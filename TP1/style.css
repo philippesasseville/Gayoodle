@@ -22,3 +22,14 @@ li a {
 li a:hover {
     background-color: #111;
 }
+
+footer {   
+	position:fixed;
+	left:0px;
+	bottom:0px;
+	height:30px;
+	width:100%;
+	text-align: center;
+}
+
+/*Source : http://www.w3schools.com/css/css_navbar.asp */
