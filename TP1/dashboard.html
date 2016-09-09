@@ -9,12 +9,48 @@
   <li><a href="index.html">Acceuil</a></li>
   <li><a href="dashboard.html">Tableau de bord</a></li>
   <li><a href="instructions.html">Instructions</a></li>
-  <li><a href="quicktest.html">Test Rapide</a></li>
-  <li><a href="exam.html">Exam</a></li>
-  <li><a href="results.html">Resultats</a></li>
 </ul>
-Voici votre tableau de bord,
-Vous avez eu D- au dernier exam xDDD.
+
+<div id="content">
+	<h1>Bienvenue sur le Tableau de bord</h1>
+	<h2>Resultat</h2>
+	<p>Vous avez eu D- au dernier exam xDDD.</p>
+	<table>
+	  <tr>
+	    <th>Nb de test reussis</th>
+	    <th>Nb de test effectues</th>
+	    <th>Taux de reussite</th>
+	    <th>Moyenne</th>
+	  </tr>
+	  <tr>
+	    <td>3</td>
+	    <td>10</td>
+	    <td>30%</td>
+	    <td>56%</td>
+	  </tr>
+	  
+	</table>
+
+	<h2>Pratique</h2>
+	<p>Pour une simulation d'examen final, veuillez choisir parmis les configurations suivantes: </p>
+
+	<form action="exam.html">
+	  <select name="domaine">
+	    <option value="html">HTML</option>
+	    <option value="css">CSS</option>
+	    <option value="javascript">JavaScript</option>
+	  </select>
+	  <select name="nbquestions">
+	    <option value="3">3 Questions</option>
+	    <option value="5">5 Questions</option>
+	    <option value="10">10 Questions</option>
+	  </select>
+	  <br><br>
+	  <p>Etes vous pret?</p>
+	  <input type="submit" value="Commencer l'examen" href="exam.html"></input>
+	</form>
+
+</div>
 </body>
 <footer>
 <small> QuizFacile TM - 2016 </small>
