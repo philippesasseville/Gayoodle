@@ -5,10 +5,11 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     ul
-      li
-        a(href="/") Acceuil
-      li
-        a(href="/game") Jeu
-      li
-        a(href="/rules") Regles du Jeu
+      each page in [{path: "/",name : "Acceuil" }, {path: "/game",name : "Tableau de Bord" }, {path: "/rules",name : "Instructions" }]
+        if path === page.path
+          li
+            a#current(href=page.path)= page.name
+        else
+          li
+            a(href=page.path)= page.name
     block content
