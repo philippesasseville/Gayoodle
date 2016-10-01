@@ -9,6 +9,16 @@ block content
       span Commencer le quiz
     h2 Pratique d'examen
     p Selectionner vos parametre pour la simulation d'examen.
+    form 
+      select(name="domaine")
+        option(value="html") HTML
+        option(value="css") CSS
+        option(value="javascript") JavaScript
+      select(name="nbquestions")
+        option(value="3") 3 Questions
+        option(value="5") 5 Questions
+        option(value="10") 10 Questions
+    p Etes-vous pret?
     a(class='button') 
       span Commencer l'examen
   div#stats
