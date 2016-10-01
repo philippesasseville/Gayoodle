@@ -1,12 +1,19 @@
 extends layout
 
 block content
-	h1 Tableau de Bord
-	button(class="button") 
-		span Examen Rapide
-	div#stats
-		h2 Statistiques
-		p Note test rapide (Nombre de questions réussies / Nombre de questions répondues) : 10 / 15
-		p Note des examens (Moyenne des scores des examens sur 20) : 15 / 20
-		p Examen 1 : 20 / 20
-		p Examen 2 : 10 / 20
+  h1 Tableau de Bord
+  button(class="button") 
+    span Examen Rapide
+  div#stats
+    h2 Statistiques
+    p Note test rapide (Nombre de questions réussies / Nombre de questions répondues) : 10 / 15
+    p Note des examens (Moyenne des scores des examens sur 20) : 15 / 20
+    p Examen 1 : 20 / 20
+    p Examen 2 : 10 / 20
+    a(href='#openModal') Afficher les details
+    div(id='openModal', class='modalDialog')
+      div
+        a(href='#close', title='close', class='close') X
+        h2 Details
+        p Moyenne : 15/20
+        p Ecart type : 4.3
