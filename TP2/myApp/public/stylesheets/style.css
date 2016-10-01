@@ -43,7 +43,7 @@ div#rules {
 	float: left;
 }
 
-#pug {
+div#pug {
 	display: inline;
 	float: right;
 }
@@ -178,4 +178,39 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+@media screen and (max-width: 1024px)
+{
+  div#stats {
+    float: left;
+  }
+  div#info{
+    float: none;
+  }
+  div#pug {
+    display: flex;
+    float: left;
+  }
+  div#rules{
+    display: block;
+    float: none;
+  }
+}
+
+@media screen and (max-width: 768px){
+  div#stats{
+    float: left;
+  }
+  div#info{
+    float: none;
+  }
+  div#pug {
+    float: flex;
+    float: left;
+  }
+  div#rules{
+    display: block;
+    float: none;
+  }
 }
