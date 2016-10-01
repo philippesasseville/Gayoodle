@@ -34,6 +34,11 @@ div#stats {
 	float: right;
 }
 
+div#rules {
+	display: inline;
+	float: left;
+}
+
 #pug {
 	display: inline;
 	float: right;
@@ -77,4 +82,13 @@ div#stats {
 .button:hover span:after {
   opacity: 1;
   right: 0;
+}
+
+footer {
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:30px;
+  width:100%;
+  text-align: center;
 }
