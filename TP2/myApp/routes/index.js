@@ -19,6 +19,7 @@ router.get('/quicktest-q1', function(req, res) {
   	title: 'Question 1', 
   	path: req.path, 
   	quiz: q1,
+  	note: '0%',
   	next: 'quicktest-q2'
   });
 });
@@ -28,6 +29,7 @@ router.get('/quicktest-q2', function(req, res) {
   	title: 'Question 2', 
   	path: req.path, 
   	quiz: q2,
+  	note: '100%',
   	next: 'quicktest-q3'
   });
 });
@@ -37,6 +39,7 @@ router.get('/quicktest-q3', function(req, res) {
   	title: 'Question 3', 
   	path: req.path, 
   	quiz: q3,
+  	note: '100%',
   	next: 'game'
   });
 });
