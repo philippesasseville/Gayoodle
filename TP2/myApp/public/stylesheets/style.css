@@ -1,4 +1,4 @@
-body {
+﻿body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: gray;
   color: white;
@@ -47,6 +47,8 @@ div#pug {
 	display: inline;
 	float: right;
 }
+
+http://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_animate1
 
 .button {
   display: inline-block;
