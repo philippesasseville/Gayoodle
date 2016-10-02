@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	h1= title
+	form(action='game')
+		h2= quiz.question
+		input(type='radio', name='answer', value='#{quiz.rep1.ans}', checked='')
+		| #{quiz.rep1.text}
+		br
+		input(type='radio', name='answer', value='#{quiz.rep2.ans}', checked='')
+		| #{quiz.rep2.text}
+		br
+		input(type='radio', name='answer', value='#{quiz.rep3.ans}', checked='')
+		| #{quiz.rep3.text}
+		br
+		br
+		a(class='button', href= next)
+			span Suivant
+		h3 Note Courante : 0 % 
