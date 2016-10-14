@@ -1,0 +1,17 @@
+{
+	"q1": {
+		"question":"Que veux dire WWW?",
+		"rep1": {
+			"text":"Weird Wizard Words",
+			"ans":false
+		},
+		"rep2": {
+			"text":"World Wide Web",
+			"ans":true
+		},
+		"rep3": {
+			"text":"Wild Wank Weiner",
+			"ans":false
+		}
+	}
+}

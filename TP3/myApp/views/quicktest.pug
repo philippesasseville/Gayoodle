@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	script(src='/javascripts/quicktest.js')
+
+	h1#id_title
+	form(id='id_form', action='game')
+		h2#id_question
+		input(type='radio', name='answer', checked='')
+		label(id='id_ans1') 1
+		br
+		input(type='radio', name='answer', checked='')
+		label(id='id_ans2') 2
+		br
+		input(type='radio', name='answer', checked='')
+		label(id='id_ans3') 3
+		br
+		br
+		a(class='button', href= 'quicktest', id='id_button_next')
+			span Suivant
+		h3 Note Courante : #{note} 
