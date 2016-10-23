@@ -1,11 +1,20 @@
-$(document).ready(function() {
+var completedQuestions;
 
-  	// console.log("HELLO");
-  	// var i = 1;
-  	// console.log("ASDFOIJ " + i);
+$(document).ready(function() {
   	var url = "./api/randomQuestion";
-	$.getJSON(url, function(data) {
-		$("#id_title").text("OKTAMER:");
+  	var currentQuestion;
+
+	// resetDB();
+	initQuestionHistory();
+  	
+
+	var strCompletedQuestions = JSON.stringify(completedQuestions);
+	var query = "q="+strCompletedQuestions;
+	//TODO: ADD COMPLETED TO QUERY FOR SERVER
+
+	$.getJSON(url, /*,{"q": strCompletedQuestions},*/ function(data) {
+		currentQuestion = data.id;
+		$("#id_title").text(data.theme);
 		$("#id_question").text(data.question);
 		$("#id_ans1").text(data.rep1.text);
 		$("#id_ans2").text(data.rep2.text);
@@ -13,13 +22,34 @@ $(document).ready(function() {
 	});
 
 	$("#id_button_next").click(function() {
-		//TODO: Array de question faite xD
+		if (!arrayContains(currentQuestion)) {
+			completedQuestions.push(currentQuestion);
+			localStorage.setItem("completedQuestions", JSON.stringify(completedQuestions));
+		}
 		location.href='/quicktest';
 	})
 
-  // $(".buttonNext").click(function() {
-  //   $("#question1").load('./api/q1'), function(data) {
-  //     console.log(data);
-  //   };
-  // });
 });
+
+var initQuestionHistory = function() {
+	completedQuestions = JSON.parse(localStorage.getItem("completedQuestions"));
+  	if (completedQuestions == null) {
+  		completedQuestions = [];
+  	}
+  	console.log(completedQuestions);
+};
+
+var resetDB = function() {
+  	localStorage.setItem("completedQuestions", "[]");
+};
+
+var arrayContains = function(data) {
+	var found = false;
+	for(var i = 0; i < completedQuestions.length; i++) {
+	    if (completedQuestions[i] == data) {
+	        found = true;
+	        break;
+	    }
+	}
+	return found;
+};
