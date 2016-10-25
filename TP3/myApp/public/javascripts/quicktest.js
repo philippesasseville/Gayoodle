@@ -1,9 +1,9 @@
 var completedQuestions;
 
 $(document).ready(function() {
-  	var url = "./api/randomQuestion";
-  	var currentQuestion;
-
+  var url = "./api/randomQuestion";
+  var currentQuestion;
+     
 	// resetDB();
 	initQuestionHistory();
   	
@@ -19,6 +19,9 @@ $(document).ready(function() {
 		$("#id_ans1").text(data.rep1.text);
 		$("#id_ans2").text(data.rep2.text);
 		$("#id_ans3").text(data.rep3.text);
+    $("#col_ans1 p").text(data.rep1.text);
+    $("#col_ans2 p").text(data.rep2.text);
+    $("#col_ans3 p").text(data.rep3.text);
 	});
 
 	$("#id_button_next").click(function() {

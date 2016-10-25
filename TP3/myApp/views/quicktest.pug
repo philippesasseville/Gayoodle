@@ -1,8 +1,7 @@
 extends layout
 
 block content
-	script(src='/javascripts/quicktest.js')
-
+  
 	h1#id_title
 	form(id='id_form', action='game')
 		h2#id_question
@@ -19,3 +18,19 @@ block content
 		a(class='button', id='id_button_next')
 			span Suivant
 		h3 Note Courante : #{note} 
+	div(id='columns')
+		div(class='column',id='col_ans1', draggable='true')
+			header A
+			p empty
+		div(class='column',id='col_ans2', draggable='true')
+			header B
+			p empty
+		div(class='column',id='col_ans3', draggable='true')
+			header C
+			p empty
+		div(class='column', id='ans')
+			header Reponse
+			p drag answer here
+
+	script(src='/javascripts/dnd.js', type='text/javascript')
+	script(src='/javascripts/quicktest.js', type='text/javascript')
