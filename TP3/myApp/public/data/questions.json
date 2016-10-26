@@ -1,17 +1,152 @@
 {
-	"q1": {
-		"question":"Que veux dire WWW?",
-		"rep1": {
-			"text":"Weird Wizard Words",
-			"ans":false
+	"questions" : [
+		{
+			"theme": "HTML",
+			"id" : 101,
+			"question":"Que veux dire WWW?",
+			"reponses": [
+				{"text":"Weird Wizard Words", "ans": false },
+				{"text":"World Wide Web", "ans": true },
+				{"text":"Wild Wank Weiner", "ans": false }
+			]
 		},
-		"rep2": {
-			"text":"World Wide Web",
-			"ans":true
+		{
+			"theme": "HTML",
+			"id" : 102,
+			"question":"Que veux dire la balise br?",
+			"reponses": [
+				{"text":"Retour a la ligne", "ans": true },
+				{"text":"Serveur au Bresil", "ans": false },
+				{"text":"Bonnie Rotten", "ans": false }
+			]
 		},
-		"rep3": {
-			"text":"Wild Wank Weiner",
-			"ans":false
-		}
-	}
+		{
+			"theme": "HTML",
+			"id" : 103,
+			"question":"Que veux dire HTML?",
+			"reponses": [
+				{"text":"Home Tool Markup Language", "ans": false },
+				{"text":"Hyperlinks and Text Markup Language", "ans": false },
+				{"text":"Hyper Text Markup Language", "ans": true }
+			]
+		},
+		{
+			"theme": "HTML",
+			"id" : 104,
+			"question":"Qui fait les standards Web?",
+			"reponses": [
+				{"text":"The World Wide Web Consortium", "ans": true },
+				{"text":"Microsoft", "ans": false },
+				{"text":"Google", "ans": false }
+			]
+		},
+		{
+			"theme": "CSS",
+			"id" : 201,
+			"question":"Ou devrais etre le style de ma page web?",
+			"reponses": [
+				{"text":"Dans un fichier css", "ans": true },
+				{"text":"Dans une belle mallette mauve", "ans": false },
+				{"text":"Une page web n'a pas de style", "ans": false }
+			]
+		},
+		{
+			"theme": "CSS",
+			"id" : 202,
+			"question":"Dans un fichier HTML, u devrions référer le fichier CSS?",
+			"reponses": [
+				{"text":"Dans la section <head>", "ans": false },
+				{"text":"Dans la section <body>", "ans": false },
+				{"text":"Dans la section <footer>", "ans": false }
+			]
+		},
+		{
+			"theme": "CSS",
+			"id" : 203,
+			"question":"Comment insérer un commentaire dans un fichier CSS?",
+			"reponses": [
+				{"text":"// commentaire", "ans": false },
+				{"text":"/* commentaire */", "ans": true },
+				{"text":"<!--commentaire-->", "ans": false }
+			]
+		},
+		{
+			"theme": "CSS",
+			"id" : 204,
+			"question":"Quel est la syntaxe correcte pour avoir tous les <p> en gras?",
+			"reponses": [
+				{"text":"p {font-weight:bold;}", "ans": true },
+				{"text":"<p style='font-size:bold;'", "ans": false },
+				{"text":"p.setFont(Font.BOLD);", "ans": false }
+			]
+		},
+		{
+			"theme": "JavaScript",
+			"id" : 301,
+			"question":"En quel langage on code un fichier JavaScript?",
+			"reponses": [
+				{"text":"Java", "ans": false },
+				{"text":"JavaScript", "ans": true },
+				{"text":"JqueryScript", "ans": false }
+			]
+		},
+		{
+			"theme": "JavaScript",
+			"id" : 302,
+			"question":"Peut-on écrire du JavaScript dans un fichier HTML?",
+			"reponses": [
+				{"text":"Vrai", "ans": true },
+				{"text":"Faux", "ans": false },
+				{"text":"Toutes ces réponses", "ans": false }
+			]
+		},
+		{
+			"theme": "JavaScript",
+			"id" : 303,
+			"question":"Comment écrire un commentaire en JavaScript?",
+			"reponses": [
+				{"text":"// commentaire", "ans": true },
+				{"text":"'commentaire", "ans": false },
+				{"text":"<!--commentaire-->", "ans": false }
+			]
+		},
+		{
+			"theme": "JavaScript",
+			"id" : 304,
+			"question":"Quel évenement déclanché lors d'un click sur un élément HTML?",
+			"reponses": [
+				{"text":"onclick", "ans": false },
+				{"text":"onmouseclick", "ans": false },
+				{"text":"onusermouseclick", "ans": false }
+			]
+		},
+	]
+
 }
+
+// var q = [
+//   {
+//       theme: "HTML",
+//       id:101,
+//       question: 'Que veux dire WWW?',
+//       rep1: {text:'Weird Wizard Words', ans: false },
+//       rep2: {text:'World Wide Web',  ans: true },
+//       rep3: {text:'Wild Wank Weiner',  ans: false }
+//   },
+//   {
+//       theme: "CSS",
+//       id:201,
+//       question: 'Ou devrais etre le style de ma page web?',
+//       rep1: {text:'Dans un fichier css', ans: true },
+//       rep2: {text:'Dans une belle mallette mauve',  ans: false },
+//       rep3: {text:'Une page web n\'a pas de style',  ans: false }
+//   },
+//   {
+//       theme: "HTML",
+//       id:102,
+//       question: 'Que veux dire la balise br?',
+//       rep1: {text:'Retour a la ligne', ans: true },
+//       rep2: {text:'Le serveur est au Bresil',  ans: false },
+//       rep3: {text:'Bonnie Rotten',  ans: false }
+//   }
+// ];
