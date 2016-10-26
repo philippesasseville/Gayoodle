@@ -3,20 +3,7 @@ extends layout
 block content
   
 	h1#id_title
-	form(id='id_form', action='game')
 		h2#id_question
-		input(type='radio', name='answer', checked='')
-		label(id='id_ans1') 1
-		br
-		input(type='radio', name='answer', checked='')
-		label(id='id_ans2') 2
-		br
-		input(type='radio', name='answer', checked='')
-		label(id='id_ans3') 3
-		br
-		br
-		a(class='button', id='id_button_next')
-			span Suivant
 		h3 Note Courante : #{note} 
 	div(id='columns')
 		div(class='column',id='col_ans1', draggable='true')
@@ -30,7 +17,7 @@ block content
 			p empty
 		div(class='column', id='ans')
 			header Reponse
-			p drag answer here
+			p Glisser votre reponse ici
 
 	script(src='/javascripts/dnd.js', type='text/javascript')
 	script(src='/javascripts/quicktest.js', type='text/javascript')

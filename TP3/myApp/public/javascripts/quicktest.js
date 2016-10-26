@@ -39,7 +39,7 @@ var initQuestionHistory = function() {
   	if (completedQuestions == null) {
   		completedQuestions = [];
   	}
-  	console.log(completedQuestions);
+  	//console.log(completedQuestions);
 };
 
 var resetDB = function() {
