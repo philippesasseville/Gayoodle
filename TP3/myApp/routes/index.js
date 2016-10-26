@@ -6,8 +6,8 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'QuizFacile', path: req.path });
 });
 
-router.get('/game', function(req, res) {
-  res.render('game', { title: 'QuizFacile',  path: req.path });
+router.get('/dashboard', function(req, res) {
+  res.render('dashboard', { title: 'QuizFacile',  path: req.path });
 });
 
 router.get('/rules', function(req, res) {
@@ -15,18 +15,11 @@ router.get('/rules', function(req, res) {
 });
 
 router.get('/exam', function(req, res) {
-	console.log("PARAMETERS: ");
   res.render('exam', { title: 'QuizFacile', path: req.path  });
 });
 
-router.get('/exam/HTML', function(req, res) {
-  res.render('exam', { title: 'QuizFacile', path: req.path, theme:"HTML"});
-});
-router.get('/exam/CSS', function(req, res) {
-  res.render('exam', { title: 'QuizFacile', path: req.path, theme:"CSS"});
-});
-router.get('/exam/JavaScript', function(req, res) {
-  res.render('exam', { title: 'QuizFacile', path: req.path, theme:"JavaScript"});
+router.get('/results', function(req, res) {
+  res.render('results', { title: 'QuizFacile', path: req.path });
 });
 
 router.get('/quicktest', function(req, res) {

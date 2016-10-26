@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  
+	h1 Examen Terminé [
+		span#id_theme
+		span ]
+	h3#note Note Finale : 
+		span#id_resultat
+	h1#id_pourcentage
+	p#id_message
+
+	br
+	a(class='button' id='id_backToDashboard') 
+		span Retour
+	script(src='/javascripts/results.js', type='text/javascript')

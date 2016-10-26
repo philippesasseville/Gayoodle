@@ -28,7 +28,7 @@ $(document).ready(function() {
 			json.results.push(result);
 			localStorage.setItem("stats", JSON.stringify(json));
 			console.log(localStorage.getItem("stats"));
-			location.href="/game"
+			location.href="/dashboard"
 		}
 	})
 
