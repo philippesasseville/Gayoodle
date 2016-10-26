@@ -208,7 +208,7 @@ tr:nth-child(even) {
     float: none;
   }
   div#pug {
-    float: flex;
+    display: flex;
     float: left;
   }
   div#rules{
@@ -228,11 +228,15 @@ tr:nth-child(even) {
   -webkit-user-drag: element;
 }
 
+#columns {
+	height: 150px;
+	display: flex;
+}
+
 .column {
   color: black;
   height: 150px;
   width: 150px;
-  float: left;
   border: 2px solid #666666;
   background-color: #ccc;
   margin-right: 5px;
@@ -275,4 +279,8 @@ tr:nth-child(even) {
 
 #ans{
 	color: blue;
+}
+
+#buttondiv{
+	margin-top: 20px;
 }
