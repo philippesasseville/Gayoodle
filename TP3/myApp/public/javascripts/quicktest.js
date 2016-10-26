@@ -5,8 +5,8 @@ $(document).ready(function() {
   var currentQuestion;
      
 	// resetDB();
-	initQuestionHistory();
-  	
+	//initQuestionHistory();
+  
 
 	var strCompletedQuestions = JSON.stringify(completedQuestions);
 	var query = "q="+strCompletedQuestions;
@@ -33,17 +33,26 @@ $(document).ready(function() {
 	})
 
 });
+//borken document ready lel
+var updateNote = function(ans) {
+	var q = sessionStorage.getItem('nbQuestion');
+	var qr = sessionStorage.getItem('nbQuestionReussi');
+	if(ans === true){
+		sessionStorage.setItem('nbQuestionReussi', qr++);
+	}
+	else{
+		sessionStorage.setItem('nbQuestionReussi', qr);
+	}
+	sessionStorage.setItem('nbQuestion', q++);
+	$("#note").text("Note Courante : "+qr/q+"%");
+};
 
 var initQuestionHistory = function() {
 	completedQuestions = JSON.parse(localStorage.getItem("completedQuestions"));
-  	if (completedQuestions == null) {
-  		completedQuestions = [];
-  	}
-  	//console.log(completedQuestions);
-};
-
-var resetDB = function() {
-  	localStorage.setItem("completedQuestions", "[]");
+	if (completedQuestions == null) {
+		completedQuestions = [];
+	}
+	//console.log(completedQuestions);
 };
 
 var arrayContains = function(data) {
