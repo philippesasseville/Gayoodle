@@ -1,20 +1,20 @@
+//variables
 var completedQuestions;
 var goodAnswer;
 var q = 0;
 var qr = 0;
-
+//fontion executer lorsque le document est pret
 $(document).ready(function() {
 
 	nextQuestion();
 
 	$("#id_button_next").click(function() {
-		console.log($('#ans p').text());
-		updateNote(checkAnswer($('#ans p').text()));
+		updateNote($('#ans p').text() == goodAnswer);
 		nextQuestion();
 	})
 
 });
-//borken document ready lel
+//Fonction en charge d'actualiser la note
 var updateNote = function(ans) {
 	if(ans === true){
 		qr++;
@@ -24,7 +24,8 @@ var updateNote = function(ans) {
 	note = note.toFixed(0);
 	$("#note").text("Note Courante : "+note+"%");
 };
-
+//fonction en charge de la reinitialisation de variable importante 
+//et de la requete ajax pour charger la question
 var nextQuestion = function(){
 	var url = "./api/randomQuestion";
 	$.getJSON(url, function(data) {
@@ -48,11 +49,4 @@ var nextQuestion = function(){
 	});
 	$('#ans p').text("Glisser votre reponse ici");
 
-};
-
-var checkAnswer = function(str){
-	console.log("check ans");
-	console.log(goodAnswer);
-	console.log(str);
-	return str == goodAnswer;
 };

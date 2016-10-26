@@ -16,12 +16,13 @@ function handleDrop(e) {
     e.stopPropagation(); // Stops some browsers from redirecting.
   }
 
-  // Don't do anything if dropping the same column we're dragging.
+  // on verifie que la drop zone est bonne
   if ($(this).attr('id') === "ans") {
-    // Set the source column's HTML to the HTML of the column we dropped on.
-    //dragSrcEl.innerHTML = this.innerHTML;
-    $(this).find("p").text(e.dataTransfer.getData('text/html')); //=e.dataTransfer.getData('text/html');
+	// on popule le tag p
+    $(this).find("p").text(e.dataTransfer.getData('text/html'));
+    // classe pour lindicateur visuel
     $(dragSrcEl).addClass("chosen");
+	// on desactive le drag car le user ne peux pas changer de reponse.
     [].forEach.call(cols, function(col) {
 	  $(col).attr("draggable","false");
 	});
@@ -57,6 +58,7 @@ function handleDragEnd(e) {
   });
 }
 
+// on lie les fonction au evenement du modele drag and drop html5
 var cols = document.querySelectorAll('#columns .column');
 [].forEach.call(cols, function(col) {
   col.addEventListener('dragstart', handleDragStart, false);
