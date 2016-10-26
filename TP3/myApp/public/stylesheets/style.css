@@ -273,8 +273,12 @@ tr:nth-child(even) {
   border-top-right-radius: 10px;
 }
 
-.chosen {
+.good {
 	color: green;
+}
+
+.bad {
+	color: red;
 }
 
 #ans{
