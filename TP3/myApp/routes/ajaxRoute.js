@@ -9,7 +9,7 @@ router.get('/randomQuestion', function(req, res, next) {
     if (err) {
       return console.log(err);
     }
-    res.json(json.questions[random(0,11)]);
+    res.json(json.questions[random(0,12)]);
   });
 });
 

@@ -53,7 +53,7 @@
 		{
 			"theme": "CSS",
 			"id" : 202,
-			"question":"Dans un fichier HTML, u devrions référer le fichier CSS?",
+			"question":"Dans un fichier HTML, ou devrions référer le fichier CSS?",
 			"reponses": [
 				{"text":"Dans la section <head>", "ans": false },
 				{"text":"Dans la section <body>", "ans": false },
@@ -115,10 +115,21 @@
 			"id" : 304,
 			"question":"Quel évenement déclanché lors d'un click sur un élément HTML?",
 			"reponses": [
-				{"text":"onclick", "ans": false },
+				{"text":"onclick", "ans": true },
 				{"text":"onmouseclick", "ans": false },
 				{"text":"onusermouseclick", "ans": false }
 			]
+		},
+		{
+			"theme": "Politique",
+			"id" : 420,
+			"question":"Un foetus devrait-t-il avoir le droit de vote?",
+			"reponses": [
+				{"text":"Oui", "ans": true },
+				{"text":"Trump", "ans": true },
+				{"text":"Hillary", "ans": false }
+			]
 		}
+
 	]
 }
