@@ -14,6 +14,10 @@ router.get('/rules', function(req, res) {
   res.render('rules', { title: 'QuizFacile', path: req.path  });
 });
 
+router.get('/exam', function(req, res) {
+  res.render('exam', { title: 'QuizFacile', path: req.path  });
+});
+
 router.get('/quicktest', function(req, res) {
   res.render('quicktest', { 
     path: req.path, 
