@@ -24,35 +24,43 @@ block content
     br
   div#stats
     h2 Statistiques
-    table
+    table#stats
       tr
-        th Nb de test reussis
-        th Nb de test effectues
-        th Taux de reussite
-        th Moyenne
-      tr 
-        td 3
-        td 10
-        td 30%
-        td 56%
-      tr 
-        td 4
-        td 12
-        td 67%
-        td 90%
-      tr 
-        td 2
-        td 42
-        td 12%
-        td 41%
+        td nombre de test HTML passe
+        td#htmlpassed
+      tr
+        td nombre de test CSS passe
+        td#csspassed
+      tr
+        td nombre de test JavaScript passe
+        td#jspassed
+      tr
+        td nombre de test HTML coule
+        td#htmlfail
+      tr
+        td nombre de test CSS passe
+        td#cssfail
+      tr
+        td nombre de test JavaScript passe
+        td#jsfail
+      tr
+        td note moyenne des examens
+        td#notemoy
+      tr
+        td questions rapides reussi
+        td#qrpassed
+      tr
+        td questions rapides rate
+        td#qrfailed
+      tr
+        td % question rapide reussi
+        td#qrmoy
     a(class='button', href='#modal')
       span Details
     div(id='modal', class='overlay')
       a(class='cancel', href='#')
       div(class='modal')
         h2 Details
-        div(class='content')
-        p Moyenne : 15 / 20
-        p Ecart Type : 3.4
+        div(id='modalcontent')
         small Cliquer hors de la boite pour fermer le dialogue.
   script(src='/javascripts/dashboard.js', type='text/javascript')
