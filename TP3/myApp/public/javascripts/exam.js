@@ -16,7 +16,6 @@ $(document).ready(function() {
 			questionsrestante--;
 			$('#indicateurQuestion').text(nbquestion-questionsrestante+"/"+nbquestion);
 		} else {
-
 			saveFinalResults(getQuizResultObject());
 			location.href="/results";
 		}
