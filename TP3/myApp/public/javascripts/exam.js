@@ -16,7 +16,9 @@ $(document).ready(function() {
 			questionsrestante--;
 			$('#indicateurQuestion').text(nbquestion-questionsrestante+"/"+nbquestion);
 		}else{
-			result = {"theme":theme,"note":getQuestionRatio()};
+
+			result = {"theme":theme,"note":getQuestionRatio(), "pourcentage":getQuestionPourcentage()};
+
 			storage = localStorage.getItem("stats");
 			if(storage == null){
 				localStorage.setItem("stats",JSON.stringify({"results":[]}));
@@ -26,7 +28,7 @@ $(document).ready(function() {
 			json.results.push(result);
 			localStorage.setItem("stats", JSON.stringify(json));
 			console.log(localStorage.getItem("stats"));
-			location.href="/dashboard"
+			location.href="/results"
 		}
 	})
 

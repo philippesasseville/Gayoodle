@@ -7,6 +7,10 @@ var qr = 0;
 var getQuestionRatio = function() {
 	return qr+"/"+q;
 };
+var getQuestionPourcentage = function() {
+	var percent = (qr/q)*100;
+	return parseFloat(Math.round(percent * 100) / 100).toFixed(2);
+};
 
 //Fonction en charge d'actualiser la note
 var updateNote = function(ans, JqueryNode) {
