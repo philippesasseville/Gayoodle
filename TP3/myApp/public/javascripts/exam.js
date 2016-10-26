@@ -10,12 +10,24 @@ $(document).ready(function() {
 	$('#indicateurQuestion').text(nbquestion-questionsrestante+"/"+nbquestion);
 
 	$("#id_button_next").click(function() {
+		updateNote($('#ans p').text() == goodAnswer, $("#note"));
 		if(questionsrestante > 0){
-			updateNote($('#ans p').text() == goodAnswer, $("#note"));
 			nextQuestionTheme(theme);
 			questionsrestante--;
 			$('#indicateurQuestion').text(nbquestion-questionsrestante+"/"+nbquestion);
 		}else{
+			result = {"theme":theme,"note":getQuestionRatio()};
+			console.log("kappa is here");
+			storage = localStorage.getItem("stats");
+			if(storage == null){
+				localStorage.setItem("stats",JSON.stringify({"results":[]}));
+			}
+			storage = localStorage.getItem("stats");
+			console.log(storage);
+			json = JSON.parse(storage);
+			json.results.push(result);
+			localStorage.setItem("stats", JSON.stringify(json));
+			console.log(localStorage.getItem("stats"));
 			location.href="/game"
 		}
 	})

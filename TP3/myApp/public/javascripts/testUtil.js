@@ -4,6 +4,10 @@ var goodAnswer;
 var q = 0;
 var qr = 0;
 
+var getQuestionRatio = function() {
+	return qr+"/"+q;
+};
+
 //Fonction en charge d'actualiser la note
 var updateNote = function(ans, JqueryNode) {
 	if(ans === true){
