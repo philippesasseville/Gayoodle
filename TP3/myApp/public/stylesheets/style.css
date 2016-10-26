@@ -229,6 +229,7 @@ tr:nth-child(even) {
 }
 
 .column {
+  color: black;
   height: 150px;
   width: 150px;
   float: left;
@@ -266,4 +267,12 @@ tr:nth-child(even) {
   -ms-border-top-right-radius: 10px;
   -moz-border-radius-topright: 10px;
   border-top-right-radius: 10px;
+}
+
+.chosen {
+	color: green;
+}
+
+#ans{
+	color: blue;
 }
