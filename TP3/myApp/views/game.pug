@@ -19,7 +19,7 @@ block content
         option(value="5") 5 Questions
         option(value="10") 10 Questions
     p Etes-vous pret?
-    a(class='button' href= 'exam') 
+    a(class='button' id='id_button_exam') 
       span Commencer l'examen
     br
   div#stats
@@ -55,3 +55,4 @@ block content
         p Moyenne : 15 / 20
         p Ecart Type : 3.4
         small Cliquer hors de la boite pour fermer le dialogue.
+  script(src='/javascripts/dashboard.js', type='text/javascript')

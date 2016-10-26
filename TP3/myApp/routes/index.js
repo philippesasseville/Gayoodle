@@ -15,7 +15,18 @@ router.get('/rules', function(req, res) {
 });
 
 router.get('/exam', function(req, res) {
+	console.log("PARAMETERS: ");
   res.render('exam', { title: 'QuizFacile', path: req.path  });
+});
+
+router.get('/exam/HTML', function(req, res) {
+  res.render('exam', { title: 'QuizFacile', path: req.path, theme:"HTML"});
+});
+router.get('/exam/CSS', function(req, res) {
+  res.render('exam', { title: 'QuizFacile', path: req.path, theme:"CSS"});
+});
+router.get('/exam/JavaScript', function(req, res) {
+  res.render('exam', { title: 'QuizFacile', path: req.path, theme:"JavaScript"});
 });
 
 router.get('/quicktest', function(req, res) {
