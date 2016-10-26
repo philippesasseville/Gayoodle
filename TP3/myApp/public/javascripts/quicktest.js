@@ -7,6 +7,10 @@ $(document).ready(function() {
 	$("#id_button_next").click(function() {
 		updateNote($('#ans p').text() == goodAnswer, $("#note"));
 		nextQuestion();
-	})
+	});
+
+	$("#id_button_back").click(function() {
+		location.href = "/dashboard"
+	});
 
 });
