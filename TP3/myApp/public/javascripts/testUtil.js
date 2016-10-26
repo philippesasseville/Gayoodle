@@ -34,6 +34,25 @@ var nextQuestion = function(){
 
 };
 
+var nextQuestionTheme = function(theme){
+	var url = "./api/randomQuestionTheme/:"+theme;
+
+	getJsonQuestion(url, function(data) {
+		updateUIforQuestion(data);
+		setGoodAnswer(data)
+	});
+
+
+	var cols = document.querySelectorAll('#columns .column');
+	[].forEach.call(cols, function(col) {
+	  $(col).attr("draggable","true");
+	  $(col).removeClass("good");
+	  $(col).removeClass("bad");
+	});
+	$('#ans p').text("Glisser votre reponse ici");
+
+};
+
 var getJsonQuestion = function(url, res) {
 	$.getJSON(url, function(data) {
 		res(data);
@@ -56,8 +75,7 @@ var setGoodAnswer = function(data) {
 		}
 }
 
-///////////////////////////////////////////////////////
-
+// drag and drop logic
 
 var dragSrcEl = null;
 

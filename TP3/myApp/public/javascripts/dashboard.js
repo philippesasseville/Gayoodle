@@ -4,8 +4,8 @@ $(document).ready(function() {
 
 	
 	$("#id_button_exam").click(function() {
-		// var theme = $("#")
-		//TODO : GOOD REF DEPENDANT LES PARAMETRES
+		sessionStorage.setItem("theme", $('select[name=domaine] option:selected').attr('value'));
+		sessionStorage.setItem("nbquestions", $('select[name=nbquestions] option:selected').attr('value'));
 		window.location.href = '/exam'
 	})
 
