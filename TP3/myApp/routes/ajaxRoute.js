@@ -25,7 +25,7 @@ router.get('/randomQuestion', function(req, res, next) {
     if (err) {
       return console.log(err);
     }
-    res.json(json.questions[random(0,12)]);
+    res.json(json.questions[random(0,json.questions.length)]);
   });
 });
 
