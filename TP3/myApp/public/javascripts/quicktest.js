@@ -30,15 +30,15 @@ var nextQuestion = function(){
 	$.getJSON(url, function(data) {
 		$("#id_title").text(data.theme);
 		$("#id_question").text(data.question);
-		$("#col_ans1 p").text(data.rep1.text);
-		$("#col_ans2 p").text(data.rep2.text);
-		$("#col_ans3 p").text(data.rep3.text);
-		if(data.rep1.ans == true){
-			goodAnswer = data.rep1.text;
-		}else if (data.rep2.ans == true){
-			goodAnswer = data.rep2.text;
+		$("#col_ans1 p").text(data.reponses[0].text);
+		$("#col_ans2 p").text(data.reponses[1].text);
+		$("#col_ans3 p").text(data.reponses[2].text);
+		if(data.reponses[0].ans == true){
+			goodAnswer = data.reponses[0].text;
+		}else if (data.reponses[1].ans == true){
+			goodAnswer = data.reponses[1].text;
 		}else{
-			goodAnswer = data.rep3.text;
+			goodAnswer = data.reponses[2].text;
 		}
 	});
 	var cols = document.querySelectorAll('#columns .column');
