@@ -31,9 +31,23 @@ var getStatsStorageObject = function() {
 	return json;
 };
 
+var getQuickTestStatsObject = function() {
+	var quickTestStats;
+	var quickTestStatsStr = localStorage.getItem("quicktestStats");
+	if (quickTestStatsStr == null) {
+		quickTestStats = {"questionsDone":0, "questionsReussites":0};
+		localStorage.setItem("quicktestStats", JSON.stringify(quickTestStats));
+	} else {
+		quickTestStats = JSON.parse(quickTestStatsStr);
+	}
+	return quickTestStats;
+};
+
+
 var updateStats = function() {
 	json = getStatsStorageObject();
-	
+	quickTestJson = getQuickTestStatsObject();
+
 	var htmlpassed = 0;
 	var csspassed = 0;
 	var jspassed = 0;
@@ -82,12 +96,15 @@ var updateStats = function() {
 	if(json.results.length == 0){
 		$("#notemoy").text("0");
 	}else{
-		$("#notemoy").text(parseFloat(Math.round((pourcentagetotal/json.results.length) * 100) / 100).toFixed(2));
+		$("#notemoy").text(parseFloat(Math.round((pourcentagetotal/json.results.length) * 100) / 100).toFixed(2) + "%");
 	}
 
-	$("#qrpassed").text("Kappo?");
+	$("#qrpassed").text(quickTestJson.questionsReussites);
 
-	$("#qrfailed").text("Kappo?");
-
-	$("#qrmoy").text("Kappo?");
+	$("#qrfailed").text(quickTestJson.questionsDone - quickTestJson.questionsReussites);
+	if(quickTestJson.questionsDone == 0){
+		$("#qrmoy").text("0");
+	}else{
+		$("#qrmoy").text(parseFloat(Math.round((quickTestJson.questionsReussites/quickTestJson.questionsDone) * 100)).toFixed(2) + "%");
+	}
 }
