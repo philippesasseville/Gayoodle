@@ -35,6 +35,9 @@ $(document).ready(function() {
 		sessionStorage.setItem("theme", $('select[name=domaine] option:selected').attr('value'));
 		sessionStorage.setItem("nbquestions", $('select[name=nbquestions] option:selected').attr('value'));
 		location.href = '/exam';
-	})
+	});
+	$("#id_button_reset").click(function() {
+		localStorage.clear();
+	});
 
 });
