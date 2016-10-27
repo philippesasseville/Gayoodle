@@ -59,9 +59,9 @@ var updateStats = function() {
 	var qrfailed = 0;
 	var qrmoy = 0;
 	
-	pourcentagetotal= 0;
+	var pourcentagetotal= 0;
 	for(var i = 0; i < json.results.length; i++){
-		pourcentagetotal += json.results[i].pourcentage;
+		pourcentagetotal += parseFloat(json.results[i].pourcentage);
 		if(json.results[i].pourcentage >= 60){
 			if(json.results[i].theme == "HTML"){
 				htmlpassed++;
@@ -94,17 +94,17 @@ var updateStats = function() {
 	$("#jsfail").text(jsfail);
 
 	if(json.results.length == 0){
-		$("#notemoy").text("0");
+		$("#notemoy").text("0%");
 	}else{
-		$("#notemoy").text(parseFloat(Math.round((pourcentagetotal/json.results.length) * 100) / 100).toFixed(2) + "%");
+		$("#notemoy").text(parseFloat(Math.round((pourcentagetotal/json.results.length) * 100) / 100).toFixed(0) + "%");
 	}
 
 	$("#qrpassed").text(quickTestJson.questionsReussites);
 
 	$("#qrfailed").text(quickTestJson.questionsDone - quickTestJson.questionsReussites);
 	if(quickTestJson.questionsDone == 0){
-		$("#qrmoy").text("0");
+		$("#qrmoy").text("0%");
 	}else{
-		$("#qrmoy").text(parseFloat(Math.round((quickTestJson.questionsReussites/quickTestJson.questionsDone) * 100)).toFixed(2) + "%");
+		$("#qrmoy").text(parseFloat(Math.round((quickTestJson.questionsReussites/quickTestJson.questionsDone) * 100)).toFixed(0) + "%");
 	}
 }

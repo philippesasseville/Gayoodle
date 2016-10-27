@@ -179,7 +179,7 @@ td, th {
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: black;
 }
 
 @media screen and (max-width: 1024px)
