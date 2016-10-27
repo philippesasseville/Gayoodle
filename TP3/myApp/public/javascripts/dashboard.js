@@ -2,29 +2,7 @@
 var examParameters;
 $(document).ready(function() {
 	
-	json = JSON.parse(localStorage.getItem("stats"));
-	
-	console.log(json);
-	
-	$("#htmlpassed").text("Kappo?");
-
-	$("#csspassed").text("Kappo?");
-
-	$("#jspassed").text("Kappo?");
-
-	$("#htmlfail").text("Kappo?");
-
-	$("#cssfail").text("Kappo?");
-
-	$("#jsfail").text("Kappo?");
-
-	$("#notemoy").text("Kappo?");
-
-	$("#qrpassed").text("Kappo?");
-
-	$("#qrfailed").text("Kappo?");
-
-	$("#qrmoy").text("Kappo?");
+	updateStats();
 	
 	for(var i = 0; i < json.results.length;i++){
 		$("#modalcontent").append("<p></p>");
@@ -38,6 +16,78 @@ $(document).ready(function() {
 	});
 	$("#id_button_reset").click(function() {
 		localStorage.clear();
+		updateStats();
 	});
 
 });
+
+var getStatsStorageObject = function() {
+	storage = localStorage.getItem("stats");
+	if(storage == null){
+		localStorage.setItem("stats",JSON.stringify({"results":[]}));
+	}
+	storage = localStorage.getItem("stats");
+	json = JSON.parse(storage);
+	return json;
+};
+
+var updateStats = function() {
+	json = getStatsStorageObject();
+	
+	var htmlpassed = 0;
+	var csspassed = 0;
+	var jspassed = 0;
+	var htmlfail = 0;
+	var cssfail = 0;
+	var jsfail = 0;
+	var notemoy = 0;
+	var qrpassed = 0;
+	var qrfailed = 0;
+	var qrmoy = 0;
+	
+	pourcentagetotal= 0;
+	for(var i = 0; i < json.results.length; i++){
+		pourcentagetotal += json.results[i].pourcentage;
+		if(json.results[i].pourcentage >= 60){
+			if(json.results[i].theme == "HTML"){
+				htmlpassed++;
+			}else if(json.results[i].theme == "CSS"){
+				csspassed++;
+			}else{
+				jspassed++;
+			}
+		}else{
+			if(json.results[i].theme == "HTML"){
+				htmlfail++;
+			}else if(json.results[i].theme == "CSS"){
+				cssfail++;
+			}else{
+				jsfail++;
+			}
+		}
+	}
+	
+	$("#htmlpassed").text(htmlpassed);
+
+	$("#csspassed").text(csspassed);
+
+	$("#jspassed").text(jspassed);
+
+	$("#htmlfail").text(htmlfail);
+
+	$("#cssfail").text(cssfail);
+
+	$("#jsfail").text(jsfail);
+
+	if(json.results.length == 0){
+		$("#notemoy").text("0");
+	}else{
+		$("#notemoy").text(parseFloat(Math.round((pourcentagetotal/json.results.length) * 100) / 100).toFixed(2));
+	}
+
+	$("#qrpassed").text("Kappo?");
+
+	$("#qrfailed").text("Kappo?");
+
+	$("#qrmoy").text("Kappo?");
+}
