@@ -35,6 +35,7 @@ app.use('/users', users);
 app.use('/api/', api);
 
 app.post('/postQuestion',routes.create);
+app.get('/getQuestions',routes.index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

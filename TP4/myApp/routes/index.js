@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Question = mongoose.model('Question');
+
+
 var express = require('express');
 var router = express.Router();
 
@@ -67,7 +69,27 @@ router.create = function ( req, res ){
   });
 };
 
+router.index = function( req, res ){
+  var theme = "HTML";//req.body.theme;
 
+  var filter = {theme: theme};
+  var fields = {};
+  var options = {};
+
+  Question.findRandom(filter, fields, options, function(err, results) {
+  // Question.find( filter, function ( err, results, count ){
+    var questions = JSON.stringify(results);
+    console.log("QUESTIONS: " + questions);
+
+    return questions;
+
+
+    // res.render( 'index', {
+      // title : 'Express Todo Example',
+    //   todos : todos
+    // });
+  });
+};
 
 // exports.create = function ( req, res ){
 //   new Model({

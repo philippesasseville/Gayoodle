@@ -13,7 +13,7 @@
     "fs": "0.0.1-security",
     "modernizr": "^3.3.1",
     "mongoose": "4.6.4",
-    "mongoose-simple-random":"0.3.3",
+    "mongoose-simple-random": "^0.3.3",
     "morgan": "~1.7.0",
     "pug": "^2.0.0-beta6",
     "serve-favicon": "~2.3.0"

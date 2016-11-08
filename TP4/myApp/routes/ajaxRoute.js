@@ -6,10 +6,10 @@ router.get('/randomQuestionTheme/:theme', function(req, res, next) {
   
   fs.readFile('./public/data/questions.json', 'utf8', function (err,data) {
     var json = JSON.parse(data);
-    var curatedjson= {"questions" : []};
+    var curatedjson = {"questions" : []};
     for(var i = 0; i < json.questions.length; i++){
-		if(json.questions[i].theme == req.params.theme.substr(1))
-			curatedjson.questions.push(json.questions[i]);
+  		if(json.questions[i].theme == req.params.theme.substr(1))
+  			curatedjson.questions.push(json.questions[i]);
 	  }
     if (err) {
       return console.log(err);
