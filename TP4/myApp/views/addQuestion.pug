@@ -3,6 +3,14 @@ extends layout
 block content
 	h1= title
 	form(action="/postQuestion" method="post")
+		span theme
+		br
+		input(type="text", name="theme")
+		br
+		span id
+		br
+		input(type="text", name="id")
+		br
 		span Question
 		br
 		input(type="text", name="question")

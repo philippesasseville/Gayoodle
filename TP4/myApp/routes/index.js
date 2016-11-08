@@ -39,14 +39,30 @@ router.get('/quicktest', function(req, res) {
 
 
 router.create = function ( req, res ){
-	console.log("hello");
+	console.log(req.body.reponse);
+	var slot1 =false;
+	var slot2 =false;
+	var slot3 =false;
+	
+	console.log(req.body.reponse.localeCompare("reponse1"));
+	
+	//local compare returns 0 on perfect match
+	if (!req.body.reponse.localeCompare("reponse1"))
+		slot1 = true
+	
+	if (!req.body.reponse.localeCompare("reponse2"))
+		slot2 = true
+	
+	if (!req.body.reponse.localeCompare("reponse3"))
+		slot3 = true
+	
   new Questions({
-	 theme: "HTML",
-	 id : "1234",
+	 theme: req.body.theme,
+	 id : req.body.id,
 	 question: req.body.question,
-	 reponses: [{text:req.body.reponse1, ans: true },
-	 {text:req.body.reponse2, ans: false },
-	 {text:req.body.reponse3, ans: false }]
+	 reponses: [{text:req.body.reponse1, ans: slot1 },
+	 {text:req.body.reponse2, ans: slot2 },
+	 {text:req.body.reponse3, ans: slot3 }]
 	}).save( function( err, comment, count ){
     res.redirect( '/ajouterQuestion' );
   });
