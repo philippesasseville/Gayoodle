@@ -11,7 +11,7 @@ var api = require('./routes/ajaxRoute');
 
 var db = require('./lib/db.js');
 var mongoose = require('mongoose');
-var model = mongoose.model('Questions');
+var Model = mongoose.model('Questions');
 
 var app = express();
 

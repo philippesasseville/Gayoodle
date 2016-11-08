@@ -2,10 +2,10 @@ var mongoose = require( 'mongoose' );
 var Schema   = mongoose.Schema;
 
 var Questions = new Schema({
- "theme": String,
- "id" : Number,
- "question":String,
- "reponses": [{"text":String, "ans": Boolean }]
+ theme: String,
+ id : Number,
+ question:String,
+ reponses: [{text:String, ans: Boolean }]
 });
 
 mongoose.model( 'Questions', Questions );

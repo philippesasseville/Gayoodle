@@ -35,15 +35,30 @@ router.get('/quicktest', function(req, res) {
   });
 });
 
-// function httpGet(theUrl)
-// {
-//   console.log('HTTPGET');
-//     var xmlHttp = new XMLHttpRequest();
-//     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-//     xmlHttp.send( null );
-//     return xmlHttp.responseText;
-// }
 
+router.post('/postQuestion', function(req, res) {
+  var stuff = req.body.content;
+  console.log("CONTENT: " + stuff);
+
+  new Model({
+    theme    : "test",
+    id : 999
+  }).save( function( err, todo, count ){
+      console.log("SAVE");
+    res.redirect( '/addQuestion' );
+  });
+});//router.create);
+
+
+
+// exports.create = function ( req, res ){
+//   new Model({
+//     theme    : "test",
+//     id : 999
+//   }).save( function( err, todo, count ){
+//     res.redirect( '/ajouterQuestion' );
+//   });
+// };
 
 
 module.exports = router;
