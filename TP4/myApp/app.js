@@ -7,7 +7,12 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var api = require('./routes/ajaxRoute')
+var api = require('./routes/ajaxRoute');
+
+var db = require('./lib/db.js');
+var mongoose = require('mongoose');
+var model = mongoose.model('Questions');
+
 var app = express();
 
 // view engine setup
