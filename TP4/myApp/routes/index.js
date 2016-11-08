@@ -57,7 +57,7 @@ router.create = function ( req, res ){
 		slot3 = true
 	
   new Question({
-	 theme: "anus",//req.body.theme.value,
+	 theme: req.body.theme,
 	 question: req.body.question,
 	 reponses: [{text:req.body.reponse1, ans: slot1 },
 	 {text:req.body.reponse2, ans: slot2 },
