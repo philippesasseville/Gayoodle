@@ -5,13 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
+
+var mongoose = require('mongoose');
+var db = require('./lib/db.js');
+var Model = mongoose.model('Questions');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/ajaxRoute');
 
-var db = require('./lib/db.js');
-var mongoose = require('mongoose');
-var Model = mongoose.model('Questions');
 
 var app = express();
 
@@ -30,6 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/api/', api);
+
+app.post('/postQuestion',routes.create);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+var Questions = mongoose.model('Questions');
 var express = require('express');
 var router = express.Router();
 
@@ -36,18 +38,19 @@ router.get('/quicktest', function(req, res) {
 });
 
 
-router.post('/postQuestion', function(req, res) {
-  var stuff = req.body.content;
-  console.log("CONTENT: " + stuff);
-
-  new Model({
-    theme    : "test",
-    id : 999
-  }).save( function( err, todo, count ){
-      console.log("SAVE");
-    res.redirect( '/addQuestion' );
+router.create = function ( req, res ){
+	console.log("hello");
+  new Questions({
+	 theme: "HTML",
+	 id : "1234",
+	 question: req.body.question,
+	 reponses: [{text:req.body.reponse1, ans: true },
+	 {text:req.body.reponse2, ans: false },
+	 {text:req.body.reponse3, ans: false }]
+	}).save( function( err, comment, count ){
+    res.redirect( '/ajouterQuestion' );
   });
-});//router.create);
+};
 
 
 
