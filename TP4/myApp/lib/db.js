@@ -9,4 +9,4 @@ var Questions = new Schema({
 });
 
 mongoose.model( 'Questions', Questions );
-mongoose.connect( 'mongodb://Tremblex:Gayoodle420@ds147797.mlab.com:47797/db_log4420' );
+mongoose.connect( 'mongodb://maymay:topkek@ds147797.mlab.com:47797/db_log4420' );

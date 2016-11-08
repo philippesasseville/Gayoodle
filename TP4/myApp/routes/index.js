@@ -22,6 +22,11 @@ router.get('/results', function(req, res) {
   res.render('results', { title: 'QuizFacile', path: req.path });
 });
 
+router.get('/ajouterQuestion', function(req, res) {
+  res.render('addQuestion', { title: 'Ajouter une Question', path: req.path });
+});
+
+
 router.get('/quicktest', function(req, res) {
   res.render('quicktest', { 
     path: req.path, 
