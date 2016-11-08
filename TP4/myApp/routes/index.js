@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Questions = mongoose.model('Questions');
+var Question = mongoose.model('Question');
 var express = require('express');
 var router = express.Router();
 
@@ -56,9 +56,8 @@ router.create = function ( req, res ){
 	if (!req.body.reponse.localeCompare("reponse3"))
 		slot3 = true
 	
-  new Questions({
-	 theme: req.body.theme,
-	 id : req.body.id,
+  new Question({
+	 theme: "anus",//req.body.theme.value,
 	 question: req.body.question,
 	 reponses: [{text:req.body.reponse1, ans: slot1 },
 	 {text:req.body.reponse2, ans: slot2 },
