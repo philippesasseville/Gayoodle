@@ -74,14 +74,14 @@ router.index = function( req, res ){
 
   var filter = {theme: theme};
   var fields = {};
-  var options = {};
+  var options = {limit: 1};
 
   Question.findRandom(filter, fields, options, function(err, results) {
   // Question.find( filter, function ( err, results, count ){
-    var questions = JSON.stringify(results);
+    var questions = JSON.stringify(results[0]);
     console.log("QUESTIONS: " + questions);
 
-    return questions;
+    res.send(questions);
 
 
     // res.render( 'index', {

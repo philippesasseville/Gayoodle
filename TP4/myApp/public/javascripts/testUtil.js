@@ -23,12 +23,31 @@ var updateNote = function(ans, JqueryNode) {
 	JqueryNode.text("Note Courante : "+note+"%");
 };
 
+var nextQuestionMongo = function(){
+	$.get( "./getQuestions", function( data ) {
+		console.log(data);
+		data = JSON.parse(data);
+		updateUIforQuestion(data);
+		setGoodAnswer(data)
+	});
+	
+	var cols = document.querySelectorAll('#columns .column');
+	[].forEach.call(cols, function(col) {
+	  $(col).attr("draggable","true");
+	  $(col).removeClass("good");
+	  $(col).removeClass("bad");
+	});
+	$('#ans p').text("Glisser votre reponse ici");
+	
+};
+
 var nextQuestion = function(){
 	var url = "./api/randomQuestion";
-
+	console.log("URL : "+ url);
 	getJsonQuestion(url, function(data) {
 		updateUIforQuestion(data);
 		setGoodAnswer(data)
+		console.log("DATA : "+ JSON.stringify(data));
 	});
 
 
@@ -81,6 +100,7 @@ var setGoodAnswer = function(data) {
 		}else{
 			goodAnswer = data.reponses[2].text;
 		}
+		console.log(goodAnswer);
 }
 
 // drag and drop logic

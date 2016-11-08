@@ -2,14 +2,13 @@
 //fontion executer lorsque le document est pret
 $(document).ready(function() {
 
-	nextQuestion();
+	nextQuestionMongo();
 
 	$("#id_button_next").click(function() {
 		
 		
 		var quickTestStats = getFile();
 			
-				
 		var isResultOk = $('#ans p').text() == goodAnswer;
 		if (isResultOk) {
 			quickTestStats.questionsReussites = quickTestStats.questionsReussites+1;
@@ -18,7 +17,7 @@ $(document).ready(function() {
 		localStorage.setItem("quicktestStats", JSON.stringify(quickTestStats));
 		
 		updateNote(isResultOk, $("#note"));
-		nextQuestion();
+		nextQuestionMongo();
 	});
 
 	$("#id_button_back").click(function() {
