@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  
+	h1#id_title
+		h2#id_question
+		h3#note Note Courante : 0%
+	div(id='columns')
+		div(class='column',id='col_ans1', draggable='true')
+			header A
+			p empty
+		div(class='column',id='col_ans2', draggable='true')
+			header B
+			p empty
+		div(class='column',id='col_ans3', draggable='true')
+			header C
+			p empty
+		div(class='column', id='ans')
+			header Reponse
+			p Glisser votre reponse ici
+	div#buttondiv
+		a(class='button', id='id_button_back')
+			span Retour au Menu
+		a(class='button', id='id_button_next')
+			span Suivant
+	script(src='/javascripts/testUtil.js', type='text/javascript')
+	script(src='/javascripts/quicktest.js', type='text/javascript')

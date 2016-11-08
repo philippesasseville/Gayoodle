@@ -1,0 +1,69 @@
+extends layout
+
+block content
+  h1 Tableau de Bord
+  div#info
+    h2 Questions Rapides
+    p Gymnastique mentale dans un environement sans stress.
+    a(class='button' href= 'quicktest') 
+      span Commencer le quiz
+    h2 Pratique d'examen
+    p Selectionnez vos parametres pour la simulation d'examen.
+    form 
+      select(name="domaine")
+        option(value="HTML") HTML
+        option(value="CSS") CSS
+        option(value="JavaScript") JavaScript
+      select(name="nbquestions")
+        option(value="3") 3 Questions
+        option(value="5") 5 Questions
+        option(value="10") 10 Questions
+    p Etes-vous pret?
+    a(class='button' id='id_button_exam') 
+      span Commencer l'examen
+    br
+  div#stats
+    h2 Statistiques
+    table#stats
+      tr
+        td nombre de test HTML passe
+        td#htmlpassed
+      tr
+        td nombre de test CSS passe
+        td#csspassed
+      tr
+        td nombre de test JavaScript passe
+        td#jspassed
+      tr
+        td nombre de test HTML coule
+        td#htmlfail
+      tr
+        td nombre de test CSS coule
+        td#cssfail
+      tr
+        td nombre de test JavaScript coule
+        td#jsfail
+      tr
+        td note moyenne des examens
+        td#notemoy
+      tr
+        td questions rapides reussi
+        td#qrpassed
+      tr
+        td questions rapides rate
+        td#qrfailed
+      tr
+        td % question rapide reussi
+        td#qrmoy
+    a(class='button', href='#modal')
+      span Details
+    a(class='button' id='id_button_reset') 
+      span Remise a Zero
+    div(id='modal', class='overlay')
+      a(class='cancel', href='#')
+      div(class='modal')
+        h2 Details
+        div(id='modalcontent')
+        small Cliquer hors de la boite pour fermer le dialogue.
+
+  script(src='/javascripts/dashboard.js', type='text/javascript')
