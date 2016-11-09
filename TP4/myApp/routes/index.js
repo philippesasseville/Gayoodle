@@ -26,6 +26,10 @@ router.get('/results', function(req, res) {
   res.render('results', { title: 'QuizFacile', path: req.path });
 });
 
+router.get('/users', function(req, res) {
+  res.render('users', { title: 'QuizFacile', path: req.path });
+});
+
 router.get('/ajouterQuestion', function(req, res) {
   res.render('addQuestion', { title: 'Ajouter une Question', path: req.path });
 });
@@ -64,41 +68,40 @@ router.create = function ( req, res ){
 	 reponses: [{text:req.body.reponse1, ans: slot1 },
 	 {text:req.body.reponse2, ans: slot2 },
 	 {text:req.body.reponse3, ans: slot3 }]
-	}).save( function( err, comment, count ){
+	}).save( function( err, question, count ){
     res.redirect( '/ajouterQuestion' );
   });
 };
 
 router.index = function( req, res ){
-  var theme = "HTML";//req.body.theme;
+  var filter = {};
+  var fields = {};
+  var options = {limit: 1};
+
+  Question.findRandom(filter, fields, options, function(err, results) {
+    var questions = JSON.stringify(results[0]);
+    res.send(questions);
+
+  });
+};
+
+router.theme = function( req, res ){
+  var theme = req.params.theme.substr(1);
 
   var filter = {theme: theme};
   var fields = {};
   var options = {limit: 1};
 
   Question.findRandom(filter, fields, options, function(err, results) {
-  // Question.find( filter, function ( err, results, count ){
     var questions = JSON.stringify(results[0]);
-    console.log("QUESTIONS: " + questions);
-
     res.send(questions);
-
-
-    // res.render( 'index', {
-      // title : 'Express Todo Example',
-    //   todos : todos
-    // });
   });
 };
 
-// exports.create = function ( req, res ){
-//   new Model({
-//     theme    : "test",
-//     id : 999
-//   }).save( function( err, todo, count ){
-//     res.redirect( '/ajouterQuestion' );
-//   });
-// };
-
+router.updateQuickTest = function( req, res ){
+  //TODO
+  console.log(req.body.answer_of_life);
+  res.send("sucess");
+};
 
 module.exports = router;

@@ -5,11 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-
-
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 var db = require('./lib/db.js');
-var Model = mongoose.model('Question');
+// var Model = mongoose.model('Question');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -35,7 +33,9 @@ app.use('/users', users);
 app.use('/api/', api);
 
 app.post('/postQuestion',routes.create);
-app.get('/getQuestions',routes.index);
+app.get('/getQuestion',routes.index);
+app.get('/getQuestionTheme/:theme', routes.theme);
+app.put('/putQuickTestStats', routes.updateQuickTest);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

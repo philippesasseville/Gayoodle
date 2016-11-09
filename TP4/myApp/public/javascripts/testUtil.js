@@ -24,33 +24,41 @@ var updateNote = function(ans, JqueryNode) {
 };
 
 var nextQuestionMongo = function(){
-	$.get( "./getQuestions", function( data ) {
-		console.log(data);
+	resetQuestionUI();
+	//async get question request
+	$.get( "./getQuestion", function( data ) {
 		data = JSON.parse(data);
 		updateUIforQuestion(data);
 		setGoodAnswer(data)
 	});
-	
-	var cols = document.querySelectorAll('#columns .column');
-	[].forEach.call(cols, function(col) {
-	  $(col).attr("draggable","true");
-	  $(col).removeClass("good");
-	  $(col).removeClass("bad");
-	});
-	$('#ans p').text("Glisser votre reponse ici");
-	
 };
 
-var nextQuestion = function(){
-	var url = "./api/randomQuestion";
-	console.log("URL : "+ url);
-	getJsonQuestion(url, function(data) {
+var nextQuestionThemeMongo = function(theme){
+	//async get question avec theme request
+	resetQuestionUI();
+	$.get( "./getQuestionTheme/:" + theme, function( data ) {
+		data = JSON.parse(data);
 		updateUIforQuestion(data);
-		setGoodAnswer(data)
-		console.log("DATA : "+ JSON.stringify(data));
+		setGoodAnswer(data);
 	});
+};
+
+var putQuickTestStats = function(data){
+	console.log(JSON.stringify(data));
+	$.ajax({
+    url: '/putQuickTestStats',
+    type: 'PUT',
+    contentType: "application/json",
+    data: JSON.stringify(data),
+    success: function(result) {
+        // Do something with the result
+        console.log(result);
+    	}
+	});
+};
 
 
+var resetQuestionUI = function(){
 	var cols = document.querySelectorAll('#columns .column');
 	[].forEach.call(cols, function(col) {
 	  $(col).attr("draggable","true");
@@ -58,33 +66,55 @@ var nextQuestion = function(){
 	  $(col).removeClass("bad");
 	});
 	$('#ans p').text("Glisser votre reponse ici");
-
 };
 
-var nextQuestionTheme = function(theme){
-	var url = "./api/randomQuestionTheme/:"+theme;
+// var nextQuestion = function(){
+// 	var url = "./api/randomQuestion";
+// 	console.log("URL : "+ url);
+// 	getJsonQuestion(url, function(data) {
+// 		updateUIforQuestion(data);
+// 		setGoodAnswer(data)
+// 		console.log("DATA : "+ JSON.stringify(data));
+// 	});
 
-	getJsonQuestion(url, function(data) {
-		updateUIforQuestion(data);
-		setGoodAnswer(data)
-	});
+
+// 	var cols = document.querySelectorAll('#columns .column');
+// 	[].forEach.call(cols, function(col) {
+// 	  $(col).attr("draggable","true");
+// 	  $(col).removeClass("good");
+// 	  $(col).removeClass("bad");
+// 	});
+// 	$('#ans p').text("Glisser votre reponse ici");
+
+// };
 
 
-	var cols = document.querySelectorAll('#columns .column');
-	[].forEach.call(cols, function(col) {
-	  $(col).attr("draggable","true");
-	  $(col).removeClass("good");
-	  $(col).removeClass("bad");
-	});
-	$('#ans p').text("Glisser votre reponse ici");
 
-};
 
-var getJsonQuestion = function(url, res) {
-	$.getJSON(url, function(data) {
-		res(data);
-	});
-};
+// var nextQuestionTheme = function(theme){
+// 	var url = "./api/randomQuestionTheme/:"+theme;
+
+// 	getJsonQuestion(url, function(data) {
+// 		updateUIforQuestion(data);
+// 		setGoodAnswer(data)
+// 	});
+
+
+// 	var cols = document.querySelectorAll('#columns .column');
+// 	[].forEach.call(cols, function(col) {
+// 	  $(col).attr("draggable","true");
+// 	  $(col).removeClass("good");
+// 	  $(col).removeClass("bad");
+// 	});
+// 	$('#ans p').text("Glisser votre reponse ici");
+
+// };
+
+// var getJsonQuestion = function(url, res) {
+// 	$.getJSON(url, function(data) {
+// 		res(data);
+// 	});
+// };
 var updateUIforQuestion = function(data) {
 	$("#id_title").text(data.theme);
 	$("#id_question").text(data.question);
@@ -100,7 +130,7 @@ var setGoodAnswer = function(data) {
 		}else{
 			goodAnswer = data.reponses[2].text;
 		}
-		console.log(goodAnswer);
+		//console.log(goodAnswer);
 }
 
 // drag and drop logic

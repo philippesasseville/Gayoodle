@@ -5,14 +5,14 @@ $(document).ready(function() {
 	theme = sessionStorage.getItem('theme');
 	questionsrestante = sessionStorage.getItem('nbquestions');
 	nbquestion = questionsrestante;
-	nextQuestionTheme(theme);
+	nextQuestionThemeMongo(theme);
 	questionsrestante--;
 	$('#indicateurQuestion').text(nbquestion-questionsrestante+"/"+nbquestion);
 
 	$("#id_button_next").click(function() {
 		updateNote($('#ans p').text() == goodAnswer, $("#note"));
 		if(questionsrestante > 0){
-			nextQuestionTheme(theme);
+			nextQuestionThemeMongo(theme);
 			questionsrestante--;
 			$('#indicateurQuestion').text(nbquestion-questionsrestante+"/"+nbquestion);
 		} else {
