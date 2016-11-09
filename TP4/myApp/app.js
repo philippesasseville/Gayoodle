@@ -32,10 +32,10 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/api/', api);
 
-app.post('/postQuestion',routes.create);
-app.get('/getQuestion',routes.index);
-app.get('/getQuestionTheme/:theme', routes.theme);
-app.put('/putQuickTestStats', routes.updateQuickTest);
+app.post('/question',routes.postQuestion);
+app.get('/question',routes.getRandomQuestion);
+app.get('/question/:theme', routes.getRandomQuestionTheme);
+app.put('/qtstats', routes.putQuickTestStats);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

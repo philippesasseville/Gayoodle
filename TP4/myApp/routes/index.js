@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Question = mongoose.model('Question');
-
+var QuickTestStats = mongoose.model('QuickTestStats');
 
 var express = require('express');
 var router = express.Router();
@@ -31,6 +31,7 @@ router.get('/users', function(req, res) {
 });
 
 router.get('/ajouterQuestion', function(req, res) {
+  console.log(req.path);
   res.render('addQuestion', { title: 'Ajouter une Question', path: req.path });
 });
 
@@ -44,7 +45,7 @@ router.get('/quicktest', function(req, res) {
 });
 
 
-router.create = function ( req, res ){
+router.postQuestion = function ( req, res ){
 	console.log(req.body.reponse);
 	var slot1 =false;
 	var slot2 =false;
@@ -62,6 +63,26 @@ router.create = function ( req, res ){
 	if (!req.body.reponse.localeCompare("reponse3"))
 		slot3 = true
 	
+  if (!slot1 && !slot2 && !slot3){
+    res.status(400).render('addQuestion', {path: '/ajouterQuestion',message: "at least one answer must be true"});
+    return;
+  }
+
+  if(req.body.theme ==  ""){
+    res.status(400).render('addQuestion', {path: '/ajouterQuestion',message: "question must have a theme"});
+    return;
+  }
+
+  if(req.body.question ==  ""){
+    res.status(400).render('addQuestion', {path: '/ajouterQuestion', message: "must have a question"});
+    return;
+  }
+
+  if(req.body.reponse1 ==  "" || req.body.reponse2 == "" || req.body.reponse3 == ""){
+    res.status(400).render('addQuestion', {path: '/ajouterQuestion',message: "question must have 3 answer options"});
+    return;
+  }
+
   new Question({
 	 theme: req.body.theme,
 	 question: req.body.question,
@@ -69,11 +90,11 @@ router.create = function ( req, res ){
 	 {text:req.body.reponse2, ans: slot2 },
 	 {text:req.body.reponse3, ans: slot3 }]
 	}).save( function( err, question, count ){
-    res.redirect( '/ajouterQuestion' );
+    res.status(200).render('addQuestion',{path: '/ajouterQuestion',message: "Question ajoutee avec success!"});
   });
 };
 
-router.index = function( req, res ){
+router.getRandomQuestion = function( req, res ){
   var filter = {};
   var fields = {};
   var options = {limit: 1};
@@ -85,7 +106,7 @@ router.index = function( req, res ){
   });
 };
 
-router.theme = function( req, res ){
+router.getRandomQuestionTheme = function( req, res ){
   var theme = req.params.theme.substr(1);
 
   var filter = {theme: theme};
@@ -98,9 +119,25 @@ router.theme = function( req, res ){
   });
 };
 
-router.updateQuickTest = function( req, res ){
-  //TODO
-  console.log(req.body.answer_of_life);
+router.putQuickTestStats = function( req, res ){
+  
+  var isResultOk = req.body.isResultOk;
+
+  QuickTestStats.find({"_id": "58235d2ddcba0f326cc62b1d"},function(err, results){
+    console.log(results);
+    var stats = results[0];
+    if(isResultOk)
+      stats.questionsRapidesWin = stats.questionsRapidesWin + 1;
+    else
+      stats.questionsRapidesLoss = stats.questionsRapidesLoss + 1;
+
+    stats.questionsRapidesMoy = ((stats.questionsRapidesWin / (stats.questionsRapidesWin + stats.questionsRapidesLoss))*100).toFixed(0);
+
+    stats.save(function( err, stats, count ){
+      //console.log("saved");
+    });
+  });
+
   res.send("sucess");
 };
 

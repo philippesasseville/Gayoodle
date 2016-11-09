@@ -16,14 +16,14 @@ var ExamStats = new Schema({
 	CSSloss: Number,
 	JSwin: Number,
 	JSloss: Number,
-	examMoyenne: String
+	examMoyenne: Number
 });
 
 var QuickTestStats = new Schema({
 
 	questionsRapidesWin: Number,
 	questionsRapidesLoss: Number,
-	questionsRapidesMoy: String
+	questionsRapidesMoy: Number
 });
 
 

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	h1= title
+	h1 Ajouter une question
 	form(action="/postQuestion" method="post")
 		span theme
 		br
@@ -12,23 +12,23 @@ block content
 		br
 		span Question
 		br
-		input(type="text", name="question",checked)
+		input(type="text", name="question",required)
 		br
 		span reponse1
 		br
-		input(type="text", name="reponse1")
+		input(type="text", name="reponse1", required)
 		br
 		span reponse2
 		br
-		input(type="text", name="reponse2")
+		input(type="text", name="reponse2", required)
 		br
 		span reponse3 :
 		br
-		input(type="text", name="reponse3")
+		input(type="text", name="reponse3", required)
 		br
 		span Quelle est la bonne reponse ?
 		br
-		input(type="radio", name="reponse", value="reponse1")
+		input(type="radio", name="reponse", value="reponse1",checked)
 		span reponse 1
 		br
 		input(type="radio", name="reponse", value="reponse2")
@@ -38,3 +38,4 @@ block content
 		span reponse 3
 		br
 		input(class='button',type="submit", value="Submit")
+	p= message
