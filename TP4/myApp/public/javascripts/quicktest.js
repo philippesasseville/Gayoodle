@@ -6,10 +6,6 @@ $(document).ready(function() {
 
 	$("#id_button_next").click(function() {
 		
-		var obj = {"answer_of_life" : 42};
-
-		putQuickTestStats(obj);
-		
 		var quickTestStats = getFile();
 			
 		var isResultOk = $('#ans p').text() == goodAnswer;
@@ -20,6 +16,11 @@ $(document).ready(function() {
 		localStorage.setItem("quicktestStats", JSON.stringify(quickTestStats));
 		
 		updateNote(isResultOk, $("#note"));
+
+		var obj = {"isResultOk" : isResultOk};
+
+		putQuickTestStats(obj);
+
 		nextQuestionMongo();
 	});
 
