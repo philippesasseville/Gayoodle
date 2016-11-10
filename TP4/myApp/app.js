@@ -32,10 +32,12 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/api/', api);
 
-app.post('/question',routes.postQuestion);
-app.get('/question',routes.getRandomQuestion);
+app.post('/question', routes.postQuestion);
+app.get('/question', routes.getRandomQuestion);
 app.get('/question/:theme', routes.getRandomQuestionTheme);
-app.put('/qtstats', routes.putQuickTestStats);
+app.put('/verify', routes.verifyAnswer);
+//app.get('/qtstats', route.getQuickTestStats);
+//app.get('/examstats', route.getExamStats);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -62,6 +64,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
+  console.log("oops");
   res.render('error', {
     message: err.message,
     error: {}

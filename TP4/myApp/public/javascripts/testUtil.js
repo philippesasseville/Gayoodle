@@ -3,6 +3,7 @@ var completedQuestions;
 var goodAnswer;
 var q = 0;
 var qr = 0;
+var currentQuestionId = "";
 
 var getQuestionRatio = function() {
 	return qr+"/"+q;
@@ -29,7 +30,7 @@ var nextQuestionMongo = function(){
 	$.get( "./question", function( data ) {
 		data = JSON.parse(data);
 		updateUIforQuestion(data);
-		setGoodAnswer(data)
+		currentQuestionId = data._id;
 	});
 };
 
@@ -39,7 +40,7 @@ var nextQuestionThemeMongo = function(theme){
 	$.get( "./question/:" + theme, function( data ) {
 		data = JSON.parse(data);
 		updateUIforQuestion(data);
-		setGoodAnswer(data);
+		currentQuestionId = data._id;
 	});
 };
 
@@ -133,54 +134,6 @@ var updateStats = function() {
 	}
 }
 
-
-// var nextQuestion = function(){
-// 	var url = "./api/randomQuestion";
-// 	console.log("URL : "+ url);
-// 	getJsonQuestion(url, function(data) {
-// 		updateUIforQuestion(data);
-// 		setGoodAnswer(data)
-// 		console.log("DATA : "+ JSON.stringify(data));
-// 	});
-
-
-// 	var cols = document.querySelectorAll('#columns .column');
-// 	[].forEach.call(cols, function(col) {
-// 	  $(col).attr("draggable","true");
-// 	  $(col).removeClass("good");
-// 	  $(col).removeClass("bad");
-// 	});
-// 	$('#ans p').text("Glisser votre reponse ici");
-
-// };
-
-
-
-
-// var nextQuestionTheme = function(theme){
-// 	var url = "./api/randomQuestionTheme/:"+theme;
-
-// 	getJsonQuestion(url, function(data) {
-// 		updateUIforQuestion(data);
-// 		setGoodAnswer(data)
-// 	});
-
-
-// 	var cols = document.querySelectorAll('#columns .column');
-// 	[].forEach.call(cols, function(col) {
-// 	  $(col).attr("draggable","true");
-// 	  $(col).removeClass("good");
-// 	  $(col).removeClass("bad");
-// 	});
-// 	$('#ans p').text("Glisser votre reponse ici");
-
-// };
-
-// var getJsonQuestion = function(url, res) {
-// 	$.getJSON(url, function(data) {
-// 		res(data);
-// 	});
-// };
 var updateUIforQuestion = function(data) {
 	$("#id_title").text(data.theme);
 	$("#id_question").text(data.question);
@@ -188,16 +141,6 @@ var updateUIforQuestion = function(data) {
 	$("#col_ans2 p").text(data.reponses[1].text);
 	$("#col_ans3 p").text(data.reponses[2].text);
 };
-var setGoodAnswer = function(data) {
-	if(data.reponses[0].ans == true){
-			goodAnswer = data.reponses[0].text;
-		}else if (data.reponses[1].ans == true){
-			goodAnswer = data.reponses[1].text;
-		}else{
-			goodAnswer = data.reponses[2].text;
-		}
-		//console.log(goodAnswer);
-}
 
 // drag and drop logic
 
@@ -224,12 +167,8 @@ function handleDrop(e) {
 	// on popule le tag p
     $(this).find("p").text(e.dataTransfer.getData('text/html'));
     // classe pour lindicateur visuel
-    if($(this).find("p").text() == goodAnswer){
-		$(dragSrcEl).addClass("good");
-	}
-	else{
-		$(dragSrcEl).addClass("bad");
-	}
+    console.log("SEND");
+	verifyAnswerWithServer(e.dataTransfer.getData('text/html'));
 	// on desactive le drag car le user ne peux pas changer de reponse.
     [].forEach.call(cols, function(col) {
 	  $(col).attr("draggable","false");
@@ -259,11 +198,11 @@ function handleDragLeave(e) {
 }
 
 function handleDragEnd(e) {
-  // this/e.target is the source node.
+	// this/e.target is the source node.
 
-  [].forEach.call(cols, function (col) {
-    col.classList.remove('over');
-  });
+	[].forEach.call(cols, function (col) {
+	  col.classList.remove('over');
+	 });
 }
 
 // on lie les fonction au evenement du modele drag and drop html5
@@ -276,3 +215,23 @@ var cols = document.querySelectorAll('#columns .column');
   col.addEventListener('drop', handleDrop, false);
   col.addEventListener('dragend', handleDragEnd, false);
 });
+
+var verifyAnswerWithServer = function(data){
+	console.log("sending : " + data + " to server.");
+	$.ajax({
+	    url: '/verify',
+	    type: 'PUT',
+	    dataType: "json",
+  		contentType: "application/json",
+	    data: JSON.stringify({ans : data, question_id : currentQuestionId}),
+	    success: function(result) {
+	        // Do something with the result
+	        console.log(result);
+	        if(result){
+				$(dragSrcEl).addClass("good");
+	        }else{
+	        	$(dragSrcEl).addClass("bad");
+	        }
+	    }
+	});
+};

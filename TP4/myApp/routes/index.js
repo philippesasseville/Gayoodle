@@ -119,7 +119,7 @@ router.getRandomQuestionTheme = function( req, res ){
   });
 };
 
-router.putQuickTestStats = function( req, res ){
+/*router.putQuickTestStats = function( req, res ){
   
   var isResultOk = req.body.isResultOk;
 
@@ -139,6 +139,23 @@ router.putQuickTestStats = function( req, res ){
   });
 
   res.send("sucess");
+};*/
+
+router.verifyAnswer = function(req, res){
+  console.log(req.body);
+  var id = req.body.question_id;
+  var ans = req.body.ans;
+  Question.find({"_id": id}, function(err, question){
+      console.log(ans);
+      console.log(question[0].reponses[question[0].ans].text);
+      if(ans == question[0].reponses[question[0].ans].text){
+        res.status(200).send(true);
+      }
+      else
+      {
+        res.status(200).send(false);
+      }
+  });
 };
 
 module.exports = router;

@@ -17,10 +17,9 @@ $(document).ready(function() {
 		
 		updateNote(isResultOk, $("#note"));
 
-		var obj = {"isResultOk" : isResultOk};
+		//var obj = {"isResultOk" : isResultOk};
 
-		putQuickTestStats(obj);
-
+		//putQuickTestStats(obj);
 		nextQuestionMongo();
 	});
 
