@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Question = mongoose.model('Question');
 var QuickTestStats = mongoose.model('QuickTestStats');
+var Testo = mongoose.model('Testo');
 
 var express = require('express');
 var router = express.Router();
@@ -120,10 +121,10 @@ router.getRandomQuestionTheme = function( req, res ){
 };
 
 router.deleteQuestions = function(req, res) {
-  console.log("DELETING SHIT?");
-  Question.find(function ( err, todo ){
-    Question.remove( function ( err, todo ){
-      res.redirect( '/' );
+  
+  Question.find(function ( err, stuff, count ){
+    Question.remove(function ( err, stuff ){
+      res.redirect( '/ajouterQuestion' );
     });
   });
 
