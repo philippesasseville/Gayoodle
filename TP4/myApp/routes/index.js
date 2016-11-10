@@ -252,4 +252,47 @@ router.getNbQuestions = function(req, res) {
   });
 }
 
+router.getQuickTestStats = function(req, res) {
+  QuickTestStats.find(function ( err, stats, count ){
+    res.send(stats[0]);
+  });
+};
+
+router.getExamStats = function(req, res) {
+  ExamStats.find(function ( err, stats, count ){
+    res.send(stats[0]);
+  });
+};
+
+router.clearStats = function(req, res) {
+  var examDone = false;
+  var quickDone = false;
+  ExamStats.find(function ( err, stats, count ){
+    stats[0].HTMLwin = 0;
+    stats[0].HTMLloss = 0;
+    stats[0].CSSwin = 0;
+    stats[0].CSSloss = 0;
+    stats[0].JSwin = 0;
+    stats[0].JSloss = 0;
+    stats[0].examMoyenne = 0;
+    stats[0].save(function(err, stats) {
+      examDone = true;
+      if (examDone && quickDone) {
+        res.send("success");
+      }
+    })
+  });
+  QuickTestStats.find(function ( err, stats, count ){
+    stats[0].questionsRapidesWin = 0;
+    stats[0].questionsRapidesLoss = 0;
+    stats[0].questionsRapidesMoy = 0;
+    stats[0].save(function(err, stats) {
+      quickDone = true;
+      if (examDone && quickDone) {
+        res.send("success");
+      }
+    })
+  });
+};
+
 module.exports = router;
