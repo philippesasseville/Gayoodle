@@ -129,27 +129,6 @@ router.deleteQuestions = function(req, res) {
   });
 
 };
-// router.putQuickTestStats = function( req, res ){
-  
-//   var isResultOk = req.body.isResultOk;
-
-//   QuickTestStats.find({"_id": "58235d2ddcba0f326cc62b1d"},function(err, results){
-//     console.log(results);
-//     var stats = results[0];
-//     if(isResultOk)
-//       stats.questionsRapidesWin = stats.questionsRapidesWin + 1;
-//     else
-//       stats.questionsRapidesLoss = stats.questionsRapidesLoss + 1;
-
-//     stats.questionsRapidesMoy = ((stats.questionsRapidesWin / (stats.questionsRapidesWin + stats.questionsRapidesLoss))*100).toFixed(0);
-
-//     stats.save(function( err, stats, count ){
-//       //console.log("saved");
-//     });
-//   });
-
-//   res.send("sucess");
-// };
 
 router.verifyAnswer = function(req, res){
   console.log(req.body);

@@ -11,7 +11,7 @@ var db = require('./lib/db.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var api = require('./routes/ajaxRoute');
+//var api = require('./routes/ajaxRoute');
 
 
 var app = express();
@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/api/', api);
+//app.use('/api/', api);
 
 app.post('/question', routes.postQuestion);
 app.get('/question', routes.getRandomQuestion);
