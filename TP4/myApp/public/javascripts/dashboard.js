@@ -19,7 +19,11 @@ $(document).ready(function() {
 	});
 	$("#id_button_reset").click(function() {
 		localStorage.clear();
-		updateStats();
+
+		$.post('/clearStats', function(data) {
+			console.log("CLEARING STATS");
+			updateStats();
+		});
 	});
 
 	$("#drop").change(function () {
@@ -38,7 +42,7 @@ $(document).ready(function() {
 
 var updateNbQuestionDropdown = function() {
 	$('#id_dropdown').empty();
-	
+
 	$.get('/getNbQuestions/:' + theme, function(data) {
 		var nb = data.substring(1);
 	    if (nb >= 10) {

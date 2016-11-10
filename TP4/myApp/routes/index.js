@@ -129,27 +129,27 @@ router.deleteQuestions = function(req, res) {
   });
 
 };
-/*router.putQuickTestStats = function( req, res ){
+// router.putQuickTestStats = function( req, res ){
   
-  var isResultOk = req.body.isResultOk;
+//   var isResultOk = req.body.isResultOk;
 
-  QuickTestStats.find({"_id": "58235d2ddcba0f326cc62b1d"},function(err, results){
-    console.log(results);
-    var stats = results[0];
-    if(isResultOk)
-      stats.questionsRapidesWin = stats.questionsRapidesWin + 1;
-    else
-      stats.questionsRapidesLoss = stats.questionsRapidesLoss + 1;
+//   QuickTestStats.find({"_id": "58235d2ddcba0f326cc62b1d"},function(err, results){
+//     console.log(results);
+//     var stats = results[0];
+//     if(isResultOk)
+//       stats.questionsRapidesWin = stats.questionsRapidesWin + 1;
+//     else
+//       stats.questionsRapidesLoss = stats.questionsRapidesLoss + 1;
 
-    stats.questionsRapidesMoy = ((stats.questionsRapidesWin / (stats.questionsRapidesWin + stats.questionsRapidesLoss))*100).toFixed(0);
+//     stats.questionsRapidesMoy = ((stats.questionsRapidesWin / (stats.questionsRapidesWin + stats.questionsRapidesLoss))*100).toFixed(0);
 
-    stats.save(function( err, stats, count ){
-      //console.log("saved");
-    });
-  });
+//     stats.save(function( err, stats, count ){
+//       //console.log("saved");
+//     });
+//   });
 
-  res.send("sucess");
-};*/
+//   res.send("sucess");
+// };
 
 router.verifyAnswer = function(req, res){
   console.log(req.body);
@@ -157,19 +157,19 @@ router.verifyAnswer = function(req, res){
   var ans = req.body.ans;
 
   QuickTestStats.find({"_id": "58235d2ddcba0f326cc62b1d"},function(err, results){
-    var stats = results[0];
     Question.find({"_id": id}, function(err, question){
       if(ans == question[0].reponses[question[0].ans].text){
-        stats.questionsRapidesWin = stats.questionsRapidesWin + 1;
+         results[0].questionsRapidesWin =  results[0].questionsRapidesWin + 1;
         res.status(200).send(true);
       }
       else
       {
-        stats.questionsRapidesLoss = stats.questionsRapidesLoss + 1;
+         results[0].questionsRapidesLoss =  results[0].questionsRapidesLoss + 1;
         res.status(200).send(false);
       }
-      stats.questionsRapidesMoy = ((stats.questionsRapidesWin / (stats.questionsRapidesWin + stats.questionsRapidesLoss))*100).toFixed(0);
-      stats.save(function( err, stats, count ){
+      console.log("WE GON SAVE BOYS");
+       results[0].questionsRapidesMoy = (( results[0].questionsRapidesWin / ( results[0].questionsRapidesWin +  results[0].questionsRapidesLoss))*100).toFixed(0);
+       results[0].save(function( err, stats, count ){
         console.log(JSON.stringify(stats));
       });
     });
@@ -251,5 +251,48 @@ router.getNbQuestions = function(req, res) {
     res.send(" "+questions.length);
   });
 }
+
+router.getQuickTestStats = function(req, res) {
+  QuickTestStats.find(function ( err, stats, count ){
+    res.send(stats[0]);
+  });
+};
+
+router.getExamStats = function(req, res) {
+  ExamStats.find(function ( err, stats, count ){
+    res.send(stats[0]);
+  });
+};
+
+router.clearStats = function(req, res) {
+  var examDone = false;
+  var quickDone = false;
+  ExamStats.find(function ( err, stats, count ){
+    stats[0].HTMLwin = 0;
+    stats[0].HTMLloss = 0;
+    stats[0].CSSwin = 0;
+    stats[0].CSSloss = 0;
+    stats[0].JSwin = 0;
+    stats[0].JSloss = 0;
+    stats[0].examMoyenne = 0;
+    stats[0].save(function(err, stats) {
+      examDone = true;
+      if (examDone && quickDone) {
+        res.send("success");
+      }
+    })
+  });
+  QuickTestStats.find(function ( err, stats, count ){
+    stats[0].questionsRapidesWin = 0;
+    stats[0].questionsRapidesLoss = 0;
+    stats[0].questionsRapidesMoy = 0;
+    stats[0].save(function(err, stats) {
+      quickDone = true;
+      if (examDone && quickDone) {
+        res.send("success");
+      }
+    })
+  });
+};
 
 module.exports = router;

@@ -72,68 +72,81 @@ var resetQuestionUI = function(){
 
 
 var updateStats = function() {
+	$.get('/examstats', function(data) {
+		console.log("EXAM STATS" + JSON.stringify(data));
+		$("#htmlpassed").text(data.HTMLwin);
+		$("#csspassed").text(data.CSSwin);
+		$("#jspassed").text(data.JSwin);
+		$("#htmlfail").text(data.HTMLloss);
+		$("#cssfail").text(data.CSSloss);
+		$("#jsfail").text(data.JSloss);	
+		$("#notemoy").text(data.examMoyenne + "%");
+	});
+	$.get('/qtstats', function(data) {
+		console.log("QUICK STATS" + JSON.stringify(data));
+		$("#qrpassed").text(data.questionsRapidesWin);
+		$("#qrfailed").text(data.questionsRapidesLoss);
+		$("#qrmoy").text(data.questionsRapidesMoy + "%");
+	});
+
+	
 	json = getStatsStorageObject();
-	quickTestJson = getQuickTestStatsObject();
+	// quickTestJson = getQuickTestStatsObject();
 
-	var htmlpassed = 0;
-	var csspassed = 0;
-	var jspassed = 0;
-	var htmlfail = 0;
-	var cssfail = 0;
-	var jsfail = 0;
-	var notemoy = 0;
-	var qrpassed = 0;
-	var qrfailed = 0;
-	var qrmoy = 0;
+	// var htmlpassed = 0;
+	// var csspassed = 0;
+	// var jspassed = 0;
+	// var htmlfail = 0;
+	// var cssfail = 0;
+	// var jsfail = 0;
+	// var notemoy = 0;
+	// var qrpassed = 0;
+	// var qrfailed = 0;
+	// var qrmoy = 0;
 	
-	var pourcentagetotal= 0;
-	for(var i = 0; i < json.results.length; i++){
-		pourcentagetotal += parseFloat(json.results[i].pourcentage);
-		if(json.results[i].pourcentage >= 60){
-			if(json.results[i].theme == "HTML"){
-				htmlpassed++;
-			}else if(json.results[i].theme == "CSS"){
-				csspassed++;
-			}else{
-				jspassed++;
-			}
-		}else{
-			if(json.results[i].theme == "HTML"){
-				htmlfail++;
-			}else if(json.results[i].theme == "CSS"){
-				cssfail++;
-			}else{
-				jsfail++;
-			}
-		}
-	}
+	// var pourcentagetotal= 0;
+	// for(var i = 0; i < json.results.length; i++){
+	// 	pourcentagetotal += parseFloat(json.results[i].pourcentage);
+	// 	if(json.results[i].pourcentage >= 60){
+	// 		if(json.results[i].theme == "HTML"){
+	// 			htmlpassed++;
+	// 		}else if(json.results[i].theme == "CSS"){
+	// 			csspassed++;
+	// 		}else{
+	// 			jspassed++;
+	// 		}
+	// 	}else{
+	// 		if(json.results[i].theme == "HTML"){
+	// 			htmlfail++;
+	// 		}else if(json.results[i].theme == "CSS"){
+	// 			cssfail++;
+	// 		}else{
+	// 			jsfail++;
+	// 		}
+	// 	}
+	// }
 	
-	$("#htmlpassed").text(htmlpassed);
+	// $("#htmlpassed").text(htmlpassed);
+	// $("#csspassed").text(csspassed);
+	// $("#jspassed").text(jspassed);
+	// $("#htmlfail").text(htmlfail);
+	// $("#cssfail").text(cssfail);
+	// $("#jsfail").text(jsfail);
 
-	$("#csspassed").text(csspassed);
+	// if(json.results.length == 0){
+	// 	$("#notemoy").text("0%");
+	// }else{
+	// 	$("#notemoy").text(parseFloat(Math.round((pourcentagetotal/json.results.length) * 100) / 100).toFixed(0) + "%");
+	// }
 
-	$("#jspassed").text(jspassed);
+	// $("#qrpassed").text(quickTestJson.questionsReussites);
 
-	$("#htmlfail").text(htmlfail);
-
-	$("#cssfail").text(cssfail);
-
-	$("#jsfail").text(jsfail);
-
-	if(json.results.length == 0){
-		$("#notemoy").text("0%");
-	}else{
-		$("#notemoy").text(parseFloat(Math.round((pourcentagetotal/json.results.length) * 100) / 100).toFixed(0) + "%");
-	}
-
-	$("#qrpassed").text(quickTestJson.questionsReussites);
-
-	$("#qrfailed").text(quickTestJson.questionsDone - quickTestJson.questionsReussites);
-	if(quickTestJson.questionsDone == 0){
-		$("#qrmoy").text("0%");
-	}else{
-		$("#qrmoy").text(parseFloat(Math.round((quickTestJson.questionsReussites/quickTestJson.questionsDone) * 100)).toFixed(0) + "%");
-	}
+	// $("#qrfailed").text(quickTestJson.questionsDone - quickTestJson.questionsReussites);
+	// if(quickTestJson.questionsDone == 0){
+	// 	$("#qrmoy").text("0%");
+	// }else{
+	// 	$("#qrmoy").text(parseFloat(Math.round((quickTestJson.questionsReussites/quickTestJson.questionsDone) * 100)).toFixed(0) + "%");
+	// }
 }
 
 var updateUIforQuestion = function(data) {
