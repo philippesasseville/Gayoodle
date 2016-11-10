@@ -120,6 +120,15 @@ router.getRandomQuestionTheme = function( req, res ){
   });
 };
 
+router.deleteQuestions = function(req, res) {
+  
+  Question.find(function ( err, stuff, count ){
+    Question.remove(function ( err, stuff ){
+      res.redirect( '/ajouterQuestion' );
+    });
+  });
+
+};
 /*router.putQuickTestStats = function( req, res ){
   
   var isResultOk = req.body.isResultOk;
@@ -233,5 +242,14 @@ router.compileExamResult = function(req, res){
 */
   res.status(200).send(true);
 };
+
+router.getNbQuestions = function(req, res) {
+  var theme = req.params.theme.substr(1);
+
+  var filter = {theme: theme};
+  Question.find(filter, function ( err, questions, count ){
+    res.send(" "+questions.length);
+  });
+}
 
 module.exports = router;

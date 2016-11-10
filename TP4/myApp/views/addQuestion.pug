@@ -39,3 +39,8 @@ block content
 		br
 		input(class='button',type="submit", value="Submit")
 	p= message
+	br
+	h1 Supprimer toutes les questions? PLEASE DON'T
+	form(action="/deleteQuestions" method="post")
+		input(class='button',type="submit", value="SUPPRIMER BD?")
+
