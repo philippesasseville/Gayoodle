@@ -119,6 +119,15 @@ router.getRandomQuestionTheme = function( req, res ){
   });
 };
 
+router.deleteQuestions = function(req, res) {
+  console.log("DELETING SHIT?");
+  Question.find(function ( err, todo ){
+    Question.remove( function ( err, todo ){
+      res.redirect( '/' );
+    });
+  });
+
+};
 /*router.putQuickTestStats = function( req, res ){
   
   var isResultOk = req.body.isResultOk;
