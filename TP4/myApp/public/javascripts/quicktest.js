@@ -9,15 +9,6 @@ $(document).ready(function() {
 	$("#id_button_next").click(function() {
 		
 		var quickTestStats = getFile();
-			
-		var isResultOk = $('#ans p').text() == goodAnswer;
-		if (isResultOk) {
-			quickTestStats.questionsReussites = quickTestStats.questionsReussites+1;
-		}
-		quickTestStats.questionsDone = quickTestStats.questionsDone+1;
-		localStorage.setItem("quicktestStats", JSON.stringify(quickTestStats));
-		
-		updateNote(isResultOk, $("#note"));
 
 		//var obj = {"isResultOk" : isResultOk};
 

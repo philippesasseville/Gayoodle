@@ -12,7 +12,6 @@ $(document).ready(function() {
 	$('#indicateurQuestion').text(nbquestion-questionsrestante+"/"+nbquestion);
 
 	$("#id_button_next").click(function() {
-		updateNote($('#ans p').text() == goodAnswer, $("#note"));
 		if(questionsrestante > 0){
 			nextQuestionThemeMongo(theme);
 			questionsrestante--;
@@ -33,6 +32,21 @@ $(document).ready(function() {
 
 
 var saveFinalResults = function(result) {
+
+	console.log(result);
+
+	$.ajax({
+		url: '/examstats',
+		type: 'PUT',
+		dataType: "json",
+		contentType: "application/json",
+		data: JSON.stringify(result),
+		success: function(res) {
+			// Do something with the result
+			console.log(res);
+		}
+	});
+
 	stats = getStatsStorageObject();
 	
 	stats.results.push(result);

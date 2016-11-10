@@ -37,6 +37,7 @@ app.get('/question', routes.getRandomQuestion);
 app.get('/question/:theme', routes.getRandomQuestionTheme);
 app.put('/verify', routes.verifyAnswer);
 app.put('/verifyexam', routes.verifyAnswerExam);
+app.put('/examstats', routes.compileExamResult);
 //app.get('/qtstats', route.getQuickTestStats);
 //app.get('/examstats', route.getExamStats);
 

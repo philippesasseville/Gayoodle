@@ -6,6 +6,8 @@ var qr = 0;
 var currentQuestionId = "";
 var exam = false;
 
+var pourcentage = 0;
+
 var getQuestionRatio = function() {
 	return qr+"/"+q;
 };
@@ -15,14 +17,13 @@ var getQuestionPourcentage = function() {
 };
 
 //Fonction en charge d'actualiser la note
-var updateNote = function(ans, JqueryNode) {
+var updateNote = function(ans) {
 	if(ans === true){
 		qr++;
 	}
 	q++;
 	var note = ((qr/q)*100);
 	note = note.toFixed(0);
-	JqueryNode.text("Note Courante : "+note+"%");
 };
 
 var nextQuestionMongo = function(){
@@ -235,8 +236,10 @@ var verifyAnswerWithServer = function(data){
 	        console.log(result);
 	        if(result){
 				$(dragSrcEl).addClass("good");
+				updateNote(true);
 	        }else{
 	        	$(dragSrcEl).addClass("bad");
+	        	updateNote(false);
 	        }
 	    }
 	});
@@ -255,8 +258,10 @@ var verifyAnswerWithServerExam = function(data){
 	        console.log(result);
 	        if(result){
 				$(dragSrcEl).addClass("good");
+				updateNote(true);
 	        }else{
 	        	$(dragSrcEl).addClass("bad");
+	        	updateNote(false);
 	        }
 	    }
 	});
