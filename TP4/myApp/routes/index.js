@@ -154,16 +154,40 @@ router.verifyAnswer = function(req, res){
   console.log(req.body);
   var id = req.body.question_id;
   var ans = req.body.ans;
-  Question.find({"_id": id}, function(err, question){
-      console.log(ans);
-      console.log(question[0].reponses[question[0].ans].text);
+
+  QuickTestStats.find({"_id": "58235d2ddcba0f326cc62b1d"},function(err, results){
+    var stats = results[0];
+    Question.find({"_id": id}, function(err, question){
       if(ans == question[0].reponses[question[0].ans].text){
+        stats.questionsRapidesWin = stats.questionsRapidesWin + 1;
         res.status(200).send(true);
       }
       else
       {
+        stats.questionsRapidesLoss = stats.questionsRapidesLoss + 1;
         res.status(200).send(false);
       }
+      stats.questionsRapidesMoy = ((stats.questionsRapidesWin / (stats.questionsRapidesWin + stats.questionsRapidesLoss))*100).toFixed(0);
+      stats.save(function( err, stats, count ){
+        console.log(JSON.stringify(stats));
+      });
+    });
+  });
+};
+
+router.verifyAnswerExam = function(req, res){
+  console.log(req.body);
+  var id = req.body.question_id;
+  var ans = req.body.ans;
+
+  Question.find({"_id": id}, function(err, question){
+    if(ans == question[0].reponses[question[0].ans].text){
+      res.status(200).send(true);
+    }
+    else
+    {
+      res.status(200).send(false);
+    }
   });
 };
 

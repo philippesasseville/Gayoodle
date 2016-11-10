@@ -2,6 +2,8 @@
 //fontion executer lorsque le document est pret
 $(document).ready(function() {
 
+	exam = false;
+
 	nextQuestionMongo();
 
 	$("#id_button_next").click(function() {
