@@ -2,6 +2,8 @@ var questionsrestante = 0;
 //fontion executer lorsque le document est pret
 $(document).ready(function() {
 
+	exam = true;
+
 	theme = sessionStorage.getItem('theme');
 	questionsrestante = sessionStorage.getItem('nbquestions');
 	nbquestion = questionsrestante;

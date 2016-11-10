@@ -4,6 +4,7 @@ var goodAnswer;
 var q = 0;
 var qr = 0;
 var currentQuestionId = "";
+var exam = false;
 
 var getQuestionRatio = function() {
 	return qr+"/"+q;
@@ -168,7 +169,12 @@ function handleDrop(e) {
     $(this).find("p").text(e.dataTransfer.getData('text/html'));
     // classe pour lindicateur visuel
     console.log("SEND");
-	verifyAnswerWithServer(e.dataTransfer.getData('text/html'));
+    console.log(exam);
+    if(exam){
+		verifyAnswerWithServerExam(e.dataTransfer.getData('text/html'));
+    }else{
+		verifyAnswerWithServer(e.dataTransfer.getData('text/html'));
+    }
 	// on desactive le drag car le user ne peux pas changer de reponse.
     [].forEach.call(cols, function(col) {
 	  $(col).attr("draggable","false");
@@ -220,6 +226,26 @@ var verifyAnswerWithServer = function(data){
 	console.log("sending : " + data + " to server.");
 	$.ajax({
 	    url: '/verify',
+	    type: 'PUT',
+	    dataType: "json",
+  		contentType: "application/json",
+	    data: JSON.stringify({ans : data, question_id : currentQuestionId}),
+	    success: function(result) {
+	        // Do something with the result
+	        console.log(result);
+	        if(result){
+				$(dragSrcEl).addClass("good");
+	        }else{
+	        	$(dragSrcEl).addClass("bad");
+	        }
+	    }
+	});
+};
+
+var verifyAnswerWithServerExam = function(data){
+	console.log("sending : " + data + " to server.");
+	$.ajax({
+	    url: '/verifyexam',
 	    type: 'PUT',
 	    dataType: "json",
   		contentType: "application/json",
