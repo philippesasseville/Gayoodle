@@ -7,7 +7,7 @@ $(document).ready(function() {
 	nextQuestionMongo();
 
 
-	$("#note").text(getQuestionPourcentage());//getQuestionPourcentage().toString();
+	//$("#note").text(parseFloat(Math.round(percent * 100) / 100).toFixed(0) + "%");
 
 	$("#id_button_next").click(function() {
 		
