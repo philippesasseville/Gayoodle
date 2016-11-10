@@ -10,14 +10,11 @@ block content
     h2 Pratique d'examen
     p Selectionnez vos parametres pour la simulation d'examen.
     form 
-      select(name="domaine")
+      select(name="domaine" id="id_dropdown_domain")
         option(value="HTML") HTML
         option(value="CSS") CSS
         option(value="JavaScript") JavaScript
-      select(name="nbquestions")
-        option(value="3") 3 Questions
-        option(value="5") 5 Questions
-        option(value="10") 10 Questions
+      select(name="nbquestions" id="id_dropdown")
     p Etes-vous pret?
     a(class='button' id='id_button_exam') 
       span Commencer l'examen

@@ -192,4 +192,13 @@ router.verifyAnswerExam = function(req, res){
   });
 };
 
+router.getNbQuestions = function(req, res) {
+  var theme = req.params.theme.substr(1);
+
+  var filter = {theme: theme};
+  Question.find(filter, function ( err, questions, count ){
+    res.send(" "+questions.length);
+  });
+}
+
 module.exports = router;

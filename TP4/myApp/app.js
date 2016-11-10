@@ -40,7 +40,7 @@ app.post('/deleteQuestions', routes.deleteQuestions);
 app.put('/verifyexam', routes.verifyAnswerExam);
 //app.get('/qtstats', route.getQuickTestStats);
 //app.get('/examstats', route.getExamStats);
-
+app.get('/getNbQuestions/:theme', routes.getNbQuestions);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
