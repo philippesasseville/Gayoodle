@@ -278,9 +278,13 @@ var verifyAnswerWithServerExam = function(data){
 	        if(result){
 				$(dragSrcEl).addClass("good");
 				updateNote(true);
+				var percent = (qr/q)*100;
+				$("#note").text(parseFloat(Math.round(percent * 100) / 100).toFixed(0) + "%");
 	        }else{
 	        	$(dragSrcEl).addClass("bad");
 	        	updateNote(false);
+	        	var percent = (qr/q)*100;
+				$("#note").text(parseFloat(Math.round(percent * 100) / 100).toFixed(0) + "%");
 	        }
 	    }
 	});
