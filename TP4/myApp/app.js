@@ -40,6 +40,7 @@ app.post('/deleteQuestions', routes.deleteQuestions);
 app.put('/verifyexam', routes.verifyAnswerExam);
 app.put('/examstats', routes.compileExamResult);
 app.get('/qtstats', routes.getQuickTestStats);
+// app.put('/qtstats', routes.putQuickTestStats);
 app.get('/examstats', routes.getExamStats);
 app.get('/getNbQuestions/:theme', routes.getNbQuestions);
 app.post('/clearStats', routes.clearStats);
