@@ -250,9 +250,15 @@ var verifyAnswerWithServer = function(data){
 	        if(result){
 				$(dragSrcEl).addClass("good");
 				updateNote(true);
+				console.log("good "+q+" "+qr+" "+pourcentage);
+				var percent = (qr/q)*100;
+				$("#note").text(parseFloat(Math.round(percent * 100) / 100).toFixed(0) + "%");
 	        }else{
 	        	$(dragSrcEl).addClass("bad");
 	        	updateNote(false);
+	        	console.log("bad "+q+" "+qr+" "+pourcentage);
+	        	var percent = (qr/q)*100;
+	        	$("#note").text(parseFloat(Math.round(percent * 100) / 100).toFixed(0) + "%");
 	        }
 	    }
 	});

@@ -6,6 +6,9 @@ $(document).ready(function() {
 
 	nextQuestionMongo();
 
+
+	$("#note").text(getQuestionPourcentage());//getQuestionPourcentage().toString();
+
 	$("#id_button_next").click(function() {
 		
 		var quickTestStats = getFile();
