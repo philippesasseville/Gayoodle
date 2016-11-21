@@ -1,5 +1,7 @@
 export class Question {
-  text: string;
-  answers: string[];
-  goodAnswer: number;
+	theme: string;
+	question: string;
+	reponses: [{text: string, ans: boolean },
+	{text: string, ans: boolean },
+	{text: string, ans: boolean }]
 }

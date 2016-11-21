@@ -25,6 +25,8 @@ app.use(express.static(path.join(__dirname, 'client')));
 app.use('/', routes);
 app.use('/users', users);
 
+app.post('/question', routes.postQuestion);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

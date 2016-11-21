@@ -14,9 +14,17 @@ export class QuestionService {
 
   	private headers = new Headers({'Content-Type': 'application/json'});
 
-	create(text: string, answer1: string, answer2: string, answer3: string, goodAnswer: number): Promise<Question> {
+	create(theme: string,question: string, answer1: string, answer2: string, answer3: string, slot1: boolean, slot2: boolean, slot3: boolean): Promise<Question> {
 	  return this.http
-	    .post(this.questionUrl, JSON.stringify({ text: text, answers:[answer1,answer2,answer3], goodAnswer: goodAnswer}), {headers: this.headers})
+	    .post(this.questionUrl, JSON.stringify(
+	    	{ 	
+	    		theme: theme,
+	    		question: question,
+	    		reponses:[{text: answer1, ans: slot1},
+	    				  {text: answer2, ans: slot2},
+	    				  {text: answer3, ans: slot3}]
+	    	}
+	    ), {headers: this.headers})
 	    .toPromise()
 	    .then(res => res.json().data)
 	    .catch(this.handleError);
