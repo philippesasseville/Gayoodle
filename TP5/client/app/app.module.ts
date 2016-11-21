@@ -9,10 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RulesComponent } from './rules.component';
 import { DashboardComponent } from './dashboard.component';
+import { AddQuestionComponent }      from './addquestion.component';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule, HttpModule, AppRoutingModule ],
-  declarations: [ AppComponent, RulesComponent, DashboardComponent ],
+  declarations: [ AppComponent, RulesComponent, DashboardComponent, AddQuestionComponent ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [ AppComponent ]
 })

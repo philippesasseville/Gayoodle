@@ -1,40 +1,37 @@
-extends layout
-
-block content
-	h1= title
-	form(action="/postQuestion" method="post")
-		span theme
-		br
-		select(name="theme")
-			option(value="HTML") HTML
-			option(value="CSS") CSS
-			option(value="JavaScript") JavaScript
-		br
-		span Question
-		br
-		input(type="text", name="question",checked)
-		br
-		span reponse1
-		br
-		input(type="text", name="reponse1")
-		br
-		span reponse2
-		br
-		input(type="text", name="reponse2")
-		br
-		span reponse3 :
-		br
-		input(type="text", name="reponse3")
-		br
-		span Quelle est la bonne reponse ?
-		br
-		input(type="radio", name="reponse", value="reponse1")
-		span reponse 1
-		br
-		input(type="radio", name="reponse", value="reponse2")
-		span reponse 2
-		br
-		input(type="radio", name="reponse", value="reponse3")
-		span reponse 3
-		br
-		input(class='button',type="submit", value="Submit")
+h1= title
+form(action="/postQuestion" method="post")
+	span theme
+	br
+	select(name="theme")
+		option(value="HTML") HTML
+		option(value="CSS") CSS
+		option(value="JavaScript") JavaScript
+	br
+	span Question
+	br
+	input(type="text", name="question",checked)
+	br
+	span reponse1
+	br
+	input(type="text", name="reponse1")
+	br
+	span reponse2
+	br
+	input(type="text", name="reponse2")
+	br
+	span reponse3 :
+	br
+	input(type="text", name="reponse3")
+	br
+	span Quelle est la bonne reponse ?
+	br
+	input(type="radio", name="reponse", value="reponse1")
+	span reponse 1
+	br
+	input(type="radio", name="reponse", value="reponse2")
+	span reponse 2
+	br
+	input(type="radio", name="reponse", value="reponse3")
+	span reponse 3
+	br
+	input(class='button',type="submit", value="Submit")
