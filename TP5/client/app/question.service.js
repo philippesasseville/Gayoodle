@@ -17,9 +17,9 @@ var QuestionService = (function () {
         this.questionUrl = 'myApp/question'; // URL to web api
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
-    QuestionService.prototype.create = function (text, answer1, answer2, answer3, goodAnswer) {
+    QuestionService.prototype.create = function (question) {
         return this.http
-            .post(this.questionUrl, JSON.stringify({ text: text, answers: [answer1, answer2, answer3], goodAnswer: goodAnswer }), { headers: this.headers })
+            .post(this.questionUrl, JSON.stringify(question), { headers: this.headers })
             .toPromise()
             .then(function (res) { return res.json().data; })
             .catch(this.handleError);
