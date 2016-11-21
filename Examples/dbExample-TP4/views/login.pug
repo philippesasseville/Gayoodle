@@ -1,0 +1,10 @@
+extends layout.pug
+
+block content
+    section
+        h1 Connexion d'un utilisateur
+        p= error
+        form(action="/login" method="POST")
+            input(type="text" name="nom")
+            input(type="submit")
+
