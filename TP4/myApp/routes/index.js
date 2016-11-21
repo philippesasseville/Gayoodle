@@ -70,7 +70,7 @@ router.create = function ( req, res ){
 };
 
 router.index = function( req, res ){
-  var theme = "HTML";//req.body.theme;
+  var theme = "JavaScript";//req.body.theme;
 
   var filter = {theme: theme};
   var fields = {};

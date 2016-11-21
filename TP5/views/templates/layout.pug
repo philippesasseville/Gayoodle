@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://code.jquery.com/jquery-3.1.1.min.js')
+  body
+    ul
+      each page in [{path: "/",name : "Accueil" }, {path: "/dashboard",name : "Tableau de Bord" }, {path: "/rules",name : "Instructions" }, {path: "/ajouterQuestion",name : "Ajouter une Question" }]
+        if path === page.path
+          li
+            a#current(href=page.path)= page.name
+        else
+          li
+            a(href=page.path)= page.name
+    block content
+
+    footer
+        small QuizFacile 2016
