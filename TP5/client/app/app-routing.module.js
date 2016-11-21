@@ -12,10 +12,12 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var dashboard_component_1 = require('./dashboard.component');
 var rules_component_1 = require('./rules.component');
+var addquestion_component_1 = require('./addquestion.component');
 var routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: dashboard_component_1.DashboardComponent },
-    { path: 'rules', component: rules_component_1.RulesComponent }
+    { path: 'rules', component: rules_component_1.RulesComponent },
+    { path: 'addquestion', component: addquestion_component_1.AddQuestionComponent }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

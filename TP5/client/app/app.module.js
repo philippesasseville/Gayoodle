@@ -17,13 +17,14 @@ var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
 var rules_component_1 = require('./rules.component');
 var dashboard_component_1 = require('./dashboard.component');
+var addquestion_component_1 = require('./addquestion.component');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, app_routing_module_1.AppRoutingModule],
-            declarations: [app_component_1.AppComponent, rules_component_1.RulesComponent, dashboard_component_1.DashboardComponent],
+            declarations: [app_component_1.AppComponent, rules_component_1.RulesComponent, dashboard_component_1.DashboardComponent, addquestion_component_1.AddQuestionComponent],
             providers: [{ provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy }],
             bootstrap: [app_component_1.AppComponent]
         }), 

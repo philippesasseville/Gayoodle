@@ -9,19 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
-        this.title = "QuizFacile";
+var AddQuestionComponent = (function () {
+    function AddQuestionComponent() {
     }
-    AppComponent = __decorate([
+    AddQuestionComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'my-app',
-            template: "\n\t  <h1>{{title}}</h1>\n\t  <nav>\n\t    <a routerLink=\"/dashboard\" routerLinkActive=\"active\">Dashboard</a>\n\t    <a routerLink=\"/rules\" routerLinkActive=\"active\">Rules</a>\n\t    <a routerLink=\"/addquestion\" routerLinkActive=\"active\">Add Question</a>\n\t  </nav>\n\t  <router-outlet></router-outlet>\n\t"
+            selector: 'my-addquestion',
+            templateUrl: '/templates/addquestion'
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], AddQuestionComponent);
+    return AddQuestionComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.AddQuestionComponent = AddQuestionComponent;
+//# sourceMappingURL=addquestion.component.js.map
