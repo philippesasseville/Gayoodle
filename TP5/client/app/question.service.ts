@@ -24,7 +24,7 @@ export class QuestionService {
 	}
 
 	handleError(err : Error): void{
-		console.log(err);
+		// console.log(err);
 	}
 
 	get(): Promise<Question> {

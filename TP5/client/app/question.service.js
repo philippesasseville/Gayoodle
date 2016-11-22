@@ -26,7 +26,7 @@ var QuestionService = (function () {
             .catch(this.handleError);
     };
     QuestionService.prototype.handleError = function (err) {
-        console.log(err);
+        // console.log(err);
     };
     QuestionService.prototype.get = function () {
         return this.http.get(this.questionUrl)
