@@ -17,6 +17,7 @@ export class QuickTestComponent implements OnInit {
 	reponse2 = "";
 	reponse3 = "";
 	reponseChoisi = "Glisser votre reponse ici"
+	reponseBonne = "";
 
 	ngOnInit(): void {
 		this.questionService.get().then(question => {
@@ -41,15 +42,33 @@ export class QuickTestComponent implements OnInit {
 	onDrop(event, data: any) {
 	  let dataTransfer = event.dataTransfer.getData('data');
 	  this.reponseChoisi = event.dataTransfer.getData('data');
+
+	  let isGood = this.checkAnswer();
+	  
+	  if (isGood) {console.log("GOOD SHIT");} else {console.log("TU SUCK");}
+
+
 	  event.preventDefault();
 	}
 	allowDrop(event) {
 	  event.preventDefault();
-}
+	}
 
 
-	// get() {
-	// 	this.questionService.getRandomQuestion();
+	checkAnswer() {
+		this.question.reponses.forEach((item, index) => {
+		    if (item.ans) {
+		    	this.reponseBonne = item.text;
+		    }
+		});
 
-	// }
+		if (this.reponseChoisi === this.reponseBonne) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+
 }

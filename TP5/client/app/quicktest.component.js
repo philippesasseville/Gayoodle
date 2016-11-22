@@ -18,6 +18,7 @@ var QuickTestComponent = (function () {
         this.reponse2 = "";
         this.reponse3 = "";
         this.reponseChoisi = "Glisser votre reponse ici";
+        this.reponseBonne = "";
     }
     QuickTestComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -46,10 +47,31 @@ var QuickTestComponent = (function () {
     QuickTestComponent.prototype.onDrop = function (event, data) {
         var dataTransfer = event.dataTransfer.getData('data');
         this.reponseChoisi = event.dataTransfer.getData('data');
+        var isGood = this.checkAnswer();
+        if (isGood) {
+            console.log("GOOD SHIT");
+        }
+        else {
+            console.log("TU SUCK");
+        }
         event.preventDefault();
     };
     QuickTestComponent.prototype.allowDrop = function (event) {
         event.preventDefault();
+    };
+    QuickTestComponent.prototype.checkAnswer = function () {
+        var _this = this;
+        this.question.reponses.forEach(function (item, index) {
+            if (item.ans) {
+                _this.reponseBonne = item.text;
+            }
+        });
+        if (this.reponseChoisi === this.reponseBonne) {
+            return true;
+        }
+        else {
+            return false;
+        }
     };
     QuickTestComponent = __decorate([
         core_1.Component({
