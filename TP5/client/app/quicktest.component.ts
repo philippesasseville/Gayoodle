@@ -11,12 +11,14 @@ import { Router } from '@angular/router';
 
 export class QuickTestComponent implements OnInit {
 
-	question: Question;
+	constructor(private questionService: QuestionService, private router: Router) { }
 
-	questionText= "meme";
-	reponse1 = "";
-	reponse2 = "";
-	reponse3 = "";
+	question: Question;
+	err = "";
+	questionText= "Loading...";
+	reponse1 = "Loading...";
+	reponse2 = "Loading...";
+	reponse3 = "Loading...";
 	reponseBonne = "";
 	reponseChoisi = "Glisser votre reponse ici";
 	goodClassBool = false;
@@ -24,6 +26,20 @@ export class QuickTestComponent implements OnInit {
 	canDrop = true;
 
 	ngOnInit(): void {
+		this.init();
+	}
+	init() {
+		this.questionText= "Loading...";
+		this.err = "";
+		this.reponse1 = "Loading...";
+		this.reponse2 = "Loading...";
+		this.reponse3 = "Loading...";
+		this.reponseBonne = "";
+		this.reponseChoisi = "Glisser votre reponse ici";
+		this.goodClassBool = false;
+		this.badClassBool = false;
+		this.canDrop = true;
+
 		this.questionService.get().then(question => {
 			this.question = question; 
 			this.questionText = question.question;
@@ -32,8 +48,6 @@ export class QuickTestComponent implements OnInit {
 			this.reponse3 = question.reponses[2].text;
 		});
 	}
-
-	constructor(private questionService: QuestionService, private router: Router) { }
 
 	onDragStart(event, data: any) {
 		switch(event.target.id){
@@ -70,13 +84,15 @@ export class QuickTestComponent implements OnInit {
 	}
 
 	clickSuivant() {
-		console.log("CLICKY SUIVANT");
-		this.router.navigate(['/quicktest']);
+		if (this.canDrop) {
+			this.err = "Veuillez choisir une reponse.";
+			return;
+		}
+		this.init();
 
 	}
 
 	clickMenu() {
-		console.log("CLICKY MENU");
 		this.router.navigate(['/dashboard']);
 	}
 

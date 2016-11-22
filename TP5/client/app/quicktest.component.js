@@ -15,10 +15,11 @@ var QuickTestComponent = (function () {
     function QuickTestComponent(questionService, router) {
         this.questionService = questionService;
         this.router = router;
-        this.questionText = "meme";
-        this.reponse1 = "";
-        this.reponse2 = "";
-        this.reponse3 = "";
+        this.err = "";
+        this.questionText = "Loading...";
+        this.reponse1 = "Loading...";
+        this.reponse2 = "Loading...";
+        this.reponse3 = "Loading...";
         this.reponseBonne = "";
         this.reponseChoisi = "Glisser votre reponse ici";
         this.goodClassBool = false;
@@ -26,7 +27,20 @@ var QuickTestComponent = (function () {
         this.canDrop = true;
     }
     QuickTestComponent.prototype.ngOnInit = function () {
+        this.init();
+    };
+    QuickTestComponent.prototype.init = function () {
         var _this = this;
+        this.questionText = "Loading...";
+        this.err = "";
+        this.reponse1 = "Loading...";
+        this.reponse2 = "Loading...";
+        this.reponse3 = "Loading...";
+        this.reponseBonne = "";
+        this.reponseChoisi = "Glisser votre reponse ici";
+        this.goodClassBool = false;
+        this.badClassBool = false;
+        this.canDrop = true;
         this.questionService.get().then(function (question) {
             _this.question = question;
             _this.questionText = question.question;
@@ -73,11 +87,13 @@ var QuickTestComponent = (function () {
         this.canDrop = false;
     };
     QuickTestComponent.prototype.clickSuivant = function () {
-        console.log("CLICKY SUIVANT");
-        this.router.navigate(['/quicktest']);
+        if (this.canDrop) {
+            this.err = "Veuillez choisir une reponse.";
+            return;
+        }
+        this.init();
     };
     QuickTestComponent.prototype.clickMenu = function () {
-        console.log("CLICKY MENU");
         this.router.navigate(['/dashboard']);
     };
     QuickTestComponent = __decorate([
