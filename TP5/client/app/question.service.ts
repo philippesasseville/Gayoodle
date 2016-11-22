@@ -25,4 +25,12 @@ export class QuestionService {
 	handleError(err : Error): void{
 		console.log(err);
 	}
+
+	get(): Promise<Question> {
+    return this.http.get(this.questionUrl)
+               .toPromise()
+               .then(response => response.json() as Question)
+               .catch(this.handleError);
+  }
+
 }

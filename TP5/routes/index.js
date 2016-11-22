@@ -42,4 +42,16 @@ router.postQuestion = function ( req, res ){
   });
 };
 
+router.getRandomQuestion = function( req, res ){
+  var filter = {};
+  var fields = {};
+  var options = {limit: 1};
+
+  Question.findRandom(filter, fields, options, function(err, results) {
+    var question = JSON.stringify(results[0]);
+    res.send(question);
+
+  });
+};
+
 module.exports = router;
