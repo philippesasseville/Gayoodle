@@ -11,6 +11,7 @@ export class QuestionService {
 	private questionUrl = '/question';  // URL to web api
 	private verifyUrl = '/verify';  // URL to web api
 	private verifyExamUrl = '/verifyexam';  // URL to web api
+	private compileExamUrl = '/examstats';
 
   	constructor(private http: Http) { }
 
@@ -53,6 +54,14 @@ export class QuestionService {
 	  verifyExam(question: String, reponseChoisi: String): Promise<boolean> {
 		return this.http
 			.post(this.verifyExamUrl, JSON.stringify({question: question, reponseChoisi: reponseChoisi}), {headers: this.headers})
+			.toPromise()
+			.then(res => res.json())
+			.catch(this.handleError);
+	}
+
+	compile(theme: String, pourcentage: Number): Promise<boolean>{
+		return this.http
+			.post(this.compileExamUrl, JSON.stringify({theme: theme,pourcentage: pourcentage}), {headers: this.headers})
 			.toPromise()
 			.then(res => res.json())
 			.catch(this.handleError);

@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Question = mongoose.model('Question');
 var QuickTestStats = mongoose.model('QuickTestStats');
+var ExamStats = mongoose.model('ExamStats');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -103,6 +104,57 @@ router.verifyAnswerExam = function(req, res){
       res.status(200).send(false);
     }
   });
+};
+
+router.compileExamResult = function(req, res){
+
+  console.log("REQ.BODY : "+JSON.stringify(req.body));
+
+  ExamStats.find(function(err, results){
+    results = results[0];
+    console.log("FIND STATS: "+results);
+    if(parseFloat(req.body.pourcentage) > 50.00)
+    {
+      console.log("success");
+      console.log(!req.body.theme.localeCompare("HTML"));
+      if(!req.body.theme.localeCompare("HTML"))
+      {
+        results.HTMLwin = results.HTMLwin + 1;
+      }
+      else if(!req.body.theme.localeCompare("CSS"))
+      {
+        results.CSSwin = results.CSSwin + 1;
+      }
+      else
+      {
+        results.JSwin = results.JSwin + 1;
+      }
+    }
+    else
+    {
+      console.log("fail");
+      if(!req.body.theme.localeCompare("HTML"))
+      {
+        results.HTMLloss = results.HTMLloss + 1;
+      }
+      else if(!req.body.theme.localeCompare("CSS"))
+      {
+        results.CSSloss = results.CSSloss + 1;
+      }
+      else
+      {
+        results.JSloss = results.JSloss + 1;
+      }
+    }
+    results.save(function(err,examstats){
+      console.log(examstats);
+    });
+  });
+  /*.save(function(err, examstats){
+    console.log("lamo");
+  });
+*/
+  res.status(200).send(true);
 };
 
 module.exports = router;

@@ -21,6 +21,7 @@ var addquestion_component_1 = require('./addquestion.component');
 var question_service_1 = require('./question.service');
 var quicktest_component_1 = require('./quicktest.component');
 var exam_component_1 = require('./exam.component');
+var result_component_1 = require('./result.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,7 +34,8 @@ var AppModule = (function () {
                 dashboard_component_1.DashboardComponent,
                 addquestion_component_1.AddQuestionComponent,
                 quicktest_component_1.QuickTestComponent,
-                exam_component_1.ExamComponent
+                exam_component_1.ExamComponent,
+                result_component_1.ResultComponent
             ],
             providers: [
                 { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy },

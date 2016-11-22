@@ -17,6 +17,7 @@ var QuestionService = (function () {
         this.questionUrl = '/question'; // URL to web api
         this.verifyUrl = '/verify'; // URL to web api
         this.verifyExamUrl = '/verifyexam'; // URL to web api
+        this.compileExamUrl = '/examstats';
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     QuestionService.prototype.create = function (question) {
@@ -50,6 +51,13 @@ var QuestionService = (function () {
     QuestionService.prototype.verifyExam = function (question, reponseChoisi) {
         return this.http
             .post(this.verifyExamUrl, JSON.stringify({ question: question, reponseChoisi: reponseChoisi }), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    QuestionService.prototype.compile = function (theme, pourcentage) {
+        return this.http
+            .post(this.compileExamUrl, JSON.stringify({ theme: theme, pourcentage: pourcentage }), { headers: this.headers })
             .toPromise()
             .then(function (res) { return res.json(); })
             .catch(this.handleError);

@@ -106,12 +106,17 @@ var ExamComponent = (function () {
             this.err = "Veuillez choisir une reponse.";
             return;
         }
-        if (this.totalRepondu == this.totalQuestion)
-            this.router.navigate(['/dashboard']);
+        if (this.totalRepondu == this.totalQuestion) {
+            //compile results
+            this.questionService.compile(this.theme, (this.totalGood / this.totalQuestion * 100));
+            this.router.navigate(['/result', this.theme, this.totalGood, this.totalQuestion]);
+        }
         else
             this.init();
     };
     ExamComponent.prototype.clickMenu = function () {
+        //compile results
+        this.questionService.compile(this.theme, 0);
         this.router.navigate(['/dashboard']);
     };
     ExamComponent = __decorate([

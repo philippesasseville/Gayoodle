@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Question } from './question';
 import { QuestionService } from './question.service'
 import { Router } from '@angular/router';
@@ -108,14 +108,18 @@ export class ExamComponent implements OnInit { //
 			this.err = "Veuillez choisir une reponse.";
 			return;
 		}
-		if(this.totalRepondu == this.totalQuestion)
-			this.router.navigate(['/dashboard']);
-			//this.router.navigate(['/result', this.theme, this.totalGood, this.totalQuestion]);
+		if(this.totalRepondu == this.totalQuestion){
+			//compile results
+			this.questionService.compile(this.theme, (this.totalGood/this.totalQuestion*100));
+			this.router.navigate(['/result', this.theme, this.totalGood, this.totalQuestion]);
+		}
 		else
 			this.init();
 	}
 
 	clickMenu() {
+		//compile results
+		this.questionService.compile(this.theme, 0);
 		this.router.navigate(['/dashboard']);
 	}
 

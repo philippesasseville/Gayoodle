@@ -5,6 +5,7 @@ import { RulesComponent }      from './rules.component';
 import { AddQuestionComponent }      from './addquestion.component';
 import { QuickTestComponent }      from './quicktest.component';
 import { ExamComponent }      from './exam.component';
+import { ResultComponent }      from './result.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'rules',     component: RulesComponent },
   { path: 'addquestion',     component: AddQuestionComponent },
   { path: 'quicktest',     component: QuickTestComponent },
-  { path: 'exam/:theme/:nb',     component: ExamComponent }
+  { path: 'exam/:theme/:nb',     component: ExamComponent },
+  { path: 'result/:theme/:totalGood/:totalQuestion', component: ResultComponent }
 
 ];
 @NgModule({

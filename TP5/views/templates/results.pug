@@ -1,16 +1,9 @@
-extends layout
+h1 Examen de {{theme}} terminé
+h3 Note Finale : 
+	span {{totalGood}}/{{totalQuestion}}
+h1 {{pourcentage}} %
+p {{message}}
 
-block content
-  
-	h1 Examen Terminé [
-		span#id_theme
-		span ]
-	h3#note Note Finale : 
-		span#id_resultat
-	h1#id_pourcentage
-	p#id_message
-
-	br
-	a(class='button' id='id_backToDashboard') 
-		span Retour
-	script(src='/javascripts/results.js', type='text/javascript')
+br
+a(class='button', (click)="goToDashboard()") 
+	span Retour

@@ -32,6 +32,7 @@ app.get('/question', routes.getRandomQuestion);
 app.get('/question/:theme', routes.getRandomQuestionTheme);
 app.post('/verify', routes.verifyAnswer);
 app.post('/verifyexam', routes.verifyAnswerExam);
+app.post('/examstats', routes.compileExamResult);
 
 
 // catch 404 and forward to error handler

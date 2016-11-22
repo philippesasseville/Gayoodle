@@ -13,6 +13,7 @@ import { AddQuestionComponent }      from './addquestion.component';
 import { QuestionService }      from './question.service';
 import { QuickTestComponent }      from './quicktest.component';
 import { ExamComponent }      from './exam.component';
+import { ResultComponent }      from './result.component';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule, HttpModule, AppRoutingModule ],
@@ -23,7 +24,8 @@ import { ExamComponent }      from './exam.component';
   		DashboardComponent, 
   		AddQuestionComponent,
   		QuickTestComponent,
-      ExamComponent
+      ExamComponent,
+      ResultComponent
 	],
   providers: 
   	[
