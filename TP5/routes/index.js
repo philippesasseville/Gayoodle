@@ -61,18 +61,16 @@ router.verifyAnswer = function(req, res){
     Question.find({"question": questionText}, function(err, question){
       if(reponseChoisi == question[0].reponses[question[0].ans].text){
         results[0].questionsRapidesWin = results[0].questionsRapidesWin + 1;
-        console.log("GOOD");
         res.status(200).send(true);
       }
       else
       {
         results[0].questionsRapidesLoss =  results[0].questionsRapidesLoss + 1;
-        console.log("NO GOOD");
         res.status(200).send(false);
       }
-      console.log("WE GON SAVE BOYS");
-       results[0].questionsRapidesMoy = (( results[0].questionsRapidesWin / ( results[0].questionsRapidesWin +  results[0].questionsRapidesLoss))*100).toFixed(0);
-       results[0].save(function( err, stats, count ){
+
+      results[0].questionsRapidesMoy = (( results[0].questionsRapidesWin / ( results[0].questionsRapidesWin +  results[0].questionsRapidesLoss))*100).toFixed(0);
+      results[0].save(function( err, stats, count ){
         console.log(JSON.stringify(stats));
       });
     });

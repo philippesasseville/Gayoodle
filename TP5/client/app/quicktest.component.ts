@@ -16,6 +16,7 @@ export class QuickTestComponent implements OnInit {
 	question: Question;
 	err = "";
 	questionText= "Loading...";
+	theme = "Loading...";
 	reponse1 = "Loading...";
 	reponse2 = "Loading...";
 	reponse3 = "Loading...";
@@ -30,6 +31,7 @@ export class QuickTestComponent implements OnInit {
 	}
 	init() {
 		this.questionText= "Loading...";
+		this.theme = "Loading...";
 		this.err = "";
 		this.reponse1 = "Loading...";
 		this.reponse2 = "Loading...";
@@ -42,6 +44,7 @@ export class QuickTestComponent implements OnInit {
 
 		this.questionService.get().then(question => {
 			this.question = question; 
+			this.theme = question.theme;
 			this.questionText = question.question;
 			this.reponse1 = question.reponses[0].text;
 			this.reponse2 = question.reponses[1].text;
@@ -74,10 +77,8 @@ export class QuickTestComponent implements OnInit {
 
 	setClasses(result) {
 		if(result){
-			console.log("GOOD SHIT")
 			this.goodClassBool = true;
 		} else {
-			console.log("TU SUCK");
 			this.badClassBool = true;
 		}
 		this.canDrop = false;
@@ -89,7 +90,6 @@ export class QuickTestComponent implements OnInit {
 			return;
 		}
 		this.init();
-
 	}
 
 	clickMenu() {

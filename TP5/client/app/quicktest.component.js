@@ -17,6 +17,7 @@ var QuickTestComponent = (function () {
         this.router = router;
         this.err = "";
         this.questionText = "Loading...";
+        this.theme = "Loading...";
         this.reponse1 = "Loading...";
         this.reponse2 = "Loading...";
         this.reponse3 = "Loading...";
@@ -32,6 +33,7 @@ var QuickTestComponent = (function () {
     QuickTestComponent.prototype.init = function () {
         var _this = this;
         this.questionText = "Loading...";
+        this.theme = "Loading...";
         this.err = "";
         this.reponse1 = "Loading...";
         this.reponse2 = "Loading...";
@@ -43,6 +45,7 @@ var QuickTestComponent = (function () {
         this.canDrop = true;
         this.questionService.get().then(function (question) {
             _this.question = question;
+            _this.theme = question.theme;
             _this.questionText = question.question;
             _this.reponse1 = question.reponses[0].text;
             _this.reponse2 = question.reponses[1].text;
@@ -77,11 +80,9 @@ var QuickTestComponent = (function () {
     };
     QuickTestComponent.prototype.setClasses = function (result) {
         if (result) {
-            console.log("GOOD SHIT");
             this.goodClassBool = true;
         }
         else {
-            console.log("TU SUCK");
             this.badClassBool = true;
         }
         this.canDrop = false;
