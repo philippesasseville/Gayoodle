@@ -1,41 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Question } from './question';
 import { QuestionService } from './question.service'
 import { Router } from '@angular/router';
+import { ActivatedRoute, Params }     from '@angular/router';
+import { Observable }         from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
 	moduleId: module.id,
-  	selector: 'my-quicktest',
-	templateUrl: '/templates/quicktest'
+  	selector: 'my-exam', //
+	templateUrl: '/templates/exam' //
 })
 
-export class QuickTestComponent implements OnInit {
+export class ExamComponent implements OnInit { //
 
-	constructor(private questionService: QuestionService, private router: Router) { }
+	constructor(private questionService: QuestionService, private router: Router, private route: ActivatedRoute) { }
+
+	theme;
 
 	question: Question;
 	err = "";
 	questionText= "Loading...";
-	theme = "Loading...";
 	reponse1 = "Loading...";
 	reponse2 = "Loading...";
 	reponse3 = "Loading...";
 	stats = "Stats: 0/0";
+	percentage; //
 	reponseBonne = "";
 	reponseChoisi = "Glisser votre reponse ici";
 	goodClassBool = false;
 	badClassBool = false;
 	canDrop = true;
 
-	totalAnswered = 0;
+	totalQuestion = 0;
 	totalGood = 0;
+	totalRepondu = 0;
 
 	ngOnInit(): void {
+		this.route.params
+		.switchMap((params: Params) => this.theme = params['theme'])
+    	.subscribe();
+
+    	this.route.params
+		.switchMap((params: Params) => this.totalQuestion = params['nb'])
+    	.subscribe();
+
 		this.init();
 	}
 	init() {
 		this.questionText= "Loading...";
-		this.theme = "Loading...";
 		this.err = "";
 		this.reponse1 = "Loading...";
 		this.reponse2 = "Loading...";
@@ -45,12 +59,9 @@ export class QuickTestComponent implements OnInit {
 		this.goodClassBool = false;
 		this.badClassBool = false;
 		this.canDrop = true;
-		//load stats
-		this.updateStats();
-		
-		this.questionService.get(null).then(question => {
+
+		this.questionService.get(this.theme).then(question => {
 			this.question = question; 
-			this.theme = question.theme;
 			this.questionText = question.question;
 			this.reponse1 = question.reponses[0].text;
 			this.reponse2 = question.reponses[1].text;
@@ -70,8 +81,8 @@ export class QuickTestComponent implements OnInit {
 	onDrop(event, data: any) {
 		if (this.canDrop) {
 			this.reponseChoisi = event.dataTransfer.getData('data');
-			this.questionService.verify(this.questionText, this.reponseChoisi)
-				.then(res => this.setClasses(res));
+			this.questionService.verifyExam(this.questionText, this.reponseChoisi)
+				.then(res => this.setClasses(res)); //
 		}
 
 		event.preventDefault();	
@@ -88,17 +99,8 @@ export class QuickTestComponent implements OnInit {
 		} else {
 			this.badClassBool = true;
 		}
-		this.totalAnswered += 1;
+		this.totalRepondu += 1;
 		this.canDrop = false;
-		this.updateStats();
-	}
-
-	updateStats() {
-		if (this.totalAnswered != 0) {
-			let percentage = this.totalGood/this.totalAnswered*100;
-			this.stats = "Stats: " + this.totalGood + "/" + this.totalAnswered 
-				+ " (" + percentage.toFixed(2) + "%)";
-		}
 	}
 	
 	clickSuivant() {
@@ -106,7 +108,11 @@ export class QuickTestComponent implements OnInit {
 			this.err = "Veuillez choisir une reponse.";
 			return;
 		}
-		this.init();
+		if(this.totalRepondu == this.totalQuestion)
+			this.router.navigate(['/dashboard']);
+			//this.router.navigate(['/result', this.theme, this.totalGood, this.totalQuestion]);
+		else
+			this.init();
 	}
 
 	clickMenu() {

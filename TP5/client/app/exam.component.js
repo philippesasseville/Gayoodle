@@ -11,13 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var question_service_1 = require('./question.service');
 var router_1 = require('@angular/router');
-var QuickTestComponent = (function () {
-    function QuickTestComponent(questionService, router) {
+var router_2 = require('@angular/router');
+require('rxjs/add/operator/map');
+require('rxjs/add/operator/switchMap');
+var ExamComponent = (function () {
+    function ExamComponent(questionService, router, route) {
         this.questionService = questionService;
         this.router = router;
+        this.route = route;
         this.err = "";
         this.questionText = "Loading...";
-        this.theme = "Loading...";
         this.reponse1 = "Loading...";
         this.reponse2 = "Loading...";
         this.reponse3 = "Loading...";
@@ -27,16 +30,23 @@ var QuickTestComponent = (function () {
         this.goodClassBool = false;
         this.badClassBool = false;
         this.canDrop = true;
-        this.totalAnswered = 0;
+        this.totalQuestion = 0;
         this.totalGood = 0;
+        this.totalRepondu = 0;
     }
-    QuickTestComponent.prototype.ngOnInit = function () {
+    ExamComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params
+            .switchMap(function (params) { return _this.theme = params['theme']; })
+            .subscribe();
+        this.route.params
+            .switchMap(function (params) { return _this.totalQuestion = params['nb']; })
+            .subscribe();
         this.init();
     };
-    QuickTestComponent.prototype.init = function () {
+    ExamComponent.prototype.init = function () {
         var _this = this;
         this.questionText = "Loading...";
-        this.theme = "Loading...";
         this.err = "";
         this.reponse1 = "Loading...";
         this.reponse2 = "Loading...";
@@ -46,18 +56,15 @@ var QuickTestComponent = (function () {
         this.goodClassBool = false;
         this.badClassBool = false;
         this.canDrop = true;
-        //load stats
-        this.updateStats();
-        this.questionService.get(null).then(function (question) {
+        this.questionService.get(this.theme).then(function (question) {
             _this.question = question;
-            _this.theme = question.theme;
             _this.questionText = question.question;
             _this.reponse1 = question.reponses[0].text;
             _this.reponse2 = question.reponses[1].text;
             _this.reponse3 = question.reponses[2].text;
         });
     };
-    QuickTestComponent.prototype.onDragStart = function (event, data) {
+    ExamComponent.prototype.onDragStart = function (event, data) {
         switch (event.target.id) {
             case "1":
                 event.dataTransfer.setData('data', this.reponse1);
@@ -71,19 +78,19 @@ var QuickTestComponent = (function () {
             default: console.log("oops");
         }
     };
-    QuickTestComponent.prototype.onDrop = function (event, data) {
+    ExamComponent.prototype.onDrop = function (event, data) {
         var _this = this;
         if (this.canDrop) {
             this.reponseChoisi = event.dataTransfer.getData('data');
-            this.questionService.verify(this.questionText, this.reponseChoisi)
-                .then(function (res) { return _this.setClasses(res); });
+            this.questionService.verifyExam(this.questionText, this.reponseChoisi)
+                .then(function (res) { return _this.setClasses(res); }); //
         }
         event.preventDefault();
     };
-    QuickTestComponent.prototype.allowDrop = function (event) {
+    ExamComponent.prototype.allowDrop = function (event) {
         event.preventDefault();
     };
-    QuickTestComponent.prototype.setClasses = function (result) {
+    ExamComponent.prototype.setClasses = function (result) {
         if (result) {
             this.goodClassBool = true;
             this.totalGood += 1;
@@ -91,36 +98,31 @@ var QuickTestComponent = (function () {
         else {
             this.badClassBool = true;
         }
-        this.totalAnswered += 1;
+        this.totalRepondu += 1;
         this.canDrop = false;
-        this.updateStats();
     };
-    QuickTestComponent.prototype.updateStats = function () {
-        if (this.totalAnswered != 0) {
-            var percentage = this.totalGood / this.totalAnswered * 100;
-            this.stats = "Stats: " + this.totalGood + "/" + this.totalAnswered
-                + " (" + percentage.toFixed(2) + "%)";
-        }
-    };
-    QuickTestComponent.prototype.clickSuivant = function () {
+    ExamComponent.prototype.clickSuivant = function () {
         if (this.canDrop) {
             this.err = "Veuillez choisir une reponse.";
             return;
         }
-        this.init();
+        if (this.totalRepondu == this.totalQuestion)
+            this.router.navigate(['/dashboard']);
+        else
+            this.init();
     };
-    QuickTestComponent.prototype.clickMenu = function () {
+    ExamComponent.prototype.clickMenu = function () {
         this.router.navigate(['/dashboard']);
     };
-    QuickTestComponent = __decorate([
+    ExamComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'my-quicktest',
-            templateUrl: '/templates/quicktest'
+            selector: 'my-exam',
+            templateUrl: '/templates/exam' //
         }), 
-        __metadata('design:paramtypes', [question_service_1.QuestionService, router_1.Router])
-    ], QuickTestComponent);
-    return QuickTestComponent;
+        __metadata('design:paramtypes', [question_service_1.QuestionService, router_1.Router, router_2.ActivatedRoute])
+    ], ExamComponent);
+    return ExamComponent;
 }());
-exports.QuickTestComponent = QuickTestComponent;
-//# sourceMappingURL=quicktest.component.js.map
+exports.ExamComponent = ExamComponent;
+//# sourceMappingURL=exam.component.js.map

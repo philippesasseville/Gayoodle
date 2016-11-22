@@ -13,9 +13,14 @@ var router_1 = require('@angular/router');
 var DashboardComponent = (function () {
     function DashboardComponent(router) {
         this.router = router;
+        this.theme = "HTML";
+        this.nb = "3";
     }
-    DashboardComponent.prototype.testo = function () {
+    DashboardComponent.prototype.goToQuickTest = function () {
         this.router.navigate(['/quicktest']);
+    };
+    DashboardComponent.prototype.goToExam = function () {
+        this.router.navigate(['/exam', this.theme, this.nb]);
     };
     DashboardComponent = __decorate([
         core_1.Component({

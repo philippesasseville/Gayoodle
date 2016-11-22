@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard.component';
 import { AddQuestionComponent }      from './addquestion.component';
 import { QuestionService }      from './question.service';
 import { QuickTestComponent }      from './quicktest.component';
+import { ExamComponent }      from './exam.component';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule, HttpModule, AppRoutingModule ],
@@ -21,7 +22,8 @@ import { QuickTestComponent }      from './quicktest.component';
   		RulesComponent, 
   		DashboardComponent, 
   		AddQuestionComponent,
-  		QuickTestComponent
+  		QuickTestComponent,
+      ExamComponent
 	],
   providers: 
   	[
