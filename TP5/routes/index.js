@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
+var Question = mongoose.model('Question');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,7 +13,6 @@ router.get('/templates/:template', function(req, res, next) {
 });
 
 router.postQuestion = function ( req, res ){
-  console.log("SERVER : " + JSON.stringify(req.body));
   var slot1 =req.body.reponses[0].ans;
   var slot2 =req.body.reponses[1].ans;
   var slot3 =req.body.reponses[2].ans;
@@ -35,19 +36,8 @@ router.postQuestion = function ( req, res ){
     res.status(400);
   }
 
-  console.log("saving : ");
-  var q = new Question({
-   theme: req.body.theme,
-   question: req.body.question,
-   reponses: [{text:req.body.reponses[0].text, ans: req.body.reponses[0].ans },
-   {text:req.body.reponses[1].text, ans: req.body.reponses[1].ans },
-   {text:req.body.reponses[2].text, ans: req.body.reponses[2].ans }]
-  });
-
-  console.log(JSON.stringify(q));
-
-  q.save( function( err, question, count ){
-    console.log("saved");
+  new Question(req.body)
+  .save( function( err, question, count ){
     res.status(200);
   });
 };
