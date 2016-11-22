@@ -18,6 +18,8 @@ var QuickTestComponent = (function () {
         this.reponse2 = "";
         this.reponse3 = "";
         this.reponseChoisi = "Glisser votre reponse ici";
+        this.goodClassBool = false;
+        this.badClassBool = false;
     }
     QuickTestComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -44,8 +46,11 @@ var QuickTestComponent = (function () {
         }
     };
     QuickTestComponent.prototype.onDrop = function (event, data) {
-        var dataTransfer = event.dataTransfer.getData('data');
         this.reponseChoisi = event.dataTransfer.getData('data');
+        if (1)
+            this.goodClassBool = true;
+        else
+            this.badClassBool = true;
         event.preventDefault();
     };
     QuickTestComponent.prototype.allowDrop = function (event) {

@@ -16,7 +16,9 @@ export class QuickTestComponent implements OnInit {
 	reponse1 = "";
 	reponse2 = "";
 	reponse3 = "";
-	reponseChoisi = "Glisser votre reponse ici"
+	reponseChoisi = "Glisser votre reponse ici";
+	goodClassBool = false;
+	badClassBool = false;
 
 	ngOnInit(): void {
 		this.questionService.get().then(question => {
@@ -39,17 +41,16 @@ export class QuickTestComponent implements OnInit {
 		}
 	}
 	onDrop(event, data: any) {
-	  let dataTransfer = event.dataTransfer.getData('data');
-	  this.reponseChoisi = event.dataTransfer.getData('data');
-	  event.preventDefault();
+		this.reponseChoisi = event.dataTransfer.getData('data');
+		//replace 1 with checkAns
+		if(1)
+			this.goodClassBool = true;
+		else
+			this.badClassBool = true;
+		event.preventDefault();
 	}
 	allowDrop(event) {
-	  event.preventDefault();
-}
+		event.preventDefault();
+	}
 
-
-	// get() {
-	// 	this.questionService.getRandomQuestion();
-
-	// }
 }
