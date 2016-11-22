@@ -9,11 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var DashboardComponent = (function () {
-    function DashboardComponent() {
+    function DashboardComponent(router) {
+        this.router = router;
     }
     DashboardComponent.prototype.testo = function () {
-        console.log("TESTO");
+        this.router.navigate(['/quicktest']);
     };
     DashboardComponent = __decorate([
         core_1.Component({
@@ -21,7 +23,7 @@ var DashboardComponent = (function () {
             selector: 'mon-dashboard',
             templateUrl: '/templates/dashboard'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], DashboardComponent);
     return DashboardComponent;
 }());

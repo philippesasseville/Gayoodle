@@ -1,4 +1,5 @@
 import { Component  } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
 	moduleId: module.id,
@@ -7,8 +8,10 @@ import { Component  } from '@angular/core';
 })
 
 export class DashboardComponent {
+
+	constructor(private router: Router) { }
 	
 	testo(): void {
-    	console.log("TESTO");
+    	this.router.navigate(['/quicktest']);
   	}
 }
