@@ -14,12 +14,14 @@ var dashboard_component_1 = require('./dashboard.component');
 var rules_component_1 = require('./rules.component');
 var addquestion_component_1 = require('./addquestion.component');
 var quicktest_component_1 = require('./quicktest.component');
+var exam_component_1 = require('./exam.component');
 var routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: dashboard_component_1.DashboardComponent },
     { path: 'rules', component: rules_component_1.RulesComponent },
     { path: 'addquestion', component: addquestion_component_1.AddQuestionComponent },
-    { path: 'quicktest', component: quicktest_component_1.QuickTestComponent }
+    { path: 'quicktest', component: quicktest_component_1.QuickTestComponent },
+    { path: 'exam/:theme/:nb', component: exam_component_1.ExamComponent }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

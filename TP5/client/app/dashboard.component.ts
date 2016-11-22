@@ -1,5 +1,5 @@
 import { Component  } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
 	moduleId: module.id,
@@ -9,9 +9,16 @@ import { Router } from '@angular/router';
 
 export class DashboardComponent {
 
+  theme="HTML";
+  nb="3";
+
 	constructor(private router: Router) { }
 	
-	testo(): void {
+	goToQuickTest(): void {
     	this.router.navigate(['/quicktest']);
+  	}
+
+  	goToExam(): void {
+    	this.router.navigate(['/exam', this.theme, this.nb]);
   	}
 }

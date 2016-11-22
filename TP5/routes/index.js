@@ -52,6 +52,19 @@ router.getRandomQuestion = function( req, res ){
   });
 };
 
+router.getRandomQuestionTheme = function( req, res ){
+  var theme = req.params.theme.substr(1);
+
+  var filter = {theme: theme};
+  var fields = {};
+  var options = {limit: 1};
+
+  Question.findRandom(filter, fields, options, function(err, results) {
+    var questions = JSON.stringify(results[0]);
+    res.send(questions);
+  });
+};
+
 
 router.verifyAnswer = function(req, res){
   var questionText = req.body.question;
@@ -74,6 +87,21 @@ router.verifyAnswer = function(req, res){
         console.log(JSON.stringify(stats));
       });
     });
+  });
+};
+
+router.verifyAnswerExam = function(req, res){
+  var questionText = req.body.question;
+  var reponseChoisi = req.body.reponseChoisi;
+
+  Question.find({"question": questionText}, function(err, question){
+    if(reponseChoisi == question[0].reponses[question[0].ans].text){
+      res.status(200).send(true);
+    }
+    else
+    {
+      res.status(200).send(false);
+    }
   });
 };
 

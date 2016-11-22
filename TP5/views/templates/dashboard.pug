@@ -2,21 +2,21 @@ h1 Tableau de Bord
 div#info
   h2 Questions Rapides
   p Gymnastique mentale dans un environement sans stress.
-  button(class='button', (click)="testo()") 
+  button(class='button', (click)="goToQuickTest()") 
     span Commencer le quiz
   h2 Pratique d'examen
   p Selectionnez vos parametres pour la simulation d'examen.
   form 
-    select(name="domaine")
+    select(name="domaine", [(ngModel)]="theme")
       option(value="HTML") HTML
       option(value="CSS") CSS
       option(value="JavaScript") JavaScript
-    select(name="nbquestions")
+    select(name="nbquestions", [(ngModel)]="nb")
       option(value="3") 3 Questions
       option(value="5") 5 Questions
       option(value="10") 10 Questions
   p Etes-vous pret?
-  a(class='button' id='id_button_exam') 
+  a(class='button' , (click)="goToExam()") 
     span Commencer l'examen
   br
 div#stats

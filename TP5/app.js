@@ -29,7 +29,10 @@ app.use('/users', users);
 
 app.post('/question', routes.postQuestion);
 app.get('/question', routes.getRandomQuestion);
+app.get('/question/:theme', routes.getRandomQuestionTheme);
 app.post('/verify', routes.verifyAnswer);
+app.post('/verifyexam', routes.verifyAnswerExam);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

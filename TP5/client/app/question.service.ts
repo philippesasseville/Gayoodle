@@ -10,6 +10,7 @@ export class QuestionService {
 
 	private questionUrl = '/question';  // URL to web api
 	private verifyUrl = '/verify';  // URL to web api
+	private verifyExamUrl = '/verifyexam';  // URL to web api
 
   	constructor(private http: Http) { }
 
@@ -27,12 +28,20 @@ export class QuestionService {
 		console.log(err);
 	}
 
-	get(): Promise<Question> {
-    	return this.http.get(this.questionUrl)
+	get(theme: string): Promise<Question> {
+		let url;
+		if(!theme)
+			url = this.questionUrl;
+		else
+			url = this.questionUrl+"/:"+ theme;
+
+    	return this.http.get(url)
                .toPromise()
                .then(response => response.json() as Question)
                .catch(this.handleError);
   	}
+
+
   	verify(question: String, reponseChoisi: String): Promise<boolean> {
 		return this.http
 			.post(this.verifyUrl, JSON.stringify({question: question, reponseChoisi: reponseChoisi}), {headers: this.headers})
@@ -40,5 +49,14 @@ export class QuestionService {
 			.then(res => res.json())
 			.catch(this.handleError);
 	}
+
+	  verifyExam(question: String, reponseChoisi: String): Promise<boolean> {
+		return this.http
+			.post(this.verifyExamUrl, JSON.stringify({question: question, reponseChoisi: reponseChoisi}), {headers: this.headers})
+			.toPromise()
+			.then(res => res.json())
+			.catch(this.handleError);
+	}
+
 
 }
