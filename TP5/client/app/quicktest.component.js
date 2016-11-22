@@ -18,7 +18,12 @@ var QuickTestComponent = (function () {
         this.reponse2 = "";
         this.reponse3 = "";
         this.reponseChoisi = "Glisser votre reponse ici";
+<<<<<<< HEAD
         this.reponseBonne = "";
+=======
+        this.goodClassBool = false;
+        this.badClassBool = false;
+>>>>>>> cb1263afc3fba3da2e6d1059fe44140ff569e01a
     }
     QuickTestComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -45,8 +50,8 @@ var QuickTestComponent = (function () {
         }
     };
     QuickTestComponent.prototype.onDrop = function (event, data) {
-        var dataTransfer = event.dataTransfer.getData('data');
         this.reponseChoisi = event.dataTransfer.getData('data');
+<<<<<<< HEAD
         var isGood = this.checkAnswer();
         if (isGood) {
             console.log("GOOD SHIT");
@@ -54,6 +59,12 @@ var QuickTestComponent = (function () {
         else {
             console.log("TU SUCK");
         }
+=======
+        if (1)
+            this.goodClassBool = true;
+        else
+            this.badClassBool = true;
+>>>>>>> cb1263afc3fba3da2e6d1059fe44140ff569e01a
         event.preventDefault();
     };
     QuickTestComponent.prototype.allowDrop = function (event) {

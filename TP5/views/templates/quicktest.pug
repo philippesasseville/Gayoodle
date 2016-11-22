@@ -9,7 +9,7 @@ div(id='columns')
 	div(class='column',id='3', draggable='true',(dragstart)="onDragStart($event, dragData)")
 		header C
 		p {{reponse3}}
-	div(class='column', (drop)="onDrop($event, dropData)", (dragover)="allowDrop($event)")
+	div(class='column',[class.good]="goodClassBool",[class.bad]="badClassBool", (drop)="onDrop($event, dropData)", (dragover)="allowDrop($event)")
 		header Reponse
 		p {{reponseChoisi}}
 div#buttondiv
