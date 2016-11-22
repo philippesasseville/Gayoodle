@@ -20,9 +20,7 @@ export class AddQuestionComponent {
 	reponse3 = "";
 	reponse = "";
 	err = ""
-	slot1 = false;
-	slot2 = false;
-	slot3 = false;
+	ans = -1;
 
 	post() {
 		//call question service
@@ -32,20 +30,17 @@ export class AddQuestionComponent {
 			this.err = "Veuillez entrer 3 reponses!";
 		else if(!this.reponse)
 			this.err = "Veuillez indiquer la bonne reponse!";
-		else
-		{
+		else {
 			if(this.reponse === "reponse1")
-				this.slot1 = true;
-			else if(this.reponse === "reponse2")
-			{
-				this.slot2 = true;
+				this.ans = 0;
+			else if(this.reponse === "reponse2") {
+				this.ans = 1;
 			}
-			else if(this.reponse === "reponse3")
-			{
-				this.slot3 = true;
+			else if(this.reponse === "reponse3") {
+				this.ans = 2;
 			}
 
-			var q = new Question(this.theme,this.question,this.reponse1,this.reponse2,this.reponse3,this.slot1,this.slot2,this.slot3);
+			var q = new Question(this.theme,this.question,this.reponse1,this.reponse2,this.reponse3, this.ans);
 
 			console.log(JSON.stringify(q));
 
@@ -58,9 +53,7 @@ export class AddQuestionComponent {
 			this.reponse2 = "";
 			this.reponse3 = "";
 			this.reponse = "";
-			this.slot1 = false;
-			this.slot2 = false;
-			this.slot3 = false;
+			this.ans = -1;
 		}
 	}
 }

@@ -1,10 +1,13 @@
 "use strict";
 var Question = (function () {
-    function Question(theme, question, answer1, answer2, answer3, slot1, slot2, slot3) {
+    function Question(theme, question, answer1, answer2, answer3, ans) {
         console.log("construct");
         this.theme = theme;
         this.question = question;
-        this.reponses = [{ text: answer1, ans: slot1 }, { text: answer2, ans: slot2 }, { text: answer3, ans: slot3 }];
+        this.ans = ans;
+        this.reponses = [{ text: answer1 },
+            { text: answer2 },
+            { text: answer3 }];
     }
     return Question;
 }());

@@ -10,20 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var question_service_1 = require('./question.service');
+var router_1 = require('@angular/router');
 var QuickTestComponent = (function () {
-    function QuickTestComponent(questionService) {
+    function QuickTestComponent(questionService, router) {
         this.questionService = questionService;
+        this.router = router;
         this.questionText = "meme";
         this.reponse1 = "";
         this.reponse2 = "";
         this.reponse3 = "";
-        this.reponseChoisi = "Glisser votre reponse ici";
-<<<<<<< HEAD
         this.reponseBonne = "";
-=======
+        this.reponseChoisi = "Glisser votre reponse ici";
         this.goodClassBool = false;
         this.badClassBool = false;
->>>>>>> cb1263afc3fba3da2e6d1059fe44140ff569e01a
+        this.canDrop = true;
     }
     QuickTestComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -50,39 +50,35 @@ var QuickTestComponent = (function () {
         }
     };
     QuickTestComponent.prototype.onDrop = function (event, data) {
-        this.reponseChoisi = event.dataTransfer.getData('data');
-<<<<<<< HEAD
-        var isGood = this.checkAnswer();
-        if (isGood) {
-            console.log("GOOD SHIT");
+        var _this = this;
+        if (this.canDrop) {
+            this.reponseChoisi = event.dataTransfer.getData('data');
+            this.questionService.verify(this.questionText, this.reponseChoisi)
+                .then(function (res) { return _this.setClasses(res); });
         }
-        else {
-            console.log("TU SUCK");
-        }
-=======
-        if (1)
-            this.goodClassBool = true;
-        else
-            this.badClassBool = true;
->>>>>>> cb1263afc3fba3da2e6d1059fe44140ff569e01a
         event.preventDefault();
     };
     QuickTestComponent.prototype.allowDrop = function (event) {
         event.preventDefault();
     };
-    QuickTestComponent.prototype.checkAnswer = function () {
-        var _this = this;
-        this.question.reponses.forEach(function (item, index) {
-            if (item.ans) {
-                _this.reponseBonne = item.text;
-            }
-        });
-        if (this.reponseChoisi === this.reponseBonne) {
-            return true;
+    QuickTestComponent.prototype.setClasses = function (result) {
+        if (result) {
+            console.log("GOOD SHIT");
+            this.goodClassBool = true;
         }
         else {
-            return false;
+            console.log("TU SUCK");
+            this.badClassBool = true;
         }
+        this.canDrop = false;
+    };
+    QuickTestComponent.prototype.clickSuivant = function () {
+        console.log("CLICKY SUIVANT");
+        this.router.navigate(['/quicktest']);
+    };
+    QuickTestComponent.prototype.clickMenu = function () {
+        console.log("CLICKY MENU");
+        this.router.navigate(['/dashboard']);
     };
     QuickTestComponent = __decorate([
         core_1.Component({
@@ -90,7 +86,7 @@ var QuickTestComponent = (function () {
             selector: 'my-quicktest',
             templateUrl: '/templates/quicktest'
         }), 
-        __metadata('design:paramtypes', [question_service_1.QuestionService])
+        __metadata('design:paramtypes', [question_service_1.QuestionService, router_1.Router])
     ], QuickTestComponent);
     return QuickTestComponent;
 }());

@@ -13,9 +13,9 @@ div(id='columns')
 		header Reponse
 		p {{reponseChoisi}}
 div#buttondiv
-	a(class='button', id='id_button_back')
+	a(class='button', id='id_button_back', (click)="clickMenu()")
 		span Retour au Menu
-	a(class='button', id='id_button_next')
+	a(class='button', id='id_button_next', (click)="clickSuivant()")
 		span Suivant
 script(src='/javascripts/testUtil.js', type='text/javascript')
 script(src='/javascripts/quicktest.js', type='text/javascript')

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Question } from './question';
 import { QuestionService } from './question.service'
+import { Router } from '@angular/router';
 
 @Component({
 	moduleId: module.id,
@@ -20,6 +21,7 @@ export class QuickTestComponent implements OnInit {
 	reponseChoisi = "Glisser votre reponse ici";
 	goodClassBool = false;
 	badClassBool = false;
+	canDrop = true;
 
 	ngOnInit(): void {
 		this.questionService.get().then(question => {
@@ -31,7 +33,7 @@ export class QuickTestComponent implements OnInit {
 		});
 	}
 
-	constructor(private questionService: QuestionService) { }
+	constructor(private questionService: QuestionService, private router: Router) { }
 
 	onDragStart(event, data: any) {
 		switch(event.target.id){
@@ -41,17 +43,12 @@ export class QuickTestComponent implements OnInit {
 			default: console.log("oops");
 		}
 	}
-	
-	onDrop(event, data: any) {
-		let dataTransfer = event.dataTransfer.getData('data');
-		this.reponseChoisi = event.dataTransfer.getData('data');
 
-		if(this.checkAnswer()){
-			console.log("GOOD SHIT")
-			this.goodClassBool = true;
-		} else {
-			console.log("TU SUCK");
-			this.badClassBool = true;
+	onDrop(event, data: any) {
+		if (this.canDrop) {
+			this.reponseChoisi = event.dataTransfer.getData('data');
+			this.questionService.verify(this.questionText, this.reponseChoisi)
+				.then(res => this.setClasses(res));
 		}
 
 		event.preventDefault();	
@@ -61,17 +58,26 @@ export class QuickTestComponent implements OnInit {
 	  event.preventDefault();
 	}
 
-	checkAnswer() {
-		this.question.reponses.forEach((item, index) => {
-		    if (item.ans) {
-		    	this.reponseBonne = item.text;
-		    }
-		});
-
-		if (this.reponseChoisi === this.reponseBonne) {
-			return true;
+	setClasses(result) {
+		if(result){
+			console.log("GOOD SHIT")
+			this.goodClassBool = true;
 		} else {
-			return false;
+			console.log("TU SUCK");
+			this.badClassBool = true;
 		}
+		this.canDrop = false;
 	}
+
+	clickSuivant() {
+		console.log("CLICKY SUIVANT");
+		this.router.navigate(['/quicktest']);
+
+	}
+
+	clickMenu() {
+		console.log("CLICKY MENU");
+		this.router.navigate(['/dashboard']);
+	}
+
 }

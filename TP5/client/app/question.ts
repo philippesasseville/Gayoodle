@@ -1,15 +1,19 @@
 export class Question {
 
-	constructor(theme: string,question: string, answer1: string, answer2: string, answer3: string, slot1: boolean, slot2: boolean, slot3: boolean) {
+	constructor(theme: string,question: string, answer1: string, answer2: string, answer3: string, ans: number) {
 	    console.log("construct");
 	    this.theme = theme;
 	    this.question = question;
-	    this.reponses = [{text: answer1, ans: slot1 },{text: answer2, ans: slot2 },{text: answer3, ans: slot3 }];
+	    this.ans = ans;
+	    this.reponses = [{text: answer1},
+	    	{text: answer2},
+	    	{text: answer3}];
 	}
 
 	theme: string;
 	question: string;
-	reponses: [{text: string, ans: boolean },
-	{text: string, ans: boolean },
-	{text: string, ans: boolean }]
+	ans: number;
+	reponses: [{text: string},
+	{text: string},
+	{text: string}]
 }

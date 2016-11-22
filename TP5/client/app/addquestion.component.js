@@ -21,9 +21,7 @@ var AddQuestionComponent = (function () {
         this.reponse3 = "";
         this.reponse = "";
         this.err = "";
-        this.slot1 = false;
-        this.slot2 = false;
-        this.slot3 = false;
+        this.ans = -1;
     }
     AddQuestionComponent.prototype.post = function () {
         //call question service
@@ -35,14 +33,14 @@ var AddQuestionComponent = (function () {
             this.err = "Veuillez indiquer la bonne reponse!";
         else {
             if (this.reponse === "reponse1")
-                this.slot1 = true;
+                this.ans = 0;
             else if (this.reponse === "reponse2") {
-                this.slot2 = true;
+                this.ans = 1;
             }
             else if (this.reponse === "reponse3") {
-                this.slot3 = true;
+                this.ans = 2;
             }
-            var q = new question_1.Question(this.theme, this.question, this.reponse1, this.reponse2, this.reponse3, this.slot1, this.slot2, this.slot3);
+            var q = new question_1.Question(this.theme, this.question, this.reponse1, this.reponse2, this.reponse3, this.ans);
             console.log(JSON.stringify(q));
             this.questionService.create(q);
             this.err = "Question soumise!";
@@ -52,9 +50,7 @@ var AddQuestionComponent = (function () {
             this.reponse2 = "";
             this.reponse3 = "";
             this.reponse = "";
-            this.slot1 = false;
-            this.slot2 = false;
-            this.slot3 = false;
+            this.ans = -1;
         }
     };
     AddQuestionComponent = __decorate([

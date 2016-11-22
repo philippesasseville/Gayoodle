@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Question = mongoose.model('Question');
+var QuickTestStats = mongoose.model('QuickTestStats');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,11 +14,8 @@ router.get('/templates/:template', function(req, res, next) {
 });
 
 router.postQuestion = function ( req, res ){
-  var slot1 =req.body.reponses[0].ans;
-  var slot2 =req.body.reponses[1].ans;
-  var slot3 =req.body.reponses[2].ans;
 
-  if (!slot1 && !slot2 && !slot3){
+  if (req.body.ans == -1){
     res.status(400);
     return;
   }
@@ -51,6 +49,33 @@ router.getRandomQuestion = function( req, res ){
     var question = JSON.stringify(results[0]);
     res.send(question);
 
+  });
+};
+
+
+router.verifyAnswer = function(req, res){
+  var questionText = req.body.question;
+  var reponseChoisi = req.body.reponseChoisi;
+
+  QuickTestStats.find({"_id": "58235d2ddcba0f326cc62b1d"},function(err, results){
+    Question.find({"question": questionText}, function(err, question){
+      if(reponseChoisi == question[0].reponses[question[0].ans].text){
+        results[0].questionsRapidesWin = results[0].questionsRapidesWin + 1;
+        console.log("GOOD");
+        res.status(200).send(true);
+      }
+      else
+      {
+        results[0].questionsRapidesLoss =  results[0].questionsRapidesLoss + 1;
+        console.log("NO GOOD");
+        res.status(200).send(false);
+      }
+      console.log("WE GON SAVE BOYS");
+       results[0].questionsRapidesMoy = (( results[0].questionsRapidesWin / ( results[0].questionsRapidesWin +  results[0].questionsRapidesLoss))*100).toFixed(0);
+       results[0].save(function( err, stats, count ){
+        console.log(JSON.stringify(stats));
+      });
+    });
   });
 };
 

@@ -9,6 +9,7 @@ import { Question } from './question';
 export class QuestionService {
 
 	private questionUrl = '/question';  // URL to web api
+	private verifyUrl = '/verify';  // URL to web api
 
   	constructor(private http: Http) { }
 
@@ -27,10 +28,17 @@ export class QuestionService {
 	}
 
 	get(): Promise<Question> {
-    return this.http.get(this.questionUrl)
+    	return this.http.get(this.questionUrl)
                .toPromise()
                .then(response => response.json() as Question)
                .catch(this.handleError);
-  }
+  	}
+  	verify(question: String, reponseChoisi: String): Promise<boolean> {
+		return this.http
+			.post(this.verifyUrl, JSON.stringify({question: question, reponseChoisi: reponseChoisi}), {headers: this.headers})
+			.toPromise()
+			.then(res => res.json())
+			.catch(this.handleError);
+	}
 
 }

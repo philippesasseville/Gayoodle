@@ -15,6 +15,7 @@ var QuestionService = (function () {
     function QuestionService(http) {
         this.http = http;
         this.questionUrl = '/question'; // URL to web api
+        this.verifyUrl = '/verify'; // URL to web api
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     QuestionService.prototype.create = function (question) {
@@ -31,6 +32,13 @@ var QuestionService = (function () {
         return this.http.get(this.questionUrl)
             .toPromise()
             .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    QuestionService.prototype.verify = function (question, reponseChoisi) {
+        return this.http
+            .post(this.verifyUrl, JSON.stringify({ question: question, reponseChoisi: reponseChoisi }), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json(); })
             .catch(this.handleError);
     };
     QuestionService = __decorate([
