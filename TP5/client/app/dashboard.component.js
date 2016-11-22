@@ -12,6 +12,9 @@ var core_1 = require('@angular/core');
 var DashboardComponent = (function () {
     function DashboardComponent() {
     }
+    DashboardComponent.prototype.testo = function () {
+        console.log("TESTO");
+    };
     DashboardComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

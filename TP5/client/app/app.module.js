@@ -19,14 +19,24 @@ var rules_component_1 = require('./rules.component');
 var dashboard_component_1 = require('./dashboard.component');
 var addquestion_component_1 = require('./addquestion.component');
 var question_service_1 = require('./question.service');
+var quicktest_component_1 = require('./quicktest.component');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, app_routing_module_1.AppRoutingModule],
-            declarations: [app_component_1.AppComponent, rules_component_1.RulesComponent, dashboard_component_1.DashboardComponent, addquestion_component_1.AddQuestionComponent],
-            providers: [{ provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy }, question_service_1.QuestionService],
+            declarations: [
+                app_component_1.AppComponent,
+                rules_component_1.RulesComponent,
+                dashboard_component_1.DashboardComponent,
+                addquestion_component_1.AddQuestionComponent,
+                quicktest_component_1.QuickTestComponent
+            ],
+            providers: [
+                { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy },
+                question_service_1.QuestionService
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

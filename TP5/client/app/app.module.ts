@@ -11,11 +11,23 @@ import { RulesComponent } from './rules.component';
 import { DashboardComponent } from './dashboard.component';
 import { AddQuestionComponent }      from './addquestion.component';
 import { QuestionService }      from './question.service';
+import { QuickTestComponent }      from './quicktest.component';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule, HttpModule, AppRoutingModule ],
-  declarations: [ AppComponent, RulesComponent, DashboardComponent, AddQuestionComponent ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, QuestionService],
+  declarations: 
+  	[ 
+  		AppComponent, 
+  		RulesComponent, 
+  		DashboardComponent, 
+  		AddQuestionComponent,
+  		QuickTestComponent
+	],
+  providers: 
+  	[
+  		{provide: LocationStrategy, useClass: HashLocationStrategy}, 
+  		QuestionService
+	],
   bootstrap: [ AppComponent ]
 })
 
