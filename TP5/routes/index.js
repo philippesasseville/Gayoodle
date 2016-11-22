@@ -57,7 +57,7 @@ router.verifyAnswer = function(req, res){
   var questionText = req.body.question;
   var reponseChoisi = req.body.reponseChoisi;
 
-  QuickTestStats.find({"_id": "58235d2ddcba0f326cc62b1d"},function(err, results){
+  QuickTestStats.find(function(err, results){
     Question.find({"question": questionText}, function(err, question){
       if(reponseChoisi == question[0].reponses[question[0].ans].text){
         results[0].questionsRapidesWin = results[0].questionsRapidesWin + 1;

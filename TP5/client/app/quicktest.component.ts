@@ -20,11 +20,15 @@ export class QuickTestComponent implements OnInit {
 	reponse1 = "Loading...";
 	reponse2 = "Loading...";
 	reponse3 = "Loading...";
+	stats = "Stats: 0/0";
 	reponseBonne = "";
 	reponseChoisi = "Glisser votre reponse ici";
 	goodClassBool = false;
 	badClassBool = false;
 	canDrop = true;
+
+	totalAnswered = 0;
+	totalGood = 0;
 
 	ngOnInit(): void {
 		this.init();
@@ -41,7 +45,9 @@ export class QuickTestComponent implements OnInit {
 		this.goodClassBool = false;
 		this.badClassBool = false;
 		this.canDrop = true;
-
+		//load stats
+		this.updateStats();
+		
 		this.questionService.get().then(question => {
 			this.question = question; 
 			this.theme = question.theme;
@@ -78,12 +84,23 @@ export class QuickTestComponent implements OnInit {
 	setClasses(result) {
 		if(result){
 			this.goodClassBool = true;
+			this.totalGood += 1;
 		} else {
 			this.badClassBool = true;
 		}
+		this.totalAnswered += 1;
 		this.canDrop = false;
+		this.updateStats();
 	}
 
+	updateStats() {
+		if (this.totalAnswered != 0) {
+			let percentage = this.totalGood/this.totalAnswered*100;
+			this.stats = "Stats: " + this.totalGood + "/" + this.totalAnswered 
+				+ " (" + percentage.toFixed(2) + "%)";
+		}
+	}
+	
 	clickSuivant() {
 		if (this.canDrop) {
 			this.err = "Veuillez choisir une reponse.";

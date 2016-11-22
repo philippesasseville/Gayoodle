@@ -21,11 +21,14 @@ var QuickTestComponent = (function () {
         this.reponse1 = "Loading...";
         this.reponse2 = "Loading...";
         this.reponse3 = "Loading...";
+        this.stats = "Stats: 0/0";
         this.reponseBonne = "";
         this.reponseChoisi = "Glisser votre reponse ici";
         this.goodClassBool = false;
         this.badClassBool = false;
         this.canDrop = true;
+        this.totalAnswered = 0;
+        this.totalGood = 0;
     }
     QuickTestComponent.prototype.ngOnInit = function () {
         this.init();
@@ -43,6 +46,8 @@ var QuickTestComponent = (function () {
         this.goodClassBool = false;
         this.badClassBool = false;
         this.canDrop = true;
+        //load stats
+        this.updateStats();
         this.questionService.get().then(function (question) {
             _this.question = question;
             _this.theme = question.theme;
@@ -81,11 +86,21 @@ var QuickTestComponent = (function () {
     QuickTestComponent.prototype.setClasses = function (result) {
         if (result) {
             this.goodClassBool = true;
+            this.totalGood += 1;
         }
         else {
             this.badClassBool = true;
         }
+        this.totalAnswered += 1;
         this.canDrop = false;
+        this.updateStats();
+    };
+    QuickTestComponent.prototype.updateStats = function () {
+        if (this.totalAnswered != 0) {
+            var percentage = this.totalGood / this.totalAnswered * 100;
+            this.stats = "Stats: " + this.totalGood + "/" + this.totalAnswered
+                + " (" + percentage.toFixed(2) + "%)";
+        }
     };
     QuickTestComponent.prototype.clickSuivant = function () {
         if (this.canDrop) {
