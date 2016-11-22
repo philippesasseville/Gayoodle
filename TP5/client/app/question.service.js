@@ -27,6 +27,12 @@ var QuestionService = (function () {
     QuestionService.prototype.handleError = function (err) {
         console.log(err);
     };
+    QuestionService.prototype.get = function () {
+        return this.http.get(this.questionUrl)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     QuestionService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
