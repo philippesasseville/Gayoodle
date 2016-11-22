@@ -8,7 +8,7 @@ import { Question } from './question';
 @Injectable()
 export class QuestionService {
 
-	private questionUrl = 'myApp/question';  // URL to web api
+	private questionUrl = '/question';  // URL to web api
 
   	constructor(private http: Http) { }
 
@@ -18,11 +18,11 @@ export class QuestionService {
 	  return this.http
 	    .post(this.questionUrl, JSON.stringify(question), {headers: this.headers})
 	    .toPromise()
-	    .then(res => res.json().data)
+	    .then(res => res.json().data as Question)
 	    .catch(this.handleError);
 	}
 
-	handleError(): void{
-		console.log("error in question service");
+	handleError(err : Error): void{
+		console.log(err);
 	}
 }

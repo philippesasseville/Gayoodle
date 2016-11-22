@@ -14,7 +14,7 @@ require('rxjs/add/operator/toPromise');
 var QuestionService = (function () {
     function QuestionService(http) {
         this.http = http;
-        this.questionUrl = 'myApp/question'; // URL to web api
+        this.questionUrl = '/question'; // URL to web api
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     QuestionService.prototype.create = function (question) {
@@ -24,8 +24,8 @@ var QuestionService = (function () {
             .then(function (res) { return res.json().data; })
             .catch(this.handleError);
     };
-    QuestionService.prototype.handleError = function () {
-        console.log("error in question service");
+    QuestionService.prototype.handleError = function (err) {
+        console.log(err);
     };
     QuestionService = __decorate([
         core_1.Injectable(), 

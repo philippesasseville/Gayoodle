@@ -1,6 +1,8 @@
 import { Component  } from '@angular/core';
 import { Question } from './question';
 
+import { QuestionService } from './question.service'
+
 @Component({
 	moduleId: module.id,
   	selector: 'my-addquestion',
@@ -8,6 +10,9 @@ import { Question } from './question';
 })
 
 export class AddQuestionComponent {
+
+	constructor(private questionService: QuestionService) { }
+
 	theme = "HTML";
 	question = "";
 	reponse1 = "";
@@ -44,7 +49,7 @@ export class AddQuestionComponent {
 
 			console.log(JSON.stringify(q));
 
-			//this.questionService.create(q);
+			this.questionService.create(q);
 
 			this.err = "Question soumise!"
 			this.theme = "HTML";

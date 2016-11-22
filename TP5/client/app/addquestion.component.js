@@ -10,8 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var question_1 = require('./question');
+var question_service_1 = require('./question.service');
 var AddQuestionComponent = (function () {
-    function AddQuestionComponent() {
+    function AddQuestionComponent(questionService) {
+        this.questionService = questionService;
         this.theme = "HTML";
         this.question = "";
         this.reponse1 = "";
@@ -42,7 +44,7 @@ var AddQuestionComponent = (function () {
             }
             var q = new question_1.Question(this.theme, this.question, this.reponse1, this.reponse2, this.reponse3, this.slot1, this.slot2, this.slot3);
             console.log(JSON.stringify(q));
-            //this.questionService.create(q);
+            this.questionService.create(q);
             this.err = "Question soumise!";
             this.theme = "HTML";
             this.question = "";
@@ -61,7 +63,7 @@ var AddQuestionComponent = (function () {
             selector: 'my-addquestion',
             templateUrl: '/templates/addquestion'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [question_service_1.QuestionService])
     ], AddQuestionComponent);
     return AddQuestionComponent;
 }());

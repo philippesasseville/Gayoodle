@@ -6,8 +6,7 @@ var random = require('mongoose-simple-random');
 var Question = new Schema({
  theme: String,
  question:String,
- reponses: [{text:String}],
- ans: Number
+ reponses: [{text:String, ans: Boolean}]
 });
 
 var ExamStats = new Schema({
