@@ -7,6 +7,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { StatsComponent } from './stats.component';
 import { RulesComponent } from './rules.component';
 import { DashboardComponent } from './dashboard.component';
 import { AddQuestionComponent }      from './addquestion.component';
@@ -27,7 +28,8 @@ import { QuickTestStatsService } from './quickteststats.service';
   		AddQuestionComponent,
   		QuickTestComponent,
       ExamComponent,
-      ResultComponent
+      ResultComponent,
+      StatsComponent
 	],
   providers: 
   	[

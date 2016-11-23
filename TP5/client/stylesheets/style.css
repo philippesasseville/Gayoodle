@@ -35,7 +35,7 @@ div#stats {
 }
 
 div#info {
-	float: left;
+  display: inline-block;
 }
 
 div#rules {
@@ -188,7 +188,7 @@ tr:nth-child(even) {
     float: left;
   }
   div#info{
-    float: none;
+    float: left;
   }
   div#pug {
     display: flex;
@@ -205,7 +205,7 @@ tr:nth-child(even) {
     float: left;
   }
   div#info{
-    float: none;
+    float: left;
   }
   div#pug {
     display: flex;

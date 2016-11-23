@@ -15,6 +15,7 @@ var http_1 = require('@angular/http');
 var common_1 = require('@angular/common');
 var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
+var stats_component_1 = require('./stats.component');
 var rules_component_1 = require('./rules.component');
 var dashboard_component_1 = require('./dashboard.component');
 var addquestion_component_1 = require('./addquestion.component');
@@ -37,7 +38,8 @@ var AppModule = (function () {
                 addquestion_component_1.AddQuestionComponent,
                 quicktest_component_1.QuickTestComponent,
                 exam_component_1.ExamComponent,
-                result_component_1.ResultComponent
+                result_component_1.ResultComponent,
+                stats_component_1.StatsComponent
             ],
             providers: [
                 { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy },
