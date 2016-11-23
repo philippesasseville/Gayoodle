@@ -38,12 +38,12 @@ export class StatsComponent {
     this.init();
   }
   clearStats(): void {
-    this.examService.clear();
-    this.quickTestStatsService.clear();
-    this.examStatsService.clear();
-    this.init();
+    this.examService.clear()
+    .then(()=>this.quickTestStatsService.clear()
+    .then(()=>this.examStatsService.clear()
+    .then(()=>this.init())));
   }
-  init(): void{
+  init(): boolean{
     this.examStatsService.get().then(stats => {
       this.htmlpassed = stats.HTMLwin;
       this.csspassed = stats.CSSwin;
@@ -61,5 +61,6 @@ export class StatsComponent {
     });
 
     this.examService.get().then(exams => this.exams = exams);
+    return true;
   }
 }

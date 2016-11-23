@@ -210,7 +210,6 @@ router.clearQuickTestStats = function(req, res) {
 
 router.dropExams = function(req,res){
   Exam.remove({}, function(err) { 
-   console.log('collection removed') 
   });
   res.status(200).send(true);
 };

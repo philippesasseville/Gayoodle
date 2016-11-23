@@ -35,10 +35,11 @@ var StatsComponent = (function () {
         this.init();
     };
     StatsComponent.prototype.clearStats = function () {
-        this.examService.clear();
-        this.quickTestStatsService.clear();
-        this.examStatsService.clear();
-        this.init();
+        var _this = this;
+        this.examService.clear()
+            .then(function () { return _this.quickTestStatsService.clear()
+            .then(function () { return _this.examStatsService.clear()
+            .then(function () { return _this.init(); }); }); });
     };
     StatsComponent.prototype.init = function () {
         var _this = this;
@@ -57,6 +58,7 @@ var StatsComponent = (function () {
             _this.qrmoy = qtstats.questionsRapidesMoy;
         });
         this.examService.get().then(function (exams) { return _this.exams = exams; });
+        return true;
     };
     StatsComponent = __decorate([
         core_1.Component({
