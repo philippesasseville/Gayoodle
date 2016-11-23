@@ -18,12 +18,18 @@ var ExamService = (function () {
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     ExamService.prototype.handleError = function (err) {
-        // console.log(err);
+        console.log(err);
     };
     ExamService.prototype.get = function () {
         return this.http.get(this.examsUrl)
             .toPromise()
             .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    ExamService.prototype.clear = function () {
+        return this.http.delete(this.examsUrl)
+            .toPromise()
+            .then()
             .catch(this.handleError);
     };
     ExamService = __decorate([

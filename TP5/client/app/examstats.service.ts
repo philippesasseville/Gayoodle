@@ -25,4 +25,11 @@ export class ExamStatsService {
                .catch(this.handleError);
   	}
 
+  clear(): Promise<Boolean> {
+  return this.http.delete(this.examStatsUrl)
+          .toPromise()
+          .then()
+          .catch(this.handleError);
+  }
+
 }

@@ -15,7 +15,7 @@ export class ExamService {
   	private headers = new Headers({'Content-Type': 'application/json'});
 
 	handleError(err : Error): void{
-		// console.log(err);
+		 console.log(err);
 	}
 
 	get(): Promise<Exam[]> {
@@ -25,4 +25,10 @@ export class ExamService {
                .catch(this.handleError);
   	}
 
+  clear(): Promise<Boolean> {
+      return this.http.delete(this.examsUrl)
+              .toPromise()
+              .then()
+              .catch(this.handleError);
+  }
 }

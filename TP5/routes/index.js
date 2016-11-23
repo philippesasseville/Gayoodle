@@ -180,4 +180,39 @@ router.getExamStats = function(req, res) {
   });
 };
 
+router.clearExamStats = function(req, res) {
+  var examDone = false;
+  var quickDone = false;
+  ExamStats.find(function ( err, stats, count ){
+    stats[0].HTMLwin = 0;
+    stats[0].HTMLloss = 0;
+    stats[0].CSSwin = 0;
+    stats[0].CSSloss = 0;
+    stats[0].JSwin = 0;
+    stats[0].JSloss = 0;
+    stats[0].examMoyenne = 0;
+    stats[0].save(function(err, stats) {
+      res.send(true);
+    })
+  });
+};
+
+router.clearQuickTestStats = function(req, res) {
+  QuickTestStats.find(function ( err, stats, count ){
+    stats[0].questionsRapidesWin = 0;
+    stats[0].questionsRapidesLoss = 0;
+    stats[0].questionsRapidesMoy = 0;
+    stats[0].save(function(err, stats) {
+      res.send(true);
+    })
+  });
+};
+
+router.dropExams = function(req,res){
+  Exam.remove({}, function(err) { 
+   console.log('collection removed') 
+  });
+  res.status(200).send(true);
+};
+
 module.exports = router;

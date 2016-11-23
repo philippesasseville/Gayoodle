@@ -14,16 +14,22 @@ require('rxjs/add/operator/toPromise');
 var QuickTestStatsService = (function () {
     function QuickTestStatsService(http) {
         this.http = http;
-        this.examStatsUrl = '/qtstats';
+        this.qtStatsUrl = '/qtstats';
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     QuickTestStatsService.prototype.handleError = function (err) {
         // console.log(err);
     };
     QuickTestStatsService.prototype.get = function () {
-        return this.http.get(this.examStatsUrl)
+        return this.http.get(this.qtStatsUrl)
             .toPromise()
             .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    QuickTestStatsService.prototype.clear = function () {
+        return this.http.delete(this.qtStatsUrl)
+            .toPromise()
+            .then()
             .catch(this.handleError);
     };
     QuickTestStatsService = __decorate([

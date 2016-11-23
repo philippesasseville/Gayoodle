@@ -35,22 +35,31 @@ export class StatsComponent {
 	constructor(private examStatsService: ExamStatsService,private examService: ExamService, private quickTestStatsService: QuickTestStatsService) { }
 	
   ngOnInit(): void {
-      this.examStatsService.get().then(stats => {
-        this.htmlpassed = stats.HTMLwin;
-        this.csspassed = stats.CSSwin;
-        this.jspassed = stats.JSwin;
-        this.htmlfail = stats.HTMLloss;
-        this.cssfail = stats.CSSloss;
-        this.jsfail = stats.JSloss;
-        this.notemoy = stats.examMoyenne;
-      });
+    this.init();
+  }
+  clearStats(): void {
+    this.examService.clear();
+    this.quickTestStatsService.clear();
+    this.examStatsService.clear();
+    this.init();
+  }
+  init(): void{
+    this.examStatsService.get().then(stats => {
+      this.htmlpassed = stats.HTMLwin;
+      this.csspassed = stats.CSSwin;
+      this.jspassed = stats.JSwin;
+      this.htmlfail = stats.HTMLloss;
+      this.cssfail = stats.CSSloss;
+      this.jsfail = stats.JSloss;
+      this.notemoy = stats.examMoyenne;
+    });
 
-      this.quickTestStatsService.get().then(qtstats => {
-        this.qrpassed = qtstats.questionsRapidesWin;
-        this.qrfailed = qtstats.questionsRapidesLoss;
-        this.qrmoy = qtstats.questionsRapidesMoy;
-      });
+    this.quickTestStatsService.get().then(qtstats => {
+      this.qrpassed = qtstats.questionsRapidesWin;
+      this.qrfailed = qtstats.questionsRapidesLoss;
+      this.qrmoy = qtstats.questionsRapidesMoy;
+    });
 
-      this.examService.get().then(exams => this.exams = exams);
+    this.examService.get().then(exams => this.exams = exams);
   }
 }

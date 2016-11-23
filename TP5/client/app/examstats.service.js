@@ -26,6 +26,12 @@ var ExamStatsService = (function () {
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    ExamStatsService.prototype.clear = function () {
+        return this.http.delete(this.examStatsUrl)
+            .toPromise()
+            .then()
+            .catch(this.handleError);
+    };
     ExamStatsService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

@@ -34,6 +34,9 @@ app.post('/examstats', routes.compileExamResult);
 app.get('/examstats', routes.getExamStats);
 app.get('/qtstats', routes.getQuickTestStats);
 app.get('/exams', routes.getExams);
+app.delete('/examstats', routes.clearExamStats);
+app.delete('/qtstats', routes.clearQuickTestStats);
+app.delete('/exams', routes.dropExams);
 
 
 // catch 404 and forward to error handler

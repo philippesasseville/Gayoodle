@@ -8,7 +8,8 @@ import { QuickTestStats } from './quickteststats';
 @Injectable()
 export class QuickTestStatsService {
 
-	private examStatsUrl = '/qtstats';
+	private qtStatsUrl = '/qtstats';
+
 
   	constructor(private http: Http) { }
 
@@ -19,10 +20,16 @@ export class QuickTestStatsService {
 	}
 
 	get(): Promise<QuickTestStats> {
-    	return this.http.get(this.examStatsUrl)
+    	return this.http.get(this.qtStatsUrl)
                .toPromise()
                .then(response => response.json() as QuickTestStats)
                .catch(this.handleError);
   	}
+  clear(): Promise<Boolean> {
+      return this.http.delete(this.qtStatsUrl)
+              .toPromise()
+              .then()
+              .catch(this.handleError);
+  }
 
 }

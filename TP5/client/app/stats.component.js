@@ -32,6 +32,15 @@ var StatsComponent = (function () {
         this.exams = [{ theme: "HTML", pourcentage: 50 }];
     }
     StatsComponent.prototype.ngOnInit = function () {
+        this.init();
+    };
+    StatsComponent.prototype.clearStats = function () {
+        this.examService.clear();
+        this.quickTestStatsService.clear();
+        this.examStatsService.clear();
+        this.init();
+    };
+    StatsComponent.prototype.init = function () {
         var _this = this;
         this.examStatsService.get().then(function (stats) {
             _this.htmlpassed = stats.HTMLwin;
