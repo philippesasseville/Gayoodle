@@ -1,0 +1,23 @@
+TEMPS:
+	Tuto(18nov): 	4h*2	= 8h
+	TP(21nov): 	3h	= 3h
+	TP(22nov): 	7h*2 	= 14h
+	TP(__nov): 	_h*2 	= __h
+
+Total Tuto: 8h
+Total TP: 3h+14h+__h = 
+
+
+
+TEMPS TOTAL : __h
+
+
+
+
+
+TODO:
+- Stats refresh
+- Stats in Component
+- Progres exam
+- Merge/split ExamComponent/QuickTestComponent
+
