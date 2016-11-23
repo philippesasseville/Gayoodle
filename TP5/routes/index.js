@@ -145,6 +145,7 @@ router.compileExamResult = function(req, res){
       {
         results.JSloss = results.JSloss + 1;
       }
+      results.examMoyenne = ((req.body.pourcentage + results.examMoyenne) / (results.HTMLwin + results.HTMLloss + results.CSSwin + results.CSSloss + results.JSwin + results.JSloss)).toFixed(0);
     }
     results.save(function(err,examstats){
       console.log(examstats);
