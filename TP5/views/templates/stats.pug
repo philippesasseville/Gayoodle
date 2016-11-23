@@ -39,5 +39,8 @@ div#stats
     a(class='cancel', href='#')
     div(class='modal')
       h2 Details
+      ul(class="exams")
+        li( *ngFor="let exam of exams")
+          span theme : {{exam.theme}}, pourcentage : {{exam.pourcentage | number:'1.2-2'}} %
       div(id='modalcontent')
       small Cliquer hors de la boite pour fermer le dialogue.

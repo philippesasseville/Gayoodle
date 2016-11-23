@@ -27,9 +27,9 @@ var QuickTestStats = new Schema({
 	questionsRapidesMoy: Number
 });
 
-var Testo = new Schema({
-	testo1: Number,
-	testo2: Number,
+var Exam = new Schema({
+	theme: String,
+	pourcentage: Number,
 })
 
 Question.plugin(random);
@@ -37,6 +37,6 @@ Question.plugin(random);
 mongoose.model( 'Question', Question );
 mongoose.model( 'ExamStats', ExamStats );
 mongoose.model( 'QuickTestStats', QuickTestStats );
-mongoose.model( 'Testo', Testo );
+mongoose.model( 'Exam', Exam );
 mongoose.connect( 'mongodb://maymay:topkek@ds147797.mlab.com:47797/db_log4420' );
 // mongoose.connect( 'mongodb://user:password@ds143767.mlab.com:43767/questions' );

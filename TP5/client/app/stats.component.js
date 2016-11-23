@@ -10,10 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var examstats_service_1 = require('./examstats.service');
+var exam_service_1 = require('./exam.service');
 var quickteststats_service_1 = require('./quickteststats.service');
 var StatsComponent = (function () {
-    function StatsComponent(examStatsService, quickTestStatsService) {
+    function StatsComponent(examStatsService, examService, quickTestStatsService) {
         this.examStatsService = examStatsService;
+        this.examService = examService;
         this.quickTestStatsService = quickTestStatsService;
         this.theme = "HTML";
         this.nb = "3";
@@ -27,6 +29,7 @@ var StatsComponent = (function () {
         this.qrpassed = 0;
         this.qrfailed = 0;
         this.qrmoy = 0;
+        this.exams = [{ theme: "HTML", pourcentage: 50 }];
     }
     StatsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -44,6 +47,7 @@ var StatsComponent = (function () {
             _this.qrfailed = qtstats.questionsRapidesLoss;
             _this.qrmoy = qtstats.questionsRapidesMoy;
         });
+        this.examService.get().then(function (exams) { return _this.exams = exams; });
     };
     StatsComponent = __decorate([
         core_1.Component({
@@ -51,7 +55,7 @@ var StatsComponent = (function () {
             selector: 'mon-stats',
             templateUrl: '/templates/stats'
         }), 
-        __metadata('design:paramtypes', [examstats_service_1.ExamStatsService, quickteststats_service_1.QuickTestStatsService])
+        __metadata('design:paramtypes', [examstats_service_1.ExamStatsService, exam_service_1.ExamService, quickteststats_service_1.QuickTestStatsService])
     ], StatsComponent);
     return StatsComponent;
 }());

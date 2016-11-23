@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ExamStatsService } from './examstats.service';
+import { ExamService } from './exam.service';
 import { QuickTestStatsService } from './quickteststats.service';
 import { ExamStats } from './examstats';
 import { QuickTestStats } from './quickteststats';
+import { Exam } from './exam';
 
 @Component({
 	moduleId: module.id,
@@ -28,8 +30,9 @@ export class StatsComponent {
   qrfailed =0;
   qrmoy =0;
 
+  exams: Exam[] = [{theme:"HTML",pourcentage: 50}];
 
-	constructor(private examStatsService: ExamStatsService, private quickTestStatsService: QuickTestStatsService) { }
+	constructor(private examStatsService: ExamStatsService,private examService: ExamService, private quickTestStatsService: QuickTestStatsService) { }
 	
   ngOnInit(): void {
       this.examStatsService.get().then(stats => {
@@ -46,7 +49,8 @@ export class StatsComponent {
         this.qrpassed = qtstats.questionsRapidesWin;
         this.qrfailed = qtstats.questionsRapidesLoss;
         this.qrmoy = qtstats.questionsRapidesMoy;
-      }
-        );
+      });
+
+      this.examService.get().then(exams => this.exams = exams);
   }
 }

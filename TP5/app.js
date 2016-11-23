@@ -33,6 +33,7 @@ app.post('/verifyexam', routes.verifyAnswerExam);
 app.post('/examstats', routes.compileExamResult);
 app.get('/examstats', routes.getExamStats);
 app.get('/qtstats', routes.getQuickTestStats);
+app.get('/exams', routes.getExams);
 
 
 // catch 404 and forward to error handler

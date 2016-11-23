@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var Question = mongoose.model('Question');
 var QuickTestStats = mongoose.model('QuickTestStats');
 var ExamStats = mongoose.model('ExamStats');
+var Exam = mongoose.model('Exam');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -38,6 +39,15 @@ router.postQuestion = function ( req, res ){
   new Question(req.body)
   .save( function( err, question, count ){
     res.status(200);
+  });
+};
+
+router.getExams = function( req, res ){
+  var filter = {};
+  var fields = {};
+  var options = {limit: 10};
+  Exam.find(filter, fields, options, function(err, results) {
+    res.send(results);
   });
 };
 
@@ -85,7 +95,6 @@ router.verifyAnswer = function(req, res){
 
       results[0].questionsRapidesMoy = (( results[0].questionsRapidesWin / ( results[0].questionsRapidesWin +  results[0].questionsRapidesLoss))*100).toFixed(0);
       results[0].save(function( err, stats, count ){
-        console.log(JSON.stringify(stats));
       });
     });
   });
@@ -107,16 +116,10 @@ router.verifyAnswerExam = function(req, res){
 };
 
 router.compileExamResult = function(req, res){
-
-  console.log("REQ.BODY : "+JSON.stringify(req.body));
-
   ExamStats.find(function(err, results){
     results = results[0];
-    console.log("FIND STATS: "+results);
     if(parseFloat(req.body.pourcentage) > 50.00)
     {
-      console.log("success");
-      console.log(!req.body.theme.localeCompare("HTML"));
       if(!req.body.theme.localeCompare("HTML"))
       {
         results.HTMLwin = results.HTMLwin + 1;
@@ -132,7 +135,6 @@ router.compileExamResult = function(req, res){
     }
     else
     {
-      console.log("fail");
       if(!req.body.theme.localeCompare("HTML"))
       {
         results.HTMLloss = results.HTMLloss + 1;
@@ -145,12 +147,20 @@ router.compileExamResult = function(req, res){
       {
         results.JSloss = results.JSloss + 1;
       }
-      results.examMoyenne = ((req.body.pourcentage + results.examMoyenne) / (results.HTMLwin + results.HTMLloss + results.CSSwin + results.CSSloss + results.JSwin + results.JSloss)).toFixed(0);
     }
+    results.examMoyenne = ((req.body.pourcentage + results.examMoyenne) / (results.HTMLwin + results.HTMLloss + results.CSSwin + results.CSSloss + results.JSwin + results.JSloss)).toFixed(0);
     results.save(function(err,examstats){
-      console.log(examstats);
+      if(err)
+        console.log(err);
     });
+
+    new Exam(req.body).save(function(err, exam){
+      if(err)
+        console.log(err);
+    });
+
   });
+
   /*.save(function(err, examstats){
     console.log("lamo");
   });
