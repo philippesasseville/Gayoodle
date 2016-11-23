@@ -28,7 +28,7 @@ var QuestionService = (function () {
             .catch(this.handleError);
     };
     QuestionService.prototype.handleError = function (err) {
-        console.log(err);
+        // console.log(err);
     };
     QuestionService.prototype.get = function (theme) {
         var url;

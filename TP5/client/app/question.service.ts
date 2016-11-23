@@ -26,7 +26,7 @@ export class QuestionService {
 	}
 
 	handleError(err : Error): void{
-		console.log(err);
+		// console.log(err);
 	}
 
 	get(theme: string): Promise<Question> {
