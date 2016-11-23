@@ -14,6 +14,8 @@ import { QuestionService }      from './question.service';
 import { QuickTestComponent }      from './quicktest.component';
 import { ExamComponent }      from './exam.component';
 import { ResultComponent }      from './result.component';
+import { ExamStatsService } from './examstats.service';
+import { QuickTestStatsService } from './quickteststats.service';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule, HttpModule, AppRoutingModule ],
@@ -30,7 +32,9 @@ import { ResultComponent }      from './result.component';
   providers: 
   	[
   		{provide: LocationStrategy, useClass: HashLocationStrategy}, 
-  		QuestionService
+  		QuestionService,
+      ExamStatsService,
+      QuickTestStatsService
 	],
   bootstrap: [ AppComponent ]
 })

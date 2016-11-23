@@ -157,4 +157,16 @@ router.compileExamResult = function(req, res){
   res.status(200).send(true);
 };
 
+router.getQuickTestStats = function(req, res) {
+  QuickTestStats.find(function ( err, stats, count ){
+    res.send(stats[0]);
+  });
+};
+
+router.getExamStats = function(req, res) {
+  ExamStats.find(function ( err, stats, count ){
+    res.send(stats[0]);
+  });
+};
+
 module.exports = router;

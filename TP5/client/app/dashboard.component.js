@@ -10,12 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var examstats_service_1 = require('./examstats.service');
+var quickteststats_service_1 = require('./quickteststats.service');
 var DashboardComponent = (function () {
-    function DashboardComponent(router) {
+    function DashboardComponent(router, examStatsService, quickTestStatsService) {
         this.router = router;
+        this.examStatsService = examStatsService;
+        this.quickTestStatsService = quickTestStatsService;
         this.theme = "HTML";
         this.nb = "3";
+        this.htmlpassed = 0;
+        this.csspassed = 0;
+        this.jspassed = 0;
+        this.htmlfail = 0;
+        this.cssfail = 0;
+        this.jsfail = 0;
+        this.notemoy = 0;
+        this.qrpassed = 0;
+        this.qrfailed = 0;
+        this.qrmoy = 0;
     }
+    DashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.examStatsService.get().then(function (stats) {
+            _this.htmlpassed = stats.HTMLwin;
+            _this.csspassed = stats.CSSwin;
+            _this.jspassed = stats.JSwin;
+            _this.htmlfail = stats.HTMLloss;
+            _this.cssfail = stats.CSSloss;
+            _this.jsfail = stats.JSloss;
+            _this.notemoy = stats.examMoyenne;
+        });
+        this.quickTestStatsService.get().then(function (qtstats) {
+            _this.qrpassed = qtstats.questionsRapidesWin;
+            _this.qrfailed = qtstats.questionsRapidesLoss;
+            _this.qrmoy = qtstats.questionsRapidesMoy;
+        });
+    };
     DashboardComponent.prototype.goToQuickTest = function () {
         this.router.navigate(['/quicktest']);
     };
@@ -28,7 +59,7 @@ var DashboardComponent = (function () {
             selector: 'mon-dashboard',
             templateUrl: '/templates/dashboard'
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, examstats_service_1.ExamStatsService, quickteststats_service_1.QuickTestStatsService])
     ], DashboardComponent);
     return DashboardComponent;
 }());

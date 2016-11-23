@@ -22,6 +22,8 @@ var question_service_1 = require('./question.service');
 var quicktest_component_1 = require('./quicktest.component');
 var exam_component_1 = require('./exam.component');
 var result_component_1 = require('./result.component');
+var examstats_service_1 = require('./examstats.service');
+var quickteststats_service_1 = require('./quickteststats.service');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,7 +41,9 @@ var AppModule = (function () {
             ],
             providers: [
                 { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy },
-                question_service_1.QuestionService
+                question_service_1.QuestionService,
+                examstats_service_1.ExamStatsService,
+                quickteststats_service_1.QuickTestStatsService
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

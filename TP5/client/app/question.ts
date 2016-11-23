@@ -15,5 +15,5 @@ export class Question {
 	ans: number;
 	reponses: [{text: string},
 	{text: string},
-	{text: string}]
+	{text: string}];
 }

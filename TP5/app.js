@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 var db = require('./lib/db.js');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -25,7 +24,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/', routes);
-app.use('/users', users);
 
 app.post('/question', routes.postQuestion);
 app.get('/question', routes.getRandomQuestion);
@@ -33,6 +31,8 @@ app.get('/question/:theme', routes.getRandomQuestionTheme);
 app.post('/verify', routes.verifyAnswer);
 app.post('/verifyexam', routes.verifyAnswerExam);
 app.post('/examstats', routes.compileExamResult);
+app.get('/examstats', routes.getExamStats);
+app.get('/qtstats', routes.getQuickTestStats);
 
 
 // catch 404 and forward to error handler
